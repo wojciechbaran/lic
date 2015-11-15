@@ -20,4 +20,17 @@ testApp.controller('userController', function($scope, CONFIG, AuthenticationServ
       $scope.dataLoading = false;
     });
   };
+  $scope.changePassword = function(tab) {
+    $scope.formCP.error = '';
+    $scope.formCP.success = '';
+    $scope.dataLoading = true;
+    CUDService.ChangePassword($scope.formCP.dt, $scope.currentUser.userid, function(response) {
+      if (response.success) {
+        $scope.formCP.success = response.message;
+      } else {
+        $scope.formCP.error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
+  };
 });

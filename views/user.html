@@ -49,7 +49,7 @@
                 <span ng-show="userDataFild.required" class="help-block">Pole wymagane</span>
             </div>
             <div class="form-actions">
-                <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
+                <button type="submit" ng-disabled="formUD.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
                 <img ng-if="dataLoading" src="lic/images/loading.gif"  />
                 <a ng-click="setTab('start')" class="btn btn-link">Anuluj</a>
             </div>
@@ -58,24 +58,24 @@
     <div class="changePassword col-md-6 col-md-offset-3" ng-show="tab=='changePassword'">
         <div ng-show="formCP.error" class="alert alert-danger">{{formCP.error}}</div>
         <div ng-show="formCP.success" class="alert alert-success">{{formCP.success}}</div>
-        <form name="formCP" ng-submit="changePassword()" role="form" ng-init="formCP['type']='update'">
+        <form name="formCP" ng-submit="changePassword()" role="form">
             <div class="form-group">
                 <label for="password">Obecne hasło</label>
-                <input type="password" name="passwordold" id="password" class="form-control" ng-model="formCP.data['passwordold']" required/>
+                <input type="password" name="passwordold" id="password" class="form-control" ng-model="formCP.dt.passwordold" required/>
                 <span class="help-block">Pole wymagane</span>
             </div>
             <div class="form-group">
                 <label for="password">Nowe hasło</label>
-                <input type="password" name="password" id="password" class="form-control" ng-model="formCP.data['password']" required/>
+                <input type="password" name="password" id="password" class="form-control" ng-model="formCP.dt.password" required/>
                 <span class="help-block">Pole wymagane</span>
             </div>
             <div class="form-group">
                 <label for="passwordrep">Powtórz hasło</label>
-                <input type="password" name="passwordrep" id="passwordrep" class="form-control" ng-model="formCP.data['passwordrep']" required/>
+                <input type="password" name="passwordrep" id="passwordrep" class="form-control" ng-model="formCP.dt.passwordrep" required/>
                 <span class="help-block">Pole wymagane</span>
             </div>
             <div class="form-actions">
-                <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
+                <button type="submit" ng-disabled="formCP.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
                 <img ng-if="dataLoading" src="lic/images/loading.gif"  />
                 <a ng-click="setTab('start')" class="btn btn-link">Anuluj</a>
             </div>
