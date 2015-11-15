@@ -1,4 +1,4 @@
-testApp.controller('userBarController', function($scope, CONFIG, $rootScope, AuthenticationService, $location) {
+testApp.controller('userBarController', function($scope, CONFIG, AuthenticationService, $location, $cookies, $rootScope) {
   $scope.config = CONFIG;
   $scope.currentUser = $rootScope.currentUser;
 

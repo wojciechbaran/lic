@@ -38,14 +38,13 @@ angular.module('testApp').service('AuthenticationService', function($http, CONFI
     Allow: function() {
       if ($rootScope.currentUser) {
         return;
-      } else {
-        var userData = $cookies.get('currentUser');
-        if (userData) {
-          $rootScope.currentUser = userData;
-          return;
-        }
-        $location.path('/' + CONFIG.route + '/login');
       }
+      var userData = $cookies.get('currentUser');
+      if (userData) {
+        $rootScope.currentUser = JSON.parse(userData);
+        return;
+      }
+      $location.path('/' + CONFIG.route + '/login');
     }
   };
 

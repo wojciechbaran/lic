@@ -3,3 +3,12 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 }
+a {
+	cursor: pointer;
+}
+.userMenu ul{
+	float: right;
+}
+.userMenu ul li{
+	list-style: none;
+}
