@@ -6,9 +6,7 @@ testApp.controller('registerController', function($scope, CONFIG, Authentication
     $scope.dataLoading = true;
     AuthenticationService.Register($scope.userData, function(response) {
       if (response.success) {
-        AuthenticationService.SetCredentials($scope.userData.username, $scope.userData.password, response.userType);
-        //$location.path('/' + $scope.config.route + '/user/' + response.userData.id);
-        $location.path('/' + $scope.config.route + '/adm');
+        $location.path('/' + $scope.config.route + '/login');
       } else {
         $scope.userData.error = response.message;
         $scope.dataLoading = false;

@@ -1,4 +1,4 @@
-angular.module('testApp').service('AuthenticationService', function($http, CONFIG, $rootScope, $cookieStore, $location) {
+angular.module('testApp').service('AuthenticationService', function($http, CONFIG, $rootScope, $cookies, $location) {
 
   return {
     Login: function(username, password, callback) {
@@ -18,18 +18,13 @@ angular.module('testApp').service('AuthenticationService', function($http, CONFI
         });
     },
     ClearCredentials: function() {
-      $rootScope.globals = {};
-      $cookieStore.remove('globals');
+      $rootScope.currentUser = {};
+      $cookies.remove('currentUser');
     },
-    SetCredentials: function(username, password, userType) {
-      $rootScope.globals = {
-        currentUser: {
-          username: username,
-          //authdata: authdata,
-          userType: userType
-        }
-      };
-      $cookieStore.put('globals', $rootScope.globals);
+    SetCredentials: function(userData) {
+      $rootScope.currentUser = userData;
+      $cookies.putObject('currentUser', $rootScope.currentUser);
+
     },
     Register: function(userData, callback) {
       $http.post(CONFIG.baseURL + '/' + CONFIG.route + '/backend/authentication.php', userData)
@@ -41,10 +36,15 @@ angular.module('testApp').service('AuthenticationService', function($http, CONFI
         });
     },
     Allow: function() {
-      if($rootScope.globals && $rootScope.globals.currentUser && $rootScope.globals.currentUser.username){
+      if ($rootScope.currentUser) {
         return;
-      }else{
-        $location.path('/' + CONFIG.route + '/login');        
+      } else {
+        var userData = $cookies.get('currentUser');
+        if (userData) {
+          $rootScope.currentUser = userData;
+          return;
+        }
+        $location.path('/' + CONFIG.route + '/login');
       }
     }
   };

@@ -1,4 +1,7 @@
 <div class="row userBar" ng-controller="userBarController">
-    <div class="userData col-md-2">data</div>
-    <div class="userMenu col-md-10">menu</div>
+    <div class="userData col-md-2">
+    {{ currentUser.name }} {{ currentUser.surname }}
+    </div>
+    <div class="userMenu col-md-10">
+    <a ng-click="logout()">Wyloguj</a></div>
 </div>

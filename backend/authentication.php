@@ -37,22 +37,30 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata, true);
 if($request['type']=='login'){
 	$error='';
+	$userData='';
 	$success=false;
-	$userType='user';
 	$username=mysql_real_escape_string($request['data']['username']);
 	$result = mysql_query("SELECT * FROM users WHERE username='$username'");
 	if($row = mysql_fetch_array($result)){
 		$password=md5($request['data']['password'].$row['salt']);
 		if($password==$row['password']){
 			$success=true;
+			$id=$row['id'];
 			$userType=$row['type'];
+			$lastlogin=$row['lastlogin'];
+			$data=json_decode($row['data'], true);
+			$basic = array('userType' => $userType, 'username' => $username, 'lastlogin' => $lastlogin, 'userid' => $id);
+			$userData = array_merge($basic, $data);
+			$now=time();
+			$sql="UPDATE users SET lastlogin=$now WHERE id=$id";
+			mysql_query($sql,$con);
 		}else{
 			$error='Podane hasło jest nieprawidłowe!';
 		}
 	 }else{
 	 	$error='Podany login nie istnieje!';
-	 }
-	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error, 'userType' => $userType);
+	 }	 
+	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error, 'userData' => $userData);
 }
 if($request['type']=='register'){
 	$error='';
@@ -84,7 +92,7 @@ if($request['type']=='register'){
 			}
 		}
 	}
-	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error, 'userType' => 'user');
+	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
 }
 echo json_encode($res);
 ?>
