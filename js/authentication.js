@@ -45,6 +45,17 @@ angular.module('testApp').service('AuthenticationService', function($http, CONFI
         return;
       }
       $location.path('/' + CONFIG.route + '/login');
+    },
+    AllowAdmin: function() {
+      if ($rootScope.currentUser && $rootScope.currentUser.userType == 'admin') {
+        return;
+      }
+      var userData = $cookies.get('currentUser');
+      $rootScope.currentUser = JSON.parse(userData);
+      if ($rootScope.currentUser && $rootScope.currentUser.userType == 'admin') {
+        return;
+      }
+      $location.path('/' + CONFIG.route + '/login');
     }
   };
 

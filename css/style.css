@@ -1,7 +1,8 @@
 body {
-  width: 1200px;
+  width: 1040px;
   margin-left: auto;
   margin-right: auto;
+  background-color: #fefefe;
 }
 
 a {
@@ -13,10 +14,10 @@ a {
 
 .header {
   background-color: #337ab7;
-  height: 34px;
-  padding: 4px;
+  padding: 4px 20px;
   color: #fff;
   font-size: 18px;
+  font-weight: bold;
 }
 
 .header .title a,
@@ -30,11 +31,14 @@ a {
 /*userBar*/
 
 .userBar {
-  background-color: #7EB1DC;
+  background-color: #f5f5f5;
   height: 34px;
   padding: 4px;
-  color: #094C83;
+  color: #000;
   font-size: 14px;
+  border-color: #ddd;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .userMenu ul {
@@ -45,11 +49,21 @@ a {
   list-style: none;
   display: inline-block;
 }
-
+.userMenu ul li:after{
+	content: '|';
+	padding: 4px;
+	color: #337ab7;
+}
+.userMenu ul li:last-child:after{
+	content: '';
+}
 
 /*user*/
 
-.user ul li {
+.user ul li,
+.adm ul li,
+.start ul li
+{
   list-style: none;
 }
 

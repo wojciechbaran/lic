@@ -1,9 +1,64 @@
 <div ng-include="config.route + '/views/header.html'"></div>
 <div ng-include="config.route + '/views/userBar.html'"></div>
-<div ng-include="config.route + '/views/mainMenu.html'"></div>
-<div class="mainContent">
-	<div class="row jumbotron text-center">
-	    <h1>i zaczynamy zabawe :)</h1>
-	</div>
+<div class="adm">
+    <div class="row text-center">
+        <h1>Panel Administracyjny</h1>
+    </div>
+    <div class="admMainMenu" ng-show="tab=='start'">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Konferencje</h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li><a ng-click="setTab('newProject')">Nowa konferencja</a></li>
+                        <li><a ng-click="setTab('listProject')">Lista konferencji</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Użytkownicy</h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li><a ng-click="setTab('listUser')">Lista użytkowników</a></li>
+                        <li><a ng-click="setTab('newUser')">Dodaj użytkownika</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Dodatki</h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li><a ng-click="setTab('guest')">Goście</a></li>
+                        <li><a ng-click="setTab('places')">Miejsca</a></li>
+                        <li><a ng-click="setTab('dev')">Podwykonawcy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ustawienia</h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li><a ng-click="setTab('listAdmin')">Administratorzy</a></li>
+                        <li><a ng-click="setTab('addAdmin')">Dodaj Administratora</a></li>
+                        <li><a ng-click="setTab('basicData')">Podstawowe dane</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div ng-include="config.route + '/views/footer.html'"></div>
