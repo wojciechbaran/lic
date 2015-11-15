@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+    <head>
+        <link rel="stylesheet" href="plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="plugins/jquery-1.11.3/jquery-1.11.3.min.js"></script>
+        <script src="plugins/angular-1.2.25/angular.min.js"></script>
+        <script src="plugins/angular-1.2.25/angular-route.min.js"></script>
+        <script src="plugins/angular-1.2.25/angular-sanitize.min.js"></script>
+        <script src="plugins/angular-1.2.25/angular-cookies.min.js"></script>
+        <script src="plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+        var testApp = angular.module('testApp', ['ngRoute','ngCookies']);
+        </script>
+        <script src="js/config.js"></script>
+        <script src="js/search.js"></script>
+        <script src="js/authentication.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/login.ctrl.js"></script>
+        <script src="js/conference.ctrl.js"></script>
+        <script src="js/register.ctrl.js"></script>
+        <script src="js/main.ctrl.js"></script>
+        <script src="js/adm.ctrl.js"></script>
+        <script src="js/header.ctrl.js"></script>
+        <script src="js/userBar.ctrl.js"></script>
+        <script src="js/mainMenu.ctrl.js"></script>
+        <script src="js/footer.ctrl.js"></script>
+        <base href="/{{ CONFIG.route }}">
+    </head>
+<body ng-controller="mainController" ng-view></body>
+</html>
