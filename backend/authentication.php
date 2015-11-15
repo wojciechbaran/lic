@@ -29,8 +29,19 @@ function chpass($pass1,$pass2){
 	}
 }
 function salt($lenght){
-	return 'qI8lFpK5';
+	$salt = '';
+    list($usec, $sec) = explode(' ', microtime());
+    mt_srand((float) $sec + ((float) $usec * 100000));
+
+    $inputs = array_merge(range('z','a'),range(0,9),range('A','Z'));
+
+    for($i=0; $i<$length; $i++)
+    {
+        $salt .= $inputs{mt_rand(0,61)};
+    }
+    return $salt;
 }
+
 //request data:
 $res='';
 $postdata = file_get_contents("php://input");
