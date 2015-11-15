@@ -1,8 +1,85 @@
 <div ng-include="config.route + '/views/header.html'"></div>
 <div ng-include="config.route + '/views/userBar.html'"></div>
-<div class="mainContent">
-	<div class="row jumbotron text-center">
-	    <h1>Witaj na swoim koncie {{ currentUser.name }}</h1>
-	</div>
+<div class="user">
+    <div class="row text-center clo-xs-4">
+        <h3>Witaj  {{ currentUser.name }} {{ currentUser.surname }}</h3>
+    </div>
+    <div class="userMainMenu" ng-show="tab=='start'">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Nowe konferencje</h3>
+                </div>
+                <div class="panel-body">
+                    Nowe konferencje
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Moje konferencje</h3>
+                </div>
+                <div class="panel-body">
+                    Moje konferencje
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ustawienia</h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li><a ng-click="setTab('userData')">Moje dane</a></li>
+                        <li><a ng-click="setTab('changePassword')">Zmiana hasła</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="userData col-md-6 col-md-offset-3" ng-show="tab=='userData'">
+        <div ng-show="formUD.error" class="alert alert-danger">{{formUD.error}}</div>
+         <div ng-show="formUD.success" class="alert alert-success">{{formUD.success}}</div>
+        <form name="formUD" ng-submit="changeUserData()" role="form">
+            <div ng-repeat="userDataFild in config.userDataFilds" class="form-group">
+                <label for="{{ userDataFild.name }}">{{ userDataFild.label }}</label>
+                <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="currentUser[userDataFild.name]" ng-required="userDataFild.required"/>
+                <span ng-show="userDataFild.required" class="help-block">Pole wymagane</span>
+            </div>
+            <div class="form-actions">
+                <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
+                <img ng-if="dataLoading" src="lic/images/loading.gif"  />
+                <a ng-click="setTab('start')" class="btn btn-link">Anuluj</a>
+            </div>
+        </form>
+    </div>
+    <div class="changePassword col-md-6 col-md-offset-3" ng-show="tab=='changePassword'">
+        <div ng-show="formCP.error" class="alert alert-danger">{{formCP.error}}</div>
+        <div ng-show="formCP.success" class="alert alert-success">{{formCP.success}}</div>
+        <form name="formCP" ng-submit="changePassword()" role="form" ng-init="formCP['type']='update'">
+            <div class="form-group">
+                <label for="password">Obecne hasło</label>
+                <input type="password" name="passwordold" id="password" class="form-control" ng-model="formCP.data['passwordold']" required/>
+                <span class="help-block">Pole wymagane</span>
+            </div>
+            <div class="form-group">
+                <label for="password">Nowe hasło</label>
+                <input type="password" name="password" id="password" class="form-control" ng-model="formCP.data['password']" required/>
+                <span class="help-block">Pole wymagane</span>
+            </div>
+            <div class="form-group">
+                <label for="passwordrep">Powtórz hasło</label>
+                <input type="password" name="passwordrep" id="passwordrep" class="form-control" ng-model="formCP.data['passwordrep']" required/>
+                <span class="help-block">Pole wymagane</span>
+            </div>
+            <div class="form-actions">
+                <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
+                <img ng-if="dataLoading" src="lic/images/loading.gif"  />
+                <a ng-click="setTab('start')" class="btn btn-link">Anuluj</a>
+            </div>
+        </form>
+    </div>
 </div>
 <div ng-include="config.route + '/views/footer.html'"></div>

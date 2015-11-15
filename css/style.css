@@ -47,6 +47,13 @@ a {
 }
 
 
+/*user*/
+
+.user ul li {
+  list-style: none;
+}
+
+
 /*mainmenu*/
 
 

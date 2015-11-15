@@ -13,8 +13,9 @@ testApp.controller('loginController', function($scope, CONFIG, AuthenticationSer
         AuthenticationService.SetCredentials(response.userData);
         if(response.userData.userType=='admin'){
           $location.path('/' + $scope.config.route + '/adm');
+        }else{
+          $location.path('/' + $scope.config.route + '/user');
         }
-        $location.path('/' + $scope.config.route + '/user');
       } else {
         $scope.userData.error = response.message;
         $scope.dataLoading = false;
