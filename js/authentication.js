@@ -51,7 +51,9 @@ angular.module('testApp').service('AuthenticationService', function($http, CONFI
         return;
       }
       var userData = $cookies.get('currentUser');
-      $rootScope.currentUser = JSON.parse(userData);
+      if(userData){
+        $rootScope.currentUser = JSON.parse(userData);
+      }
       if ($rootScope.currentUser && $rootScope.currentUser.userType == 'admin') {
         return;
       }
