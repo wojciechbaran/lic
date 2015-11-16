@@ -32,11 +32,17 @@ function chpass($pass1,$pass2){
 $res='';
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata, true);
+$error='';
+$success=false;
 if($request['type']=='add'){
- echo '';
+	$id=$request['id']; //if 0 - allow duplicate; if 1 - check for duplicate
+	$table=$request['table'];
+	foreach($request['data'] as $name => $val){
+      $data[$name]=mysql_real_escape_string($val);			
+	}
+	$error='ddd!';
+	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
 } else if($request['type']=='userupdate'){
-	$error='';
-	$success=false;
 	$id=$request['id'];
 	foreach($request['data'] as $name => $val){
       if($name!='userid' && $name!='userType' && $name!='lastlogin' && $name!='username'){
@@ -53,7 +59,6 @@ if($request['type']=='add'){
 	}
 	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
 }else if($request['type']=='changepassword'){
-	$success=false;
 	$id=$request['id']; 
 	$error=chpass($request['data']['password'],$request['data']['passwordrep']);
 	 	if($error==''){
