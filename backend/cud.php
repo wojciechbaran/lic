@@ -32,17 +32,38 @@ function chpass($pass1,$pass2){
 $res='';
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata, true);
-$error='';
-$success=false;
 if($request['type']=='add'){
-	$id=$request['id']; //if 0 - allow duplicate; if 1 - check for duplicate
+	$error='';
+	$success=false;
+	$id=$request['id']; //if 0 - allow duplicate; else - check for duplicate in columnName=id
 	$table=$request['table'];
 	foreach($request['data'] as $name => $val){
       $data[$name]=mysql_real_escape_string($val);			
 	}
-	$error='ddd!';
+	//sprawdzanie duplikatów
+	if($id){
+		$duplicate = $data[$id];
+		$result = mysql_query("SELECT * FROM $table WHERE $id='$duplicate'");
+		if($row = mysql_fetch_array($result)){
+			$error='Podana wartość już istnieje!';
+		}
+	} 
+	if($error==''){
+		//$output = implode(', ', array_map(function ($v, $k) { return sprintf("%s='%s'", $k, $v); }, $input, array_keys($input)));
+		$addNames=implode(', ',array_keys($data));
+		$addVal=implode('\', \'',$data);		
+		$sql="INSERT INTO $table ($addNames) VALUES ('$addVal')";
+		if(mysql_query($sql,$con)){
+			$success=true;
+			$error='Dane zostały dodane!';
+		} else {
+			$error='Wystąpił błąd!';
+		}
+	}
 	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
 } else if($request['type']=='userupdate'){
+	$error='';
+	$success=false;
 	$id=$request['id'];
 	foreach($request['data'] as $name => $val){
       if($name!='userid' && $name!='userType' && $name!='lastlogin' && $name!='username'){
@@ -59,6 +80,8 @@ if($request['type']=='add'){
 	}
 	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
 }else if($request['type']=='changepassword'){
+	$error='';
+	$success=false;
 	$id=$request['id']; 
 	$error=chpass($request['data']['password'],$request['data']['passwordrep']);
 	 	if($error==''){

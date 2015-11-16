@@ -1,10 +1,12 @@
-angular.module('testApp').service('Search', function($http, CONFIG) {
+angular.module('testApp').service('SearchService', function($http, CONFIG) {
 
   return {
-    search: function(query, type, callback) {
+    search: function(type, condition, table, order, callback) {
       var req = {
         type: type,
-        data: query
+        table: table,
+        condition: condition,
+        order: order
       }
       $http.post(CONFIG.baseURL + '/' + CONFIG.route + '/backend/search.php', req)
         .success(function(response, status) {

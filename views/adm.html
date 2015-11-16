@@ -57,6 +57,7 @@
                         <li><a ng-click="setTab('listAdmin')">Administratorzy</a></li>
                         <li><a ng-click="setTab('addAdmin')">Dodaj Administratora</a></li>
                         <li><a ng-click="setTab('basicData')">Podstawowe dane</a></li>
+                        <li><a ng-click="setTab('lang')">Opcje językowe</a></li>
                     </ul>
                 </div>
             </div>
@@ -87,13 +88,22 @@
             </div>
         </div>
         <!-- Lista konferencji -->
-        <div class="col-md-12" ng-show="tab=='listProject'">
+        <div class="col-md-12" ng-show="tab=='listProject'" >
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Lista konferencji</h3>
                 </div>
                 <div class="panel-body">
-                    blablabla
+                    <table border="1" cellspacing="0">
+                        <thead>
+                            <tr><th>Lp.</th><th>Nazwa</th><th>Data rozpoczęcia</th><th>Status</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="project in listProject">
+                                <th>{{ $index + 1 }}.</th><th>{{ project.name }}</th><th>{{ project.startDate }}</th><th>{{ project.status }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -179,6 +189,17 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Podstawowe dane</h3>
+                </div>
+                <div class="panel-body">
+                    blablabla
+                </div>
+            </div>
+        </div>
+        <!-- Opcje językowe -->
+        <div class="col-md-12" ng-show="tab=='lang'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Opcje językowe</h3>
                 </div>
                 <div class="panel-body">
                     blablabla

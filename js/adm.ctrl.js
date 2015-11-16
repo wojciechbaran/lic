@@ -1,28 +1,36 @@
-testApp.controller('admController', function($scope, CONFIG, Search, AuthenticationService, CUDService) {
+testApp.controller('admController', function($scope, CONFIG, SearchService, AuthenticationService, CUDService) {
   $scope.config = CONFIG;
   $scope.tab = 'start';
   AuthenticationService.AllowAdmin();
 
+
   $scope.setTab = function(tab) {
     $scope.tab = tab;
   };
-  $scope.newProjectS = function(){
-  	$scope.newProject.error = '';
+  $scope.newProjectS = function() {
+    $scope.newProject.error = '';
     $scope.newProject.success = '';
     $scope.dataLoading = true;
-    CUDService.Go('add', $scope.newProject.projectName, 'projects', 1, function(response) {
+    var data = {
+      name: $scope.newProject.projectName
+    }
+    CUDService.Go('add', data, 'projects', 'name', function(response) {
       if (response.success) {
-        $scope.newProject.success = response.message;
+        $scope.tab = 'listProject';
       } else {
         $scope.newProject.error = response.message;
       }
       $scope.dataLoading = false;
     });
   };
-  // $scope.search = function() {
-  //   Search.search($scope.ww, 'ttt', function(response) {
-  //   	$scope.response = response;
-  //   	console.log($scope.response);
-  //   });
-  // }
+  $scope.listProjectS = function() {
+    // type, condition, table, order
+    SearchService.search('simple', '', 'projects', 'id ASC', function(response) {
+      $scope.listProject = response;
+    });
+  };
+  $scope.init = function() {
+    $scope.listProjectS();
+  };
+  $scope.init();
 });

@@ -1,3 +1,3 @@
-testApp.controller('headerController', function($scope, Search, CONFIG) {
+testApp.controller('headerController', function($scope, CONFIG) {
   $scope.config = CONFIG;
 });
