@@ -17,6 +17,7 @@ testApp.controller('admController', function($scope, CONFIG, SearchService, Auth
     CUDService.Go('add', data, 'projects', 'name', function(response) {
       if (response.success) {
         $scope.tab = 'listProject';
+        $scope.listProjectS();
       } else {
         $scope.newProject.error = response.message;
       }
