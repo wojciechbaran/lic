@@ -1,10 +1,12 @@
 <div ng-include="config.route + '/views/header.html'"></div>
 <div ng-include="config.route + '/views/userBar.html'"></div>
+<div ng-if="tab!='start'" ng-include="config.route + '/views/smallMenu.html'"></div>
 <div class="adm">
-    <div class="row text-center">
+    <!-- start -->
+    <div class="row text-center" ng-show="tab=='start'">
         <h1>Panel Administracyjny</h1>
     </div>
-    <div class="admMainMenu" ng-show="tab=='start'">
+    <div class="admMainMenu row" ng-show="tab=='start'">
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -56,6 +58,119 @@
                         <li><a ng-click="setTab('addAdmin')">Dodaj Administratora</a></li>
                         <li><a ng-click="setTab('basicData')">Podstawowe dane</a></li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- elements -->
+    <div class="elements row" ng-show="tab!='start'">
+        <!-- Nowa Konferencja -->
+        <div class="col-md-12" ng-show="tab=='newProject'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Nowa Konferencja</h3>
+                </div>
+                <div class="panel-body">
+                    blablabla
+                </div>
+            </div>
+        </div>
+        <!-- Lista konferencji -->
+        <div class="col-md-12" ng-show="tab=='listProject'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Lista konferencji</h3>
+                </div>
+                <div class="panel-body">
+                    blablabla
+                </div>
+            </div>
+        </div>
+        <!-- Lista użytkowników -->
+        <div class="col-md-12" ng-show="tab=='listUser'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Lista użytkowników</h3>
+                </div>
+                <div class="panel-body">
+                    blablabla
+                </div>
+            </div>
+        </div>
+        <!-- Dodaj użytkownika -->
+        <div class="col-md-12" ng-show="tab=='newUser'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Dodaj użytkownika</h3>
+                </div>
+                <div class="panel-body">
+                    blablabla
+                </div>
+            </div>
+        </div>
+        <!-- Goście -->
+        <div class="col-md-12" ng-show="tab=='guest'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Goście</h3>
+                </div>
+                <div class="panel-body">
+                    blablabla
+                </div>
+            </div>
+        </div>
+        <!-- Miejsca -->
+        <div class="col-md-12" ng-show="tab=='places'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Miejsca</h3>
+                </div>
+                <div class="panel-body">
+                    blablabla
+                </div>
+            </div>
+        </div>
+        <!-- Podwykonawcy -->
+        <div class="col-md-12" ng-show="tab=='dev'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Podwykonawcy</h3>
+                </div>
+                <div class="panel-body">
+                    blablabla
+                </div>
+            </div>
+        </div>
+        <!-- Administratorzy -->
+        <div class="col-md-12" ng-show="tab=='listAdmin'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Administratorzy</h3>
+                </div>
+                <div class="panel-body">
+                    blablabla
+                </div>
+            </div>
+        </div>
+        <!-- Dodaj Administratora -->
+        <div class="col-md-12" ng-show="tab=='addAdmin'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Dodaj Administratora</h3>
+                </div>
+                <div class="panel-body">
+                    blablabla
+                </div>
+            </div>
+        </div>
+        <!-- Podstawowe dane -->
+        <div class="col-md-12" ng-show="tab=='basicData'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Podstawowe dane</h3>
+                </div>
+                <div class="panel-body">
+                    blablabla
                 </div>
             </div>
         </div>
