@@ -37,4 +37,5 @@ testApp.config(function($routeProvider, $locationProvider, $httpProvider, CONFIG
     });
   $locationProvider.html5Mode(true);
   document.title = CONFIG.siteName;
+
 });
