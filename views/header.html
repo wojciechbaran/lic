@@ -6,7 +6,7 @@
             {{ defaultLanguage | uppercase }} <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" style="min-width: 38px !important;" role="menu">
-                <li ng-repeat="lang in config.languages" class="small"><a ng-click="setLang('{{ lang.key }}')">{{ lang.key | uppercase }}</a></li>
+                <li ng-repeat="lang in config.languages" class="small"><a ng-click="setLang(lang.key)">{{ lang.key | uppercase }}</a></li>
             </ul>
         </div>
     </div>
