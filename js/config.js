@@ -7,7 +7,7 @@ testApp.constant('CONFIG', {
     'key': 'en',
     'label': 'English'
   }],
-  'defaultLanguage': 'en',
+  'defaultLanguage': 'pl',
   'siteName': 'System do Organizacji Konferencji Naukowych',
   'baseURL': 'http://wojbaran.webd.pl',
   'userDataFilds': [{

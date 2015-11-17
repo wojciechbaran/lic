@@ -3,7 +3,7 @@
     <div class="col-md-1 pull-right">
         <div class="btn-group">
             <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
-            {{ defaultLanguage | uppercase }} <span class="caret"></span>
+            {{ $root.defaultLanguage | uppercase }} <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" style="min-width: 38px !important;" role="menu">
                 <li ng-repeat="lang in config.languages" class="small"><a ng-click="setLang(lang.key)">{{ lang.key | uppercase }}</a></li>

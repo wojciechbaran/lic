@@ -11,7 +11,6 @@ testApp.controller('mainController', function($scope, CONFIG, $rootScope, $route
   };
   $scope.setLang = function(lang) {
     $rootScope.defaultLanguage = lang;
-    $scope.defaultLanguage = lang;
     $route.reload();
   };
 
