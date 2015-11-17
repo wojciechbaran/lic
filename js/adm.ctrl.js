@@ -3,7 +3,6 @@ testApp.controller('admController', function($scope, CONFIG, SearchService, Auth
   $scope.tab = 'start';
   AuthenticationService.AllowAdmin();
 
-
   $scope.setTab = function(tab) {
     $scope.tab = tab;
   };

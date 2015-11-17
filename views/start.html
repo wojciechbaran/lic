@@ -1,5 +1,5 @@
-<div ng-include="config.route + '/views/header.html'"></div>
-<div ng-if="currentUser" ng-include="config.route + '/views/userBar.html'"></div>
+﻿<div ng-include="config.route + '/views/header.html'"></div>
+<div ng-if="currentUser.userid" ng-include="config.route + '/views/userBar.html'"></div>
 <div class="start">
     <div class="row text-center">
         <h1>Start</h1>
@@ -8,7 +8,7 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Nowe konferencje</h3>
+                    <h3 class="panel-title">{{'Nowe konferencje' | translate }}</h3>
                 </div>
                 <div class="panel-body">
                     Nowe konferencje
@@ -18,7 +18,7 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Poprzednie konferencje</h3>
+                    <h3 class="panel-title">{{'Poprzednie konferencje' | translate }}</h3>
                 </div>
                 <div class="panel-body">
                     Lista konferencji
@@ -28,12 +28,12 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Dołącz do nas!</h3>
+                    <h3 class="panel-title">{{'Dołącz do nas' | translate }}!</h3>
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li><a href="{{ config.route }}/login">Logowanie</a></li>
-                        <li><a href="{{ config.route }}/register">Rejestracja</a></li>
+                        <li><a href="{{ config.route }}/login">{{'Logowanie' | translate }}</a></li>
+                        <li><a href="{{ config.route }}/register">{{'Rejestracja' | translate }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -41,12 +41,12 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Więcej...</h3>
+                    <h3 class="panel-title">{{'Więcej' | translate }}...</h3>
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li><a ng-click="setTab('userData')">O projekcie</a></li>
-                        <li><a href="www.up.krakow.pl">Strona główna UP</a></li>
+                        <li><a ng-click="setTab('userData')">{{'O projekcie' | translate }}</a></li>
+                        <li><a href="www.up.krakow.pl">{{'Strona główna UP' | translate }}</a></li>
                         <li><a href="{{ config.route }}/adm">ADM</a></li>
                     </ul>
                 </div>
