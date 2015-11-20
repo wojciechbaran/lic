@@ -20,11 +20,11 @@
     </tbody>
 </table>
 <div class="tableToolbar row">
-    <div class="results clo-md-2">
+    <div class="results col-md-2 ">
         <span ng-show="tableData.length>0" >Wyniki {{ (currentPage*limit)+1 }}-{{ checkPage((currentPage*limit)+limit) }} z {{tableData.length}}</span>
-        <span ng-show="tableData.length==0" >Brak wyników</span>
+        <span ng-hide="empty" >Brak wyników</span>
     </div>
-    <div ng-if="numberPage>1" class="pagination col-md-4">
+    <div ng-if="numberPage>1" class="pageSelect pull-right">
         <ul>
             <li><a ng-click="setPage(firstPage)"><span class="glyphicon glyphicon-step-backward"></span></a></li>
             <li><a ng-click="setPage(currentPage-1)"><span class="glyphicon glyphicon-triangle-left"></span></a></li>

@@ -1,5 +1,9 @@
 ﻿testApp.directive('ngTab', function(CONFIG) {
   function link(scope) {
+  	scope.empty=false;
+  	if(!scope.tableData){
+  		scope.empty=true;
+  	}
     //sort
     scope.sortVal = '$index';
     scope.sortOrder = false;

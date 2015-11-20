@@ -5,7 +5,7 @@
     <!-- start -->
     <div class="row text-center" ng-show="tab=='start'">
         <h1>Panel Administracyjny</h1>
-       <div ng-tab tab="listProject" cols="listProjectCols"></div>
+       
     </div>
     <div class="admMainMenu row" ng-show="tab=='start'">
         <div class="col-md-3">
@@ -95,16 +95,7 @@
                     <h3 class="panel-title">Lista konferencji</h3>
                 </div>
                 <div class="panel-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr><th>Lp.</th><th>Nazwa</th><th>Data rozpoczęcia</th><th>Status</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="project in listProject">
-                                <td>{{ $index + 1 }}.</td><td>{{ project.name }}</td><td>{{ project.startDate }}</td><td>{{ project.status }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div ng-tab tab="listProject" cols="listProjectCols" limit="5"></div>
                 </div>
             </div>
         </div>
@@ -115,7 +106,7 @@
                     <h3 class="panel-title">Lista użytkowników</h3>
                 </div>
                 <div class="panel-body">
-                   <!--  <tableWB tableName="listProject"></tableWB> -->
+                   <div ng-tab tab="listProject" cols="listProjectCols" limit="3"></div>
                 </div>
             </div>
         </div>
