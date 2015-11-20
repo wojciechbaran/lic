@@ -9,9 +9,9 @@ a {
   cursor: pointer;
 }
 
-.table>thead>tr>th {
+/*.table>thead>tr>th {
   text-align: center;
-}
+}*/
 
 
 /*header*/
@@ -88,3 +88,10 @@ a {
 
 
 /*footer*/
+
+/*table*/
+
+.pagination ul li {
+    list-style: none;
+    display: inline-block;
+}
