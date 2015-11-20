@@ -11,6 +11,7 @@
     label: 'Data rozpoczęcia'
 
   }];
+
   $scope.setTab = function(tab) {
     $scope.tab = tab;
   };

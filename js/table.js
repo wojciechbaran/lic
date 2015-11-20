@@ -1,10 +1,20 @@
 ﻿testApp.directive('ngTab', function(CONFIG) {
-return {
-	restrict: 'A',
+  function link(scope) {
+    scope.sortVal = '$index';
+    scope.sortOrder = true;
+    scope.setSort = function(val) {
+      scope.sortVal = val;
+    };
+
+  }
+  return {
+    restrict: 'A',
+    // transclude: true,
     scope: {
       tableData: '=tab',
       cols: '='
     },
-    templateUrl: CONFIG.route + '/views/table.html'
+    templateUrl: CONFIG.route + '/views/table.html',
+    link: link
   };
 });
