@@ -1,8 +1,16 @@
-testApp.controller('admController', function($scope, CONFIG, SearchService, AuthenticationService, CUDService) {
+﻿testApp.controller('admController', function($scope, CONFIG, SearchService, AuthenticationService, CUDService) {
   $scope.config = CONFIG;
   $scope.tab = 'start';
   AuthenticationService.AllowAdmin();
 
+  $scope.listProjectCols = [{
+    name: 'name',
+    label: 'Nazwa'
+  }, {
+    name: 'startDate',
+    label: 'Data rozpoczęcia'
+
+  }];
   $scope.setTab = function(tab) {
     $scope.tab = tab;
   };

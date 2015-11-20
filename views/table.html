@@ -1,0 +1,14 @@
+﻿<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Lp.</th>
+            <th ng-repeat="col in cols">{{ col.label }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="project in tableData | orderBy : 'name' ">
+            <td>{{ $index + 1 }}.</td>
+            <td ng-repeat="col in cols">{{ project[col.name] }}</td>
+        </tr>
+    </tbody>
+</table>
