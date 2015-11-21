@@ -5,7 +5,6 @@
     <!-- start -->
     <div class="row text-center" ng-show="tab=='start'">
         <h1>Panel Administracyjny</h1>
-       
     </div>
     <div class="admMainMenu row" ng-show="tab=='start'">
         <div class="col-md-3">
@@ -95,7 +94,7 @@
                     <h3 class="panel-title">Lista konferencji</h3>
                 </div>
                 <div class="panel-body">
-                    <div ng-tab tab="listProject" cols="listProjectCols" limit="5"></div>
+                    <div ng-tab tab="listProject" cols="listProjectCols" limit="10"></div>
                 </div>
             </div>
         </div>
@@ -106,7 +105,7 @@
                     <h3 class="panel-title">Lista użytkowników</h3>
                 </div>
                 <div class="panel-body">
-                   <div ng-tab tab="listProject" cols="listProjectCols" limit="3"></div>
+                   <div ng-tab tab="listUsers" cols="listUsersCols" limit="10"></div>
                 </div>
             </div>
         </div>

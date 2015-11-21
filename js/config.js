@@ -9,7 +9,8 @@ testApp.constant('CONFIG', {
   }],
   'defaultLanguage': 'pl',
   'siteName': 'System do Organizacji Konferencji Naukowych',
-  'baseURL': 'http://wojbaran.webd.pl',
+  //'baseURL': 'http://wojbaran.webd.pl',
+  'baseURL': '',
   'userDataFilds': [{
     'name': 'name',
     'label': 'Imie',

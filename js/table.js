@@ -1,9 +1,5 @@
 ﻿testApp.directive('ngTab', function(CONFIG) {
   function link(scope) {
-  	scope.empty=false;
-  	if(!scope.tableData){
-  		scope.empty=true;
-  	}
     //sort
     scope.sortVal = '$index';
     scope.sortOrder = false;
@@ -17,10 +13,10 @@
     };
     //pagination
     scope.setPage = function(page) {
-      if(page<0){
+      if (page < 0) {
         page = 0;
       }
-      if(page>scope.lastPage){
+      if (page > scope.lastPage) {
         page = scope.lastPage;
       }
       scope.currentPage = page;
@@ -32,6 +28,12 @@
       return g;
     }
     scope.pagination = function() {
+      if (scope.tableData && scope.tableData.length) {
+        scope.empty = false;
+      } else {
+        scope.empty = true;
+      }
+
       scope.limit ? true : scope.limit = 10;
       scope.firstPage = 0;
       scope.currentPage = 0;
@@ -49,10 +51,11 @@
       }
       return new Array(1);
     };
+    scope.setNumbers = function(num){
+    	scope.limit = num;
+    	scope.pagination();
+    }
     scope.$watch('tableData', scope.pagination);
-    //scope.$watch('tableData', scope.getNumber);
-
-
 
   }
   return {

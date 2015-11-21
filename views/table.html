@@ -13,16 +13,25 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="project in tableData | orderBy : sortVal : sortOrder " ng-hide="($index<(currentPage*limit) || $index>=((currentPage*limit)+limit))">
+        <tr ng-repeat="row in tableData | orderBy : sortVal : sortOrder " ng-hide="($index<(currentPage*limit) || $index>=((currentPage*limit)+limit))">
             <td>{{ $index + 1 }}.</td>
-            <td ng-repeat="col in cols">{{ project[col.name] }}</td>
+            <td ng-repeat="col in cols">{{ row[col.name] }}</td>
         </tr>
     </tbody>
 </table>
 <div class="tableToolbar row">
+    <div class="text-center" ng-show="empty" >Brak wyników</div>
     <div class="results col-md-2 ">
         <span ng-show="tableData.length>0" >Wyniki {{ (currentPage*limit)+1 }}-{{ checkPage((currentPage*limit)+limit) }} z {{tableData.length}}</span>
-        <span ng-hide="empty" >Brak wyników</span>
+    </div>
+    <div ng-hide="empty" class="pageSelect col-md-3">
+        <ul>
+            <li>Ilość wyników:</li>
+            <li><a ng-click="setNumbers(10)">10</a></li>
+            <li><a ng-click="setNumbers(20)">20</a></li>
+            <li><a ng-click="setNumbers(50)">50</a></li>
+            <li><a ng-click="setNumbers(100)">100</a></li>
+        </ul>
     </div>
     <div ng-if="numberPage>1" class="pageSelect pull-right">
         <ul>
