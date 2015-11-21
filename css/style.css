@@ -9,6 +9,10 @@ a {
   cursor: pointer;
 }
 
+/*.table>thead>tr>th {
+  text-align: center;
+}*/
+
 
 /*header*/
 
@@ -80,8 +84,15 @@ a {
 }
 
 
-
 /*maincontent*/
 
 
 /*footer*/
+
+/*table*/
+
+.pageSelect ul li {
+    list-style: none;
+    display: inline-block;
+    margin-left: 5px;
+}

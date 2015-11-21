@@ -25,6 +25,10 @@ if($request['type']=='simple'){
 	$res = array();
 	$result = mysql_query($query);
 	while($row = mysql_fetch_array($result)){
+		if($row['data']){
+			$data=json_decode($row['data'], true);
+			$row = array_merge($row, $data);
+		}
 		array_push($res, $row);
 	}
 }

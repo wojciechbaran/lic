@@ -1,0 +1,45 @@
+﻿<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Lp.</th>
+            <th ng-repeat="col in cols">
+                <a ng-click="setSort(col.name)">
+                {{ col.label }}
+                <span ng-show="sortVal!=col.name" class="glyphicon glyphicon-sort"></span>
+                <span ng-show="sortVal==col.name && !sortOrder" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                <span ng-show="sortVal==col.name && sortOrder" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in tableData | orderBy : sortVal : sortOrder " ng-hide="($index<(currentPage*limit) || $index>=((currentPage*limit)+limit))">
+            <td>{{ $index + 1 }}.</td>
+            <td ng-repeat="col in cols">{{ row[col.name] }}</td>
+        </tr>
+    </tbody>
+</table>
+<div class="tableToolbar row">
+    <div class="text-center" ng-show="empty" >Brak wyników</div>
+    <div class="results col-md-2 ">
+        <span ng-show="tableData.length>0" >Wyniki {{ (currentPage*limit)+1 }}-{{ checkPage((currentPage*limit)+limit) }} z {{tableData.length}}</span>
+    </div>
+    <div ng-hide="empty" class="pageSelect col-md-3">
+        <ul>
+            <li>Ilość wyników:</li>
+            <li><a ng-click="setNumbers(10)">10</a></li>
+            <li><a ng-click="setNumbers(20)">20</a></li>
+            <li><a ng-click="setNumbers(50)">50</a></li>
+            <li><a ng-click="setNumbers(100)">100</a></li>
+        </ul>
+    </div>
+    <div ng-if="numberPage>1" class="pageSelect pull-right">
+        <ul>
+            <li><a ng-click="setPage(firstPage)"><span class="glyphicon glyphicon-step-backward"></span></a></li>
+            <li><a ng-click="setPage(currentPage-1)"><span class="glyphicon glyphicon-triangle-left"></span></a></li>
+            <li ng-repeat="item in getNumber(numberPage)  track by $index"><a ng-click="setPage($index)"><span>{{ $index + 1}}</span></a></li>
+            <li><a ng-click="setPage(currentPage+1)"><span class="glyphicon glyphicon-triangle-right"></span></a></li>
+            <li><a ng-click="setPage(lastPage)"><span class="glyphicon glyphicon-step-forward"></span></a></li>
+        </ul>
+    </div>
+</div>

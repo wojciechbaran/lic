@@ -1,8 +1,28 @@
-testApp.controller('admController', function($scope, CONFIG, SearchService, AuthenticationService, CUDService) {
+﻿testApp.controller('admController', function($scope, CONFIG, SearchService, AuthenticationService, CUDService) {
   $scope.config = CONFIG;
   $scope.tab = 'start';
   AuthenticationService.AllowAdmin();
 
+  $scope.listProjectCols = [{
+    name: 'name',
+    label: 'Nazwa'
+  }, {
+    name: 'startDate',
+    label: 'Data rozpoczęcia'
+  }];
+  $scope.listUsersCols = [{
+    name: 'username',
+    label: 'Login'
+  }, {
+    name: 'name',
+    label: 'Imie'
+  }, {
+    name: 'surname',
+    label: 'Nazwisko'
+  }, {
+    name: 'lastlogin',
+    label: 'Ostatnie logowanie',
+  }];
   $scope.setTab = function(tab) {
     $scope.tab = tab;
   };
@@ -29,8 +49,15 @@ testApp.controller('admController', function($scope, CONFIG, SearchService, Auth
       $scope.listProject = response;
     });
   };
+  $scope.listUsersS = function() {
+    // type, condition, table, order
+    SearchService.search('simple', 'id=10', 'users', 'id ASC', function(response) {
+      $scope.listUsers = response;
+    });
+  };
   $scope.init = function() {
     $scope.listProjectS();
+    $scope.listUsersS();
   };
   $scope.init();
 });
