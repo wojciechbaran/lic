@@ -10,12 +10,14 @@
                 <span ng-show="sortVal==col.name && sortOrder" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
                 </a>
             </th>
+            <th>Edytuj</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="row in tableData | orderBy : sortVal : sortOrder " ng-hide="($index<(currentPage*limit) || $index>=((currentPage*limit)+limit))">
             <td>{{ $index + 1 }}.</td>
-            <td ng-repeat="col in cols">{{ row[col.name] }}</td>
+            <td ng-repeat="col in cols">{{ row[col.name] | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+            <td><a ng-click="editfunction({id: row.id})" ><span class="glyphicon glyphicon-pencil" ></span></a></td>
         </tr>
     </tbody>
 </table>
@@ -24,9 +26,9 @@
     <div class="results col-md-2 ">
         <span ng-show="tableData.length>0" >Wyniki {{ (currentPage*limit)+1 }}-{{ checkPage((currentPage*limit)+limit) }} z {{tableData.length}}</span>
     </div>
-    <div ng-hide="empty" class="pageSelect col-md-3">
+    <div ng-hide="empty" class="pageSelect col-md-4">
         <ul>
-            <li>Ilość wyników:</li>
+            <li>Ilość wyników na stronie:</li>
             <li><a ng-click="setNumbers(10)">10</a></li>
             <li><a ng-click="setNumbers(20)">20</a></li>
             <li><a ng-click="setNumbers(50)">50</a></li>

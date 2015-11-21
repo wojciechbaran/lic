@@ -51,9 +51,12 @@
   };
   $scope.listUsersS = function() {
     // type, condition, table, order
-    SearchService.search('simple', 'id=10', 'users', 'id ASC', function(response) {
+    SearchService.search('simple', '', 'users', 'id ASC', function(response) {
       $scope.listUsers = response;
     });
+  };
+  $scope.edit = function(id){
+    console.log('main'+id);
   };
   $scope.init = function() {
     $scope.listProjectS();

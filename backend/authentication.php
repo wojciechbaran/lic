@@ -63,6 +63,7 @@ if($request['type']=='login'){
 			$basic = array('userType' => $userType, 'username' => $username, 'lastlogin' => $lastlogin, 'userid' => $id);
 			$userData = array_merge($basic, $data);
 			$now=time();
+			$now=$now*1000;
 			$sql="UPDATE users SET lastlogin=$now WHERE id=$id";
 			mysql_query($sql,$con);
 		}else{

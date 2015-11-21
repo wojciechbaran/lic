@@ -60,11 +60,12 @@
   }
   return {
     restrict: 'A',
-    // transclude: true,
+    //transclude: true,
     scope: {
       tableData: '=tab',
       cols: '=',
-      limit: '='
+      limit: '=',
+      editfunction: '&callbackFn'
     },
     templateUrl: CONFIG.route + '/views/table.html',
     link: link
