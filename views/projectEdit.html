@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default" ng-controller="projectController">
     <div class="panel-heading">
         <h3 class="panel-title">Edycja projektu: {{ singleProject[0].name }} (id:{{ singleProject[0].id }}) <a ng-click="setTab('listProject')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
     </div>
@@ -9,7 +9,7 @@
                     <a ng-click="setTabEdit('start','projectTab')">Etykieta</a>
                 </li>
                 <li role="presentation" ng-class="projectTab=='description' ? 'active' : ''">
-                    <a ng-click="setTabEdit('description','projectTab')">Nazwa i Opis</a>
+                    <a ng-click="setTabEdit('description','projectTab')">Tytuł i Opis</a>
                 </li>
                 <li role="presentation" ng-class="projectTab=='dates' ? 'active' : ''">
                     <a ng-click="setTabEdit('dates','projectTab')">Daty</a>
@@ -51,7 +51,22 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='description'">
                 <div class="panel-body">
-                    description
+                    <div ng-show="projectDesc.error" class="alert alert-danger">{{projectDesc.error}}</div>
+                    <div ng-show="projectDesc.success" class="alert alert-success">{{projectDesc.success}}</div>
+                    <form name="projectDesc" ng-submit="projectDescS()" role="form" >
+                        <div class="form-group">
+                            <label for="title">Tytuł</label>
+                            <input type="text" name="title" id="title" class="form-control" ng-model="projectDesc.dtitle" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Opis</label>
+                            <textarea name="description" id="description" class="form-control" rows="3" ng-model="projectDesc.contractordescription"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" ng-disabled="projectDesc.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
+                            <img ng-if="dataLoading" src="lic/images/loading.gif"  />
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='dates'">

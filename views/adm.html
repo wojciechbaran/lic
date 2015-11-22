@@ -191,7 +191,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for="description">Opis</label>
-                            <input type="textarea" name="description" id="description" class="form-control" ng-model="newContractorD.contractordescription" />
+                            <textarea name="description" id="description" class="form-control" rows="3" ng-model="newContractorD.contractordescription"></textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="street">Ulica i numer</label>
@@ -318,7 +318,7 @@
         <div class="col-md-12" ng-show="tab=='editContractor'">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Edycja Podwykonawcy: {{ singleContractor[0].name }} (id:{{ singleContractor[0].id }})<a ng-click="setTab('listUser')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
+                    <h3 class="panel-title">Edycja Podwykonawcy: {{ singleContractor[0].name }} (id:{{ singleContractor[0].id }})<a ng-click="setTab('contractors')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
                 </div>
                 <div class="panel-body">
                     <div class=" col-md-6">

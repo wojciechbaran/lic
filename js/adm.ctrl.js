@@ -142,7 +142,7 @@
     $scope.listGuestsS();
     $scope.listAdminsS();
     $scope.listContractorsS();
-    //$scope.editProject(1);
+    $scope.editProject(1);
   };
   $scope.init();
 });
