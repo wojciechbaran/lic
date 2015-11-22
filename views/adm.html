@@ -43,7 +43,8 @@
                         <li><a ng-click="setTab('guest')">Lista Gości</a></li>
                         <li><a ng-click="setTab('lecturer')">Lista Wykładowców</a></li>
                         <li><a ng-click="setTab('places')">Miejsca</a></li>
-                        <li><a ng-click="setTab('dev')">Podwykonawcy</a></li>
+                        <li><a ng-click="setTab('contractors')">Lista podwykonawców</a></li>
+                        <li><a ng-click="setTab('newContractor')">Dodaj podwykonawę</a></li>
                     </ul>
                 </div>
             </div>
@@ -155,13 +156,68 @@
             </div>
         </div>
         <!-- Podwykonawcy -->
-        <div class="col-md-12" ng-show="tab=='dev'">
+        <div class="col-md-12" ng-show="tab=='contractors'">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Podwykonawcy</h3>
                 </div>
                 <div class="panel-body">
-                    blablabla
+                    <div ng-tab tab="listContractors" cols="contractorsCols" limit="10" callback-fn="editContractor(id)"></div>
+                </div>
+            </div>
+        </div>
+        <!-- dodaj Podwykonawe -->
+        <div class="col-md-12" ng-show="tab=='newContractor'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Dodaj nowego podwykonawę</h3>
+                </div>
+                <div class="panel-body">
+                    <div ng-show="newContractorD.error" class="alert alert-danger">{{newContractorD.error}}</div>
+                    <div ng-show="newContractorD.success" class="alert alert-success">{{newContractorD.success}}</div>
+                    <form name="newContractor" ng-submit="newContractorS()" role="form" class="col-md-6 col-md-offset-1" ng-init="newContractorD['type']='contractor'">
+                        <div class="form-group col-md-12">
+                            <label for="name">Nazwa</label>
+                            <input type="text" name="name" id="name" class="form-control" ng-model="newContractorD.contractorname" required/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="servicetype">Typ</label>
+                            <select name="servicetype" id="servicetype" class="form-control" ng-model="newContractorD.servicetype" required>
+                            <option>Sala konferencyjna</option>
+                            <option>Catering</option>
+                            <option>Obsługa Audiowizualna</option>
+                            <option>Inne</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="description">Opis</label>
+                            <input type="textarea" name="description" id="description" class="form-control" ng-model="newContractorD.contractordescription" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="street">Ulica i numer</label>
+                            <input type="text" name="street" id="street" class="form-control" ng-model="newContractorD.street" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="kode">Kod Pocztowy</label>
+                            <input type="text" name="kode" id="kode" class="form-control" ng-model="newContractorD.kode" />
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="city">Miejscowość</label>
+                            <input type="text" name="city" id="city" class="form-control" ng-model="newContractorD.city" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="nip">NIP</label>
+                            <input type="text" name="nip" id="nip" class="form-control" ng-model="newContractorD.nip" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="regon">REGON</label>
+                            <input type="text" name="regon" id="regon" class="form-control" ng-model="newContractorD.regon" />
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" ng-disabled="newContractor.$invalid || dataLoading" class="btn btn-primary">Utwórz</button>
+                            <img ng-if="dataLoading" src="lic/images/loading.gif"  />
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -213,7 +269,7 @@
         <div class="col-md-12" ng-show="tab=='editUser'">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Edycja użytkownika: {{ singleUser[0].name }} {{ singleUser[0].surname }} (id:{{ singleUser[0].id }})</h3>
+                    <h3 class="panel-title">Edycja użytkownika: {{ singleUser[0].name }} {{ singleUser[0].surname }} (id:{{ singleUser[0].id }})<a ng-click="setTab('listUser')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
                 </div>
                 <div class="panel-body">
                     <div class=" col-md-6">
@@ -257,13 +313,44 @@
             </div>
         </div>
         <!-- Edycja projektu -->
-        <div class="col-md-12" ng-show="tab=='editProject'">
+        <div class="col-md-12" ng-show="tab=='editProject'" ng-include="config.route + '/views/projectEdit.html'"></div>
+        <!-- Edycja podwykonawcy -->
+        <div class="col-md-12" ng-show="tab=='editContractor'">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Edycja projektu: {{ singleProject[0].name }} (id:{{ singleProject[0].id }})</h3>
+                    <h3 class="panel-title">Edycja Podwykonawcy: {{ singleContractor[0].name }} (id:{{ singleContractor[0].id }})<a ng-click="setTab('listUser')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
                 </div>
                 <div class="panel-body">
-                    blablabla
+                    <div class=" col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Etykietka</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>Id</td>
+                                        <td>{{ singleContractor[0].id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Typ</td>
+                                        <td>
+                                            <span ng-if="singleUser[0].type=='admin'">Administrator</span>
+                                            <span ng-if="singleUser[0].type=='user'">Użytkownik</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Login</td>
+                                        <td>{{ singleContractor[0].data }}</td>
+                                    </tr>
+                                    
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-6">
+                        Jakieś opcje
+                    </div>
                 </div>
             </div>
         </div>

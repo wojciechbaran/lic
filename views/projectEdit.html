@@ -1,0 +1,109 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Edycja projektu: {{ singleProject[0].name }} (id:{{ singleProject[0].id }}) <a ng-click="setTab('listProject')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-2">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" ng-class="projectTab=='start' ? 'active' : ''">
+                    <a ng-click="setTabEdit('start','projectTab')">Etykieta</a>
+                </li>
+                <li role="presentation" ng-class="projectTab=='description' ? 'active' : ''">
+                    <a ng-click="setTabEdit('description','projectTab')">Nazwa i Opis</a>
+                </li>
+                <li role="presentation" ng-class="projectTab=='dates' ? 'active' : ''">
+                    <a ng-click="setTabEdit('dates','projectTab')">Daty</a>
+                </li>
+                <li role="presentation" ng-class="projectTab=='place' ? 'active' : ''">
+                    <a ng-click="setTabEdit('place','projectTab')">Miejsce</a>
+                </li>
+                <li role="presentation" ng-class="projectTab=='plan' ? 'active' : ''">
+                    <a ng-click="setTabEdit('plan','projectTab')">Plan</a>
+                </li>
+                <li role="presentation" ng-class="projectTab=='guest' ? 'active' : ''">
+                    <a ng-click="setTabEdit('guest','projectTab')">Goście</a>
+                </li>
+                <li role="presentation" ng-class="projectTab=='sponsors' ? 'active' : ''">
+                    <a ng-click="setTabEdit('sponsors','projectTab')">Sponsorzy</a>
+                </li>
+                <li role="presentation" ng-class="projectTab=='extra' ? 'active' : ''">
+                    <a ng-click="setTabEdit('extra','projectTab')">Extra</a>
+                </li>
+                <li role="presentation" ng-class="projectTab=='status' ? 'active' : ''">
+                    <a ng-click="setTabEdit('status','projectTab')">Status</a>
+                </li>
+                <li role="presentation" ng-class="projectTab=='bilans' ? 'active' : ''">
+                    <a ng-click="setTabEdit('bilans','projectTab')">Bilans</a>
+                </li>
+                <li role="presentation" ng-class="projectTab=='users' ? 'active' : ''">
+                    <a ng-click="setTabEdit('users','projectTab')">Uczestnicy</a>
+                </li>
+                <li role="presentation" ng-class="projectTab=='print' ? 'active' : ''">
+                    <a ng-click="setTabEdit('print','projectTab')">Wydruki</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <div class="panel panel-default"  ng-show="projectTab=='start'">
+                <div class="panel-body">
+                    Start
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="projectTab=='description'">
+                <div class="panel-body">
+                    description
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="projectTab=='dates'">
+                <div class="panel-body">
+                    dates
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="projectTab=='place'">
+                <div class="panel-body">
+                    place
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="projectTab=='plan'">
+                <div class="panel-body">
+                    plan
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="projectTab=='guest'">
+                <div class="panel-body">
+                    guest
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="projectTab=='sponsors'">
+                <div class="panel-body">
+                    sponsors
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="projectTab=='extra'">
+                <div class="panel-body">
+                    extra
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="projectTab=='status'">
+                <div class="panel-body">
+                    status
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="projectTab=='bilans'">
+                <div class="panel-body">
+                    bilans
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="projectTab=='users'">
+                <div class="panel-body">
+                    users
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="projectTab=='print'">
+                <div class="panel-body">
+                    print
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

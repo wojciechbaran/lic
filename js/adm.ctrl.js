@@ -1,6 +1,7 @@
 ﻿testApp.controller('admController', function($scope, CONFIG, SearchService, AuthenticationService, CUDService) {
   $scope.config = CONFIG;
   $scope.tab = 'start';
+  $scope.projectTab = 'start';
   AuthenticationService.AllowAdmin();
 
   $scope.listProjectCols = [{
@@ -23,8 +24,21 @@
     name: 'lastlogin',
     label: 'Ostatnie logowanie',
   }];
+  $scope.contractorsCols = [{
+    name: 'name',
+    label: 'Nazwa'
+  }, {
+    name: 'servicetype',
+    label: 'Typ'
+  }, {
+    name: 'city',
+    label: 'Miejscowość'
+  }];
   $scope.setTab = function(tab) {
     $scope.tab = tab;
+  };
+  $scope.setTabEdit = function(tab, project) {
+    $scope[project] = tab;
   };
   $scope.newProjectS = function() {
     $scope.newProject.error = '';
@@ -38,6 +52,31 @@
         $scope.editProject(response.newid);
       } else {
         $scope.newProject.error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
+  };
+  $scope.newContractorS = function() {
+    $scope.newContractorD.error = '';
+    $scope.newContractorD.success = '';
+    $scope.dataLoading = true;
+    var data = {
+      name: $scope.newContractorD.contractorname,
+      servicetype: $scope.newContractorD.servicetype,
+      data: JSON.stringify({
+       description: $scope.newContractorD.contractordescription, 
+       street: $scope.newContractorD.street, 
+       kode: $scope.newContractorD.kode, 
+       city: $scope.newContractorD.city,
+       nip: $scope.newContractorD.nip,
+       regon: $scope.newContractorD.regon
+      })
+    };
+    CUDService.Go('add', data, 'contractors', 'name', function(response) {
+      if (response.success) {
+        $scope.newContractorD.success = response.message;
+      } else {
+        $scope.newContractorD.error = response.message;
       }
       $scope.dataLoading = false;
     });
@@ -72,10 +111,22 @@
       $scope.listLecturers = response;
     });
   };
+  $scope.listContractorsS = function() {
+    // type, condition, table, order
+    SearchService.search('simple', '', 'contractors', 'id ASC', function(response) {
+      $scope.listContractors = response;
+    });
+  };
   $scope.editProject = function(id) {
     $scope.setTab('editProject');
     SearchService.search('simple', 'id=' + id, 'projects', '', function(response) {
       $scope.singleProject = response;
+    });
+  };
+  $scope.editContractor = function(id) {
+    $scope.setTab('editContractor');
+    SearchService.search('simple', 'id=' + id, 'contractors', '', function(response) {
+      $scope.singleContractor = response;
     });
   };
   $scope.editUser = function(id) {
@@ -90,6 +141,8 @@
     $scope.listLecturersS();
     $scope.listGuestsS();
     $scope.listAdminsS();
+    $scope.listContractorsS();
+    $scope.editProject(1);
   };
   $scope.init();
 });
