@@ -183,10 +183,10 @@
                         <div class="form-group col-md-12">
                             <label for="servicetype">Typ</label>
                             <select name="servicetype" id="servicetype" class="form-control" ng-model="newContractorD.servicetype" required>
-                            <option>Sala konferencyjna</option>
-                            <option>Catering</option>
-                            <option>Obsługa Audiowizualna</option>
-                            <option>Inne</option>
+                                <option>Sala konferencyjna</option>
+                                <option>Catering</option>
+                                <option>Obsługa Audiowizualna</option>
+                                <option>Inne</option>
                             </select>
                         </div>
                         <div class="form-group col-md-12">
@@ -335,15 +335,25 @@
                                     <tr>
                                         <td>Typ</td>
                                         <td>
-                                            <span ng-if="singleUser[0].type=='admin'">Administrator</span>
-                                            <span ng-if="singleUser[0].type=='user'">Użytkownik</span>
+                                            {{ singleContractor[0].servicetype }}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Login</td>
-                                        <td>{{ singleContractor[0].data }}</td>
+                                        <td>Opis</td>
+                                        <td>{{ singleContractor[0].description }}</td>
                                     </tr>
-                                    
+                                    <tr>
+                                        <td>Adres</td>
+                                        <td>{{ singleContractor[0].street }}, {{ singleContractor[0].kode }} {{ singleContractor[0].city }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NIP</td>
+                                        <td>{{ singleContractor[0].nip }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>REGON</td>
+                                        <td>{{ singleContractor[0].regon }}</td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
