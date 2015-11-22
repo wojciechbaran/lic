@@ -14,8 +14,8 @@
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li><a ng-click="setTab('newProject')">Nowa konferencja</a></li>
                         <li><a ng-click="setTab('listProject')">Lista konferencji</a></li>
+                        <li><a ng-click="setTab('newProject')">Nowa konferencja</a></li>
                     </ul>
                 </div>
             </div>
@@ -40,7 +40,8 @@
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li><a ng-click="setTab('guest')">Goście</a></li>
+                        <li><a ng-click="setTab('guest')">Lista Gości</a></li>
+                        <li><a ng-click="setTab('lecturer')">Lista Wykładowców</a></li>
                         <li><a ng-click="setTab('places')">Miejsca</a></li>
                         <li><a ng-click="setTab('dev')">Podwykonawcy</a></li>
                     </ul>
@@ -54,7 +55,7 @@
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li><a ng-click="setTab('listAdmin')">Administratorzy</a></li>
+                        <li><a ng-click="setTab('listAdmin')">Lista Administratorów</a></li>
                         <li><a ng-click="setTab('addAdmin')">Dodaj Administratora</a></li>
                         <li><a ng-click="setTab('basicData')">Podstawowe dane</a></li>
                         <li><a ng-click="setTab('lang')">Opcje językowe</a></li>
@@ -94,18 +95,18 @@
                     <h3 class="panel-title">Lista konferencji</h3>
                 </div>
                 <div class="panel-body">
-                    <div ng-tab tab="listProject" cols="listProjectCols" limit="10" callback-fn="edit(id)"></div>
+                    <div ng-tab tab="listProject" cols="listProjectCols" limit="10" callback-fn="editProject(id)"></div>
                 </div>
             </div>
         </div>
         <!-- Lista użytkowników -->
         <div class="col-md-12" ng-show="tab=='listUser'">
             <div class="panel panel-default">
-                <div class="panel-heading">=
+                <div class="panel-heading">
                     <h3 class="panel-title">Lista użytkowników</h3>
                 </div>
                 <div class="panel-body">
-                   <div ng-tab tab="listUsers" cols="listUsersCols" limit="10"></div>
+                    <div ng-tab tab="listUsers" cols="listUsersCols" limit="10" callback-fn="editUser(id)"></div>
                 </div>
             </div>
         </div>
@@ -127,7 +128,7 @@
                     <h3 class="panel-title">Goście</h3>
                 </div>
                 <div class="panel-body">
-                    blablabla
+                    <div ng-tab tab="listGuests" cols="listUsersCols" limit="10" callback-fn="editUser(id)"></div>
                 </div>
             </div>
         </div>
@@ -139,6 +140,17 @@
                 </div>
                 <div class="panel-body">
                     blablabla
+                </div>
+            </div>
+        </div>
+        <!-- Wykładowcy -->
+        <div class="col-md-12" ng-show="tab=='lecturer'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Wykładowcy</h3>
+                </div>
+                <div class="panel-body">
+                    <div ng-tab tab="listLecturers" cols="listUsersCols" limit="10" callback-fn="editUser(id)"></div>
                 </div>
             </div>
         </div>
@@ -160,7 +172,7 @@
                     <h3 class="panel-title">Administratorzy</h3>
                 </div>
                 <div class="panel-body">
-                    blablabla
+                    <div ng-tab tab="listAdmins" cols="listUsersCols" limit="10" callback-fn="editUser(id)"></div>
                 </div>
             </div>
         </div>
@@ -191,6 +203,64 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Opcje językowe</h3>
+                </div>
+                <div class="panel-body">
+                    blablabla
+                </div>
+            </div>
+        </div>
+        <!-- Edycja użytkownika -->
+        <div class="col-md-12" ng-show="tab=='editUser'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Edycja użytkownika: {{ singleUser[0].name }} {{ singleUser[0].surname }} (id:{{ singleUser[0].id }})</h3>
+                </div>
+                <div class="panel-body">
+                    <div class=" col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Etykietka</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>Id</td>
+                                        <td>{{ singleUser[0].id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Typ konta</td>
+                                        <td>
+                                            <span ng-if="singleUser[0].type=='admin'">Administrator</span>
+                                            <span ng-if="singleUser[0].type=='user'">Użytkownik</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Login</td>
+                                        <td>{{ singleUser[0].username }}</td>
+                                    </tr>
+                                    <tr ng-repeat="userData in config.userDataFilds">
+                                        <td>{{ userData.label }}</td>
+                                        <td>{{ singleUser[0][userData.name] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ostatnie logowanie</td>
+                                        <td>{{ singleUser[0].lastlogin | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-6">
+                        Jakieś opcje
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Edycja projektu -->
+        <div class="col-md-12" ng-show="tab=='editProject'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Edycja projektu: {{ singleProject[0].name }} (id:{{ singleProject[0].id }})</h3>
                 </div>
                 <div class="panel-body">
                     blablabla

@@ -3,8 +3,8 @@
     <div class="btn-group">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='newProject' || tab=='listProject') ? 'btn-primary' : 'btn-default'">Konferencje <span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li ng-class="tab=='newProject' ? 'active' : ''"><a ng-click="setTab('newProject')">Nowa konferencja</a></li>
             <li ng-class="tab=='listProject' ? 'active' : ''"><a ng-click="setTab('listProject')">Lista konferencji</a></li>
+            <li ng-class="tab=='newProject' ? 'active' : ''"><a ng-click="setTab('newProject')">Nowa konferencja</a></li>
         </ul>
     </div>
     <div class="btn-group">
@@ -15,9 +15,10 @@
         </ul>
     </div>
     <div class="btn-group">
-        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='guest' || tab=='places' || tab=='dev') ? 'btn-primary' : 'btn-default'">Dodatki <span class="caret"></span></button>
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='guest' || tab=='places' || tab=='dev' || tab=='lecturer') ? 'btn-primary' : 'btn-default'">Dodatki <span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li ng-class="tab=='guest' ? 'active' : ''"><a ng-click="setTab('guest')">Goście</a></li>
+            <li ng-class="tab=='guest' ? 'active' : ''"><a ng-click="setTab('guest')">Lista Gości</a></li>
+            <li ng-class="tab=='lecturer' ? 'active' : ''"><a ng-click="setTab('lecturer')">Lista Wykładowców</a></li>
             <li ng-class="tab=='places' ? 'active' : ''"><a ng-click="setTab('places')">Miejsca</a></li>
             <li ng-class="tab=='dev' ? 'active' : ''"><a ng-click="setTab('dev')">Podwykonawcy</a></li>
         </ul>
@@ -25,7 +26,7 @@
     <div class="btn-group">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='listAdmin' || tab=='addAdmin' || tab=='basicData') ? 'btn-primary' : 'btn-default'">Ustawienia <span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li ng-class="tab=='listAdmin' ? 'active' : ''"><a ng-click="setTab('listAdmin')">Administratorzy</a></li>
+            <li ng-class="tab=='listAdmin' ? 'active' : ''"><a ng-click="setTab('listAdmin')">Lista Administratorów</a></li>
             <li ng-class="tab=='addAdmin' ? 'active' : ''"><a ng-click="setTab('addAdmin')">Dodaj Administratora</a></li>
             <li ng-class="tab=='basicData' ? 'active' : ''"><a ng-click="setTab('basicData')">Podstawowe dane</a></li>
             <li ng-class="tab=='lang' ? 'active' : ''"><a ng-click="setTab('lang')">Opcje językowe</a></li>

@@ -35,8 +35,7 @@
     }
     CUDService.Go('add', data, 'projects', 'name', function(response) {
       if (response.success) {
-        $scope.tab = 'listProject';
-        $scope.listProjectS();
+        $scope.editProject(response.newid);
       } else {
         $scope.newProject.error = response.message;
       }
@@ -51,16 +50,46 @@
   };
   $scope.listUsersS = function() {
     // type, condition, table, order
-    SearchService.search('simple', '', 'users', 'id ASC', function(response) {
+    SearchService.search('simple', 'type=\'user\'', 'users', 'id ASC', function(response) {
       $scope.listUsers = response;
     });
   };
-  $scope.edit = function(id){
-    console.log('main'+id);
+  $scope.listAdminsS = function() {
+    // type, condition, table, order
+    SearchService.search('simple', 'type=\'admin\'', 'users', 'id ASC', function(response) {
+      $scope.listAdmins = response;
+    });
+  };
+  $scope.listGuestsS = function() {
+    // type, condition, table, order
+    SearchService.search('simple', 'type=\'guest\'', 'users', 'id ASC', function(response) {
+      $scope.listGuests = response;
+    });
+  };
+  $scope.listLecturersS = function() {
+    // type, condition, table, order
+    SearchService.search('simple', 'type=\'lecturer\'', 'users', 'id ASC', function(response) {
+      $scope.listLecturers = response;
+    });
+  };
+  $scope.editProject = function(id) {
+    $scope.setTab('editProject');
+    SearchService.search('simple', 'id=' + id, 'projects', '', function(response) {
+      $scope.singleProject = response;
+    });
+  };
+  $scope.editUser = function(id) {
+    $scope.setTab('editUser');
+    SearchService.search('simple', 'id=' + id, 'users', '', function(response) {
+      $scope.singleUser = response;
+    });
   };
   $scope.init = function() {
     $scope.listProjectS();
     $scope.listUsersS();
+    $scope.listLecturersS();
+    $scope.listGuestsS();
+    $scope.listAdminsS();
   };
   $scope.init();
 });

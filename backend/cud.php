@@ -56,11 +56,14 @@ if($request['type']=='add'){
 		if(mysql_query($sql,$con)){
 			$success=true;
 			$error='Dane zostały dodane!';
+			$result = mysql_query("SELECT * FROM $table ORDER BY id DESC");
+			$row = mysql_fetch_array($result);
+			$newid=$row['id'];
 		} else {
 			$error='Wystąpił błąd!';
 		}
 	}
-	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
+	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error, 'newid' => $newid);
 } else if($request['type']=='userupdate'){
 	$error='';
 	$success=false;
