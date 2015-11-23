@@ -1,0 +1,17 @@
+<div class="row mlSelect">
+    <div class="btn-group col-md-offset-1" role="group">
+        <button type="button" ng-repeat="lang in languages" ng-class="tab==lang.key ? 'active' : ''" class="btn btn-default" ng-click="setTab(lang.key)">{{ lang.label }}</button>
+    </div>
+</div>
+<div ng-show="error" class="alert alert-danger">{{error}}</div>
+<div ng-show="success" class="alert alert-success">{{success}}</div>
+<form name="formMl" ng-submit="formMlS()" role="form" ng-repeat="lang in languages" ng-hide="tab!=lang.key">
+    <div class="form-group">
+        <label for="{{ fname }}">{{ flabel }} ({{lang.key}})</label>
+        <input type="{{ itype }}" name="{{ fname }}" id="{{ fName }}" class="form-control" ng-model="val[lang.key]"/>
+    </div>
+    <div class="form-actions">
+        <button type="submit" ng-disabled="formMl.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
+        <img ng-if="dataLoading" src="lic/images/loading.gif"  />
+    </div>
+</form>

@@ -9,6 +9,7 @@ a {
   cursor: pointer;
 }
 
+
 /*.table>thead>tr>th {
   text-align: center;
 }*/
@@ -33,6 +34,7 @@ a {
 
 
 /*userBar*/
+
 
 /*.userBar {
   background-color: #f5f5f5;
@@ -89,10 +91,12 @@ a {
 
 /*footer*/
 
+
 /*table*/
 
-.pageSelect ul li {
-    list-style: none;
-    display: inline-block;
-    margin-left: 5px;
+.pageSelect ul li,
+.mlSelect ul li {
+  list-style: none;
+  display: inline-block;
+  margin-left: 5px;
 }

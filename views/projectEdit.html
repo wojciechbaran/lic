@@ -51,7 +51,8 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='description'">
                 <div class="panel-body">
-                    <div ng-show="projectDesc.error" class="alert alert-danger">{{projectDesc.error}}</div>
+                <div ng-multilang itype="'text'" flabel="'Tytuł'" fname="'title'" val="{pl: 'tytuł', en: 'title'}"></div>
+                    <!-- <div ng-show="projectDesc.error" class="alert alert-danger">{{projectDesc.error}}</div>
                     <div ng-show="projectDesc.success" class="alert alert-success">{{projectDesc.success}}</div>
                     <form name="projectDesc" ng-submit="projectDescS()" role="form" >
                         <div class="form-group">
@@ -66,7 +67,7 @@
                             <button type="submit" ng-disabled="projectDesc.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
                             <img ng-if="dataLoading" src="lic/images/loading.gif"  />
                         </div>
-                    </form>
+                    </form> -->
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='dates'">
