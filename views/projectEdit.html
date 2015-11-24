@@ -51,7 +51,7 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='description'">
                 <div class="panel-body">
-                <div ng-multilang itype="'text'" flabel="'Tytuł'" fname="'title'" val="{pl: 'tytuł', en: 'title'}"></div>
+                <div ng-multilang itype="'text'" flabel="'Tytuł'" fname="'title'" val="singleProject[0].titledata"></div>
                     <!-- <div ng-show="projectDesc.error" class="alert alert-danger">{{projectDesc.error}}</div>
                     <div ng-show="projectDesc.success" class="alert alert-success">{{projectDesc.success}}</div>
                     <form name="projectDesc" ng-submit="projectDescS()" role="form" >

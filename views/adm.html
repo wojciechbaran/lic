@@ -266,7 +266,7 @@
             </div>
         </div>
         <!-- Edycja użytkownika -->
-        <div class="col-md-12" ng-show="tab=='editUser'">
+        <div class="col-md-12" ng-if="tab=='editUser'">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Edycja użytkownika: {{ singleUser[0].name }} {{ singleUser[0].surname }} (id:{{ singleUser[0].id }})<a ng-click="setTab('listUser')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
@@ -313,9 +313,9 @@
             </div>
         </div>
         <!-- Edycja projektu -->
-        <div class="col-md-12" ng-show="tab=='editProject'" ng-include="config.route + '/views/projectEdit.html'"></div>
+        <div class="col-md-12" ng-if="tab=='editProject'" ng-include="config.route + '/views/projectEdit.html'"></div>
         <!-- Edycja podwykonawcy -->
-        <div class="col-md-12" ng-show="tab=='editContractor'">
+        <div class="col-md-12" ng-if="tab=='editContractor'">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Edycja Podwykonawcy: {{ singleContractor[0].name }} (id:{{ singleContractor[0].id }})<a ng-click="setTab('contractors')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
