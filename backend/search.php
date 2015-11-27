@@ -26,7 +26,7 @@ if($request['type']=='simple'){
 	$result = mysql_query($query);
 	while($row = mysql_fetch_array($result)){
 		//substr(key($row),-4) == 'data'
-		if(substr(key($row),-4) == 'data'){
+		if(substr(key($row),-4) == 'data' || $row['data']){
 			$data=json_decode($row['data'], true);
 			$row = array_merge($row, $data);
 		}

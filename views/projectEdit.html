@@ -47,59 +47,80 @@
             <div class="panel panel-default"  ng-show="projectTab=='start'">
                 <div class="panel-body">
                     Start
+                    <hr/>
+                    <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('description','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
-                <button type="button" class="btn btn-default" ng-click="setTabEdit('description','projectTab')">Dalej</button>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='description'">
                 <div class="panel-body">
-                <div ng-multilang itype="'text'" flabel="'Tytuł'" fname="'titledata'" val="singleProject[0].titledata" fid="singleProject[0].id"></div>
-                <hr/>
-                <div ng-multilang itype="'textarea'" flabel="'Opis'" fname="'descriptiondata'" val="singleProject[0].descriptiondata" fid="singleProject[0].id"></div>
+                    <div ng-multilang itype="'text'" flabel="'Tytuł'" fname="'titledata'" val="singleProject[0].titledata" fid="singleProject[0].id"></div>
+                    <hr/>
+                    <div ng-multilang itype="'textarea'" flabel="'Opis'" fname="'descriptiondata'" val="singleProject[0].descriptiondata" fid="singleProject[0].id"></div>
+                    <hr/>
+                    <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('dates','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='dates'">
                 <div class="panel-body">
                     dates
+                    <hr/>
+                    <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('place','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='place'">
                 <div class="panel-body">
                     place
+                    <hr/>
+                    <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('plan','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='plan'">
                 <div class="panel-body">
                     plan
+                    <hr/>
+                    <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('guest','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='guest'">
                 <div class="panel-body">
                     guest
+                    <hr/>
+                    <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('sponsors','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='sponsors'">
                 <div class="panel-body">
                     sponsors
+                    <hr/>
+                    <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('extra','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='extra'">
                 <div class="panel-body">
                     extra
+                    <hr/>
+                    <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('status','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='status'">
                 <div class="panel-body">
                     status
+                    <hr/>
+                    <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('bilans','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='bilans'">
                 <div class="panel-body">
                     bilans
+                    <hr/>
+                    <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('users','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='users'">
                 <div class="panel-body">
                     users
+                    <hr/>
+                    <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('print','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='print'">

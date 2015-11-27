@@ -8,7 +8,6 @@ angular.module('testApp').service('CUDService', function($http, CONFIG) {
         table: table,
         data: data
       }
-      console.log(req);
       $http.post(CONFIG.baseURL + '/' + CONFIG.route + '/backend/cud.php', req)
         .success(function(response, status) {
           callback(response);
