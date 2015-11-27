@@ -8,7 +8,8 @@
 <form name="formMl" ng-submit="formMlS()" role="form" ng-repeat="lang in languages" ng-hide="tab!=lang.key">
     <div class="form-group">
         <label for="{{ fname }}">{{ flabel }} ({{lang.key}})</label>
-        <input type="{{ itype }}" name="{{ fname }}" id="{{ fName }}" class="form-control" ng-model="eval[lang.key]"/>
+        <input ng-if="itype=='text'" type="text" name="{{ fname }}" id="{{ fname }}" class="form-control" ng-model="eval[lang.key]"/>
+        <textarea ng-if="itype=='textarea'" name="{{ fname }}" id="{{ fname }}" class="form-control" rows="5" ng-model="eval[lang.key]"></textarea>
     </div>
     <div class="form-actions">
         <button type="submit" ng-disabled="formMl.$invalid || dataLoading" class="btn btn-primary">Zmień</button>

@@ -1,4 +1,4 @@
-testApp.directive('ngMultilang', function(CONFIG) {
+testApp.directive('ngMultilang', function(CONFIG,CUDService) {
   function link(scope) {
     scope.languages = CONFIG.languages;
     scope.tab = CONFIG.defaultLanguage;
@@ -24,17 +24,19 @@ testApp.directive('ngMultilang', function(CONFIG) {
     scope.formMlS = function() {
       scope.error = '';
       scope.success = '';
-      //$scope.dataLoading = true;
-      var data = scope.eval;
-      // CUDService.Go('add', data, 'projects', 'name', function(response) {
-      //   if (response.success) {
-      //     $scope.editProject(response.newid);
-      //   } else {
-      //     $scope.newProject.error = response.message;
-      //   }
-      //   $scope.dataLoading = false;
-      // });
-      console.log(data);
+      scope.dataLoading = true;
+      var data = {
+        name: scope.fname,
+        val: scope.eval
+      };
+      CUDService.Go('update', data, 'projects', scope.fid, function(response) {
+        if (response.success) {
+          scope.success = response.message;
+        } else {
+          scope.error = response.message;
+        }
+        scope.dataLoading = false;
+      });
     }
     scope.$watch('val', scope.setEval);
   }
@@ -44,8 +46,8 @@ testApp.directive('ngMultilang', function(CONFIG) {
       itype: '=',
       fname: '=',
       flabel: '=',
+      fid: '=',
       val: '='
-        //callbackF: '&callbackFn'
     },
     templateUrl: CONFIG.route + '/views/multilang.html',
     link: link

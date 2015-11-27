@@ -51,23 +51,9 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='description'">
                 <div class="panel-body">
-                <div ng-multilang itype="'text'" flabel="'Tytuł'" fname="'title'" val="singleProject[0].titledata"></div>
-                    <!-- <div ng-show="projectDesc.error" class="alert alert-danger">{{projectDesc.error}}</div>
-                    <div ng-show="projectDesc.success" class="alert alert-success">{{projectDesc.success}}</div>
-                    <form name="projectDesc" ng-submit="projectDescS()" role="form" >
-                        <div class="form-group">
-                            <label for="title">Tytuł</label>
-                            <input type="text" name="title" id="title" class="form-control" ng-model="projectDesc.dtitle" required/>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Opis</label>
-                            <textarea name="description" id="description" class="form-control" rows="3" ng-model="projectDesc.contractordescription"></textarea>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" ng-disabled="projectDesc.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
-                            <img ng-if="dataLoading" src="lic/images/loading.gif"  />
-                        </div>
-                    </form> -->
+                <div ng-multilang itype="'text'" flabel="'Tytuł'" fname="'titledata'" val="singleProject[0].titledata" fid="singleProject[0].id"></div>
+                <hr/>
+                <div ng-multilang itype="'textarea'" flabel="'Opis'" fname="'descriptiondata'" val="singleProject[0].descriptiondata" fid="singleProject[0].id"></div>
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='dates'">
