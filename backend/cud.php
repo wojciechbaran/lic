@@ -105,6 +105,30 @@ if($request['type']=='add'){
 		}
 	 } 
 	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
+} else if($request['type']=='update'){
+	$error='';
+	$success=false;
+	$id=$request['id'];
+	$table=$request['table'];
+	$valto= array();
+	foreach ($request['data'] as $filds) {
+		foreach($filds as $name => $val){
+			$valto[$name]=$val;
+		}
+	}
+// 	ob_start();
+// var_dump($valto);
+// $result = ob_get_clean();
+$output = implode(', ', array_map(function ($v, $k) { return sprintf("%s='%s'", $k, $v); }, $valto, array_keys($valto)));
+		
+	$sql="UPDATE $table SET $output WHERE id=$id";
+	if(mysql_query($sql,$con)){
+		$error='Dane zostały zmienione!';
+		$success=true;
+	} else {
+		$error='Nie udało się zapisać zmiany! sql '.$sql;
+	}
+	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
 }
 
 

@@ -1,4 +1,4 @@
-testApp.directive('ngMultilang', function(CONFIG,CUDService) {
+testApp.directive('ngMultilang', function(CONFIG, CUDService) {
   function link(scope) {
     scope.languages = CONFIG.languages;
     scope.tab = CONFIG.defaultLanguage;
@@ -25,10 +25,18 @@ testApp.directive('ngMultilang', function(CONFIG,CUDService) {
       scope.error = '';
       scope.success = '';
       scope.dataLoading = true;
-      var data = {
-        name: scope.fname,
-        val: scope.eval
-      };
+      var data =[];
+      var temp = {};
+      temp[scope.fname]='{"pl": "'+ scope.eval['pl'] +'", "en": "'+ scope.eval['en'] +'"}';
+      data.push(temp);
+      // var data = [{
+      //   //JSON.stringify(scope.fname) : JSON.stringify('pl: '+ scope.eval['pl'] +', en: '+ scope.eval['en'] +'')
+      //   //tab: scope.fname,
+      //   //val: JSON.stringify('pl: '+ scope.eval['pl'] +', en: '+ scope.eval['en'] +'')
+      //   //val: JSON.stringify(scope.eval.toString())
+      // }];
+      //data[scope.fname]= scope.eval;
+
       CUDService.Go('update', data, 'projects', scope.fid, function(response) {
         if (response.success) {
           scope.success = response.message;
