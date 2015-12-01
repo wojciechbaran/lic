@@ -36,10 +36,10 @@ if($request['type']=='login'){
 	$query=array('username' => $username);
 	$cursor = $col->find($query);
 	if($cursor->count()){
-		foreach($cursor as $admin){
-			if(password_verify($request['data']['password'], $admin['password'])){
+		foreach($cursor as $user){
+			if(password_verify($request['data']['password'], $user['password'])){
 				$success=true;
-				$userData = (array)$admin;
+				$userData = (array)$user;
 				$now=time();
 				$now=$now*1000;
 				$newdata = array('$set' => array('lastlogin' => "$now"));

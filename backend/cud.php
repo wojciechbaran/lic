@@ -1,11 +1,7 @@
 <?php 
-include('settings.php'); 
-//db connection
-$con = mysql_connect($host,$dbuser,$dbpass);
-if (!$con){
-  die(mysql_error());
-}
-mysql_select_db($dbname, $con);
+//Chosse Mongo Collection
+$m = new MongoClient();
+$db = $m->lic;
 //Functions
 function chpass($pass1,$pass2){
 	if($pass1!=$pass2){
@@ -64,70 +60,44 @@ if($request['type']=='add'){
 		}
 	}
 	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error, 'newid' => $newid);
-} else if($request['type']=='userupdate'){
-	$error='';
-	$success=false;
-	$id=$request['id'];
-	foreach($request['data'] as $name => $val){
-      if($name!='userid' && $name!='userType' && $name!='lastlogin' && $name!='username'){
-      	$userData[$name]=mysql_real_escape_string($val);
-      }			
-	}
-	$data = json_encode($userData);
-	$sql="UPDATE users SET data='$data' WHERE id=$id";
-	if(mysql_query($sql,$con)){
-		$error='Dane zostały zmienione!';
-		$success=true;
-	} else {
-		$error='Nie udało się zapisać zmiany!';
-	}
-	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
-}else if($request['type']=='changepassword'){
+} else if($request['type']=='changepassword'){
 	$error='';
 	$success=false;
 	$id=$request['id']; 
 	$error=chpass($request['data']['password'],$request['data']['passwordrep']);
-	 	if($error==''){
-		$result = mysql_query("SELECT * FROM users WHERE id=$id");
-		$row = mysql_fetch_array($result);
-		$password=md5($request['data']['passwordold'].$row['salt']);
-		if($password==$row['password']){
-			$newpassword=md5($request['data']['password'].$row['salt']);
-			$sql="UPDATE users SET password='$newpassword' WHERE id=$id";
-			if(mysql_query($sql,$con)){
+	if($error==''){
+	 	$col = $db->users;
+		$query=array('id' => $id);
+		$cursor = $col->find($query);
+		foreach($cursor as $user){
+			if(password_verify($request['data']['passwordold'], $user['password'])){
+				$newpassword=password_hash($request['data']['password'], PASSWORD_DEFAULT);
+				$newdata = array('$set' => array('password' => $newpassword));
+				$col->update(array('id' => $id), $newdata);
 				$success=true;
 				$error='Hasło zostało zmienione!';
-			} else {
-				$error='Nie udało się zmienić hasła!';
+			}else{
+				$error='Podane hasło jest nieprawidłowe!';
 			}
-		}else{
-			$error='Podane hasło jest nieprawidłowe!';
 		}
-	 } 
+	}
 	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
 } else if($request['type']=='update'){
 	$error='';
 	$success=false;
 	$id=$request['id'];
 	$table=$request['table'];
+	$col = $db->{$table};
 	$valto= array();
 	foreach ($request['data'] as $filds) {
 		foreach($filds as $name => $val){
 			$valto[$name]=$val;
 		}
-	}
-// 	ob_start();
-// var_dump($valto);
-// $result = ob_get_clean();
-$output = implode(', ', array_map(function ($v, $k) { return sprintf("%s='%s'", $k, $v); }, $valto, array_keys($valto)));
-		
-	$sql="UPDATE $table SET $output WHERE id=$id";
-	if(mysql_query($sql,$con)){
-		$error='Dane zostały zmienione!';
-		$success=true;
-	} else {
-		$error='Nie udało się zapisać zmiany! sql '.$sql;
-	}
+	}	
+	$newdata = array('$set' => $valto);
+ 	$col->update(array('id' => $id), $newdata);
+	$error='Dane zostały zmienione!';
+	$success=true;
 	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
 }
 

@@ -4,18 +4,20 @@
     $m = new MongoClient();
 	$db = $m->lic;
 	$col = $db->users;
+	//$col = $db->projects;
    // $collection = $db->createCollection("users");
-	$id = uniqid();
-	$item = array( 
-	      "id" => $id, 
-	      "username" => "baranwoj", 
-	      "password" => '$2y$10$r.aU/uH1Yr.r08aAD7.SRemRJZZYLXsCTDe/8OZa9RfjSY/AIzLjy',
-	      "register" => "1447431663000",
-	      "lastlogin" => "1448880891000",
-	      "userType" => "user",
-	      "name" => "Wojciech",
-	      "surname" => "Baran"
-	   );
+	//$collection = $db->createCollection("projects");
+	// $id = uniqid();
+	// $item = array( 
+	//       "id" => $id, 
+	//       "username" => "baranwoj", 
+	//       "password" => '$2y$10$r.aU/uH1Yr.r08aAD7.SRemRJZZYLXsCTDe/8OZa9RfjSY/AIzLjy',
+	//       "register" => "1447431663000",
+	//       "lastlogin" => "1448880891000",
+	//       "userType" => "user",
+	//       "name" => "Wojciech",
+	//       "surname" => "Baran"
+	//    );
 	//$m->lic->users->insert($item);
   // $col->remove(array('id' => "565d714f2b6bf"));
   // $col->remove(array('id' => "565d7196c79fe"));
@@ -37,7 +39,7 @@ if($cursor->count()){
 	echo 'pusty';
 }
 echo '<br/>';
-echo '+++++++++++++++++++++++++++++++++++++++++++++++<br/>';
+echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br/>';
    // iterate cursor to display title of documents
 	echo '<br/>';
    foreach ($cursor as $document) {
@@ -46,5 +48,17 @@ echo '+++++++++++++++++++++++++++++++++++++++++++++++<br/>';
    }
    // $array = iterator_to_array($cursor);
    // var_dump($array);
-//echo password_hash("bilbo100", PASSWORD_DEFAULT)."\n";
+
+   
+//echo password_hash("pass", PASSWORD_DEFAULT)."\n";
+
+
+// $obj = (object) array('key' => 'val');
+// $t='key';
+// var_dump($obj->{$t});
+
+
+   // 	ob_start();
+// var_dump($valto);
+// $result = ob_get_clean();
 ?>

@@ -11,7 +11,14 @@ testApp.controller('userController', function($scope, CONFIG, AuthenticationServ
     $scope.formUD.error = '';
     $scope.formUD.success = '';
     $scope.dataLoading = true;
-    CUDService.UserUpdate($scope.currentUser, $scope.currentUser.userid, function(response) {
+    var data = [{
+      name: $scope.currentUser.name,
+      surname: $scope.currentUser.surname,
+      email: $scope.currentUser.email
+    }];
+    console.log($scope.currentUser);
+    //CUDService.UserUpdate($scope.currentUser, $scope.currentUser.userid, function(response) {
+    CUDService.Go('update', data, 'users', $scope.currentUser.id, function(response) {
       if (response.success) {
         $scope.formUD.success = response.message;
       } else {
