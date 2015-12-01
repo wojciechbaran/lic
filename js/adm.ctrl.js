@@ -63,14 +63,12 @@
     var data = {
       name: $scope.newContractorD.contractorname,
       servicetype: $scope.newContractorD.servicetype,
-      data: JSON.stringify({
-       description: $scope.newContractorD.contractordescription, 
-       street: $scope.newContractorD.street, 
-       kode: $scope.newContractorD.kode, 
-       city: $scope.newContractorD.city,
-       nip: $scope.newContractorD.nip,
-       regon: $scope.newContractorD.regon
-      })
+      description: $scope.newContractorD.contractordescription, 
+      street: $scope.newContractorD.street, 
+      kode: $scope.newContractorD.kode, 
+      city: $scope.newContractorD.city,
+      nip: $scope.newContractorD.nip,
+      regon: $scope.newContractorD.regon
     };
     CUDService.Go('add', data, 'contractors', 'name', function(response) {
       if (response.success) {

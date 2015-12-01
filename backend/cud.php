@@ -33,31 +33,26 @@ if($request['type']=='add'){
 	$success=false;
 	$id=$request['id']; //if 0 - allow duplicate; else - check for duplicate in columnName=id
 	$table=$request['table'];
+	$col = $db->{$table};
+	$valto= array();
 	foreach($request['data'] as $name => $val){
-      $data[$name]=mysql_real_escape_string($val);			
+		$valto[$name]=$val;
 	}
-	//sprawdzanie duplikatów
 	if($id){
-		$duplicate = $data[$id];
-		$result = mysql_query("SELECT * FROM $table WHERE $id='$duplicate'");
-		if($row = mysql_fetch_array($result)){
+		$duplicate = $valto[$id];
+		$query=array($id => $valto[$id]);
+		$cursor = $col->find($query);
+		if($cursor->count()){
 			$error='Podana wartość już istnieje!';
 		}
 	} 
 	if($error==''){
-		//$output = implode(', ', array_map(function ($v, $k) { return sprintf("%s='%s'", $k, $v); }, $input, array_keys($input)));
-		$addNames=implode(', ',array_keys($data));
-		$addVal=implode('\', \'',$data);		
-		$sql="INSERT INTO $table ($addNames) VALUES ('$addVal')";
-		if(mysql_query($sql,$con)){
-			$success=true;
-			$error='Dane zostały dodane!';
-			$result = mysql_query("SELECT * FROM $table ORDER BY id DESC");
-			$row = mysql_fetch_array($result);
-			$newid=$row['id'];
-		} else {
-			$error='Wystąpił błąd!';
-		}
+		$uniqid =uniqid();
+		$valto['id']=$uniqid;
+		$col->insert($valto);
+		$success=true;
+		$error='Dane zostały dodane!';
+		$newid=$uniqid;
 	}
 	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error, 'newid' => $newid);
 } else if($request['type']=='changepassword'){

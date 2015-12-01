@@ -3,10 +3,11 @@
 // create Collection
     $m = new MongoClient();
 	$db = $m->lic;
-	$col = $db->users;
+	$col = $db->contractors;
 	//$col = $db->projects;
    // $collection = $db->createCollection("users");
 	//$collection = $db->createCollection("projects");
+	//$collection = $db->createCollection("contractors");
 	// $id = uniqid();
 	// $item = array( 
 	//       "id" => $id, 
@@ -49,7 +50,7 @@ echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    // $array = iterator_to_array($cursor);
    // var_dump($array);
 
-   
+
 //echo password_hash("pass", PASSWORD_DEFAULT)."\n";
 
 
