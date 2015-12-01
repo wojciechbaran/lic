@@ -3,7 +3,7 @@
 // create Collection
     $m = new MongoClient();
 	$db = $m->lic;
-	$col = $db->contractors;
+	$col = $db->projects;
 	//$col = $db->projects;
    // $collection = $db->createCollection("users");
 	//$collection = $db->createCollection("projects");
@@ -30,8 +30,9 @@
 	//$m->lic->users->insert($item);
 echo '<br/>';
 $query=array('username' => 'admin');
-//$cursor = $col->find($query);
-$cursor = $col->find();
+$query= array();
+$cursor = $col->find($query);
+//$cursor = $col->find();
 echo '<br/>';
 var_dump($cursor->count());
 if($cursor->count()){

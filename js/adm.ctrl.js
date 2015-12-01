@@ -81,55 +81,55 @@
   };
   $scope.listProjectS = function() {
     // type, condition, table, order
-    SearchService.search('simple', '', 'projects', 'id ASC', function(response) {
+    SearchService.search('simple', '', 'projects', 'id:ASC', function(response) {
       $scope.listProject = response;
     });
   };
   $scope.listUsersS = function() {
     // type, condition, table, order
-    SearchService.search('simple', 'type=\'user\'', 'users', 'id ASC', function(response) {
+    SearchService.search('simple', 'userType:user', 'users', 'id:ASC', function(response) {
       $scope.listUsers = response;
     });
   };
   $scope.listAdminsS = function() {
     // type, condition, table, order
-    SearchService.search('simple', 'type=\'admin\'', 'users', 'id ASC', function(response) {
+    SearchService.search('simple', 'userType:admin', 'users', 'id:ASC', function(response) {
       $scope.listAdmins = response;
     });
   };
   $scope.listGuestsS = function() {
     // type, condition, table, order
-    SearchService.search('simple', 'type=\'guest\'', 'users', 'id ASC', function(response) {
+    SearchService.search('simple', 'userType:guest', 'users', 'id:ASC', function(response) {
       $scope.listGuests = response;
     });
   };
   $scope.listLecturersS = function() {
     // type, condition, table, order
-    SearchService.search('simple', 'type=\'lecturer\'', 'users', 'id ASC', function(response) {
+    SearchService.search('simple', 'userType:lecturer', 'users', 'id:ASC', function(response) {
       $scope.listLecturers = response;
     });
   };
   $scope.listContractorsS = function() {
     // type, condition, table, order
-    SearchService.search('simple', '', 'contractors', 'id ASC', function(response) {
+    SearchService.search('simple', '', 'contractors', 'id:ASC', function(response) {
       $scope.listContractors = response;
     });
   };
   $scope.editProject = function(id) {
     $scope.setTab('editProject');
-    SearchService.search('simple', 'id=' + id, 'projects', '', function(response) {
+    SearchService.search('simple', 'id:' + id, 'projects', '', function(response) {
       $scope.singleProject = response;
     });
   };
   $scope.editContractor = function(id) {
     $scope.setTab('editContractor');
-    SearchService.search('simple', 'id=' + id, 'contractors', '', function(response) {
+    SearchService.search('simple', 'id:' + id, 'contractors', '', function(response) {
       $scope.singleContractor = response;
     });
   };
   $scope.editUser = function(id) {
     $scope.setTab('editUser');
-    SearchService.search('simple', 'id=' + id, 'users', '', function(response) {
+    SearchService.search('simple', 'id:' + id, 'users', '', function(response) {
       $scope.singleUser = response;
     });
   };
