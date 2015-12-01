@@ -16,20 +16,6 @@ angular.module('testApp').service('CUDService', function($http, CONFIG) {
           console.log('error');
         });
     },
-    UserUpdate: function(data, id, callback) {
-      var req = {
-        type: 'userupdate',
-        id: id,
-        data: data
-      }
-      $http.post(CONFIG.baseURL + '/' + CONFIG.route + '/backend/cud.php', req)
-        .success(function(response, status) {
-          callback(response);
-        })
-        .error(function(response, status) {
-          console.log('error');
-        });
-    },
     ChangePassword: function(data, id, callback) {
       var req = {
         type: 'changepassword',

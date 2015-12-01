@@ -73,7 +73,7 @@ if($request['type']=='add'){
 			if(password_verify($request['data']['passwordold'], $user['password'])){
 				$newpassword=password_hash($request['data']['password'], PASSWORD_DEFAULT);
 				$newdata = array('$set' => array('password' => $newpassword));
-				$col->update(array('id' => $id), $newdata);
+				$col->update(array('id' => $id), $newdata);				
 				$success=true;
 				$error='Hasło zostało zmienione!';
 			}else{

@@ -16,7 +16,6 @@ testApp.controller('userController', function($scope, CONFIG, AuthenticationServ
       surname: $scope.currentUser.surname,
       email: $scope.currentUser.email
     }];
-    console.log($scope.currentUser);
     //CUDService.UserUpdate($scope.currentUser, $scope.currentUser.userid, function(response) {
     CUDService.Go('update', data, 'users', $scope.currentUser.id, function(response) {
       if (response.success) {
@@ -31,7 +30,7 @@ testApp.controller('userController', function($scope, CONFIG, AuthenticationServ
     $scope.formCP.error = '';
     $scope.formCP.success = '';
     $scope.dataLoading = true;
-    CUDService.ChangePassword($scope.formCP.dt, $scope.currentUser.userid, function(response) {
+    CUDService.ChangePassword($scope.formCP.dt, $scope.currentUser.id, function(response) {
       if (response.success) {
         $scope.formCP.success = response.message;
       } else {
