@@ -88,7 +88,7 @@ if($request['type']=='add'){
 		foreach($filds as $name => $val){
 			$valto[$name]=$val;
 		}
-	}	
+	}
 	$newdata = array('$set' => $valto);
  	$col->update(array('id' => $id), $newdata);
 	$error='Dane zostały zmienione!';

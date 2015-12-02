@@ -11,32 +11,26 @@ testApp.directive('ngMultilang', function(CONFIG, CUDService) {
         scope.val = JSON.parse(scope.val);
       }
       if (scope.val && scope.val.pl) {
-        scope.eval['pl'] = scope.val.pl;
+        scope.eval.pl = scope.val.pl;
       } else {
-        scope.eval['pl'] = '';
+        scope.eval.pl = '';
       }
       if (scope.val && scope.val.en) {
-        scope.eval['en'] = scope.val.en;
+        scope.eval.en = scope.val.en;
       } else {
-        scope.eval['en'] = '';
+        scope.eval.en = '';
       }
     }
     scope.formMlS = function() {
       scope.error = '';
       scope.success = '';
       scope.dataLoading = true;
-      var data =[];
-      var temp = {};
-      temp[scope.fname]='{"pl": "'+ scope.eval['pl'] +'", "en": "'+ scope.eval['en'] +'"}';
-      data.push(temp);
-      // var data = [{
-      //   //JSON.stringify(scope.fname) : JSON.stringify('pl: '+ scope.eval['pl'] +', en: '+ scope.eval['en'] +'')
-      //   //tab: scope.fname,
-      //   //val: JSON.stringify('pl: '+ scope.eval['pl'] +', en: '+ scope.eval['en'] +'')
-      //   //val: JSON.stringify(scope.eval.toString())
-      // }];
-      //data[scope.fname]= scope.eval;
-
+      var fname = {};
+      fname[scope.fname] = {
+        pl: scope.eval.pl,
+        en: scope.eval.en
+      };
+      var data = [fname];
       CUDService.Go('update', data, 'projects', scope.fid, function(response) {
         if (response.success) {
           scope.success = response.message;

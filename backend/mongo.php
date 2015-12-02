@@ -23,8 +23,9 @@
   // $col->remove(array('id' => "565d714f2b6bf"));
   // $col->remove(array('id' => "565d7196c79fe"));
   // $col->remove(array('id' => "565d804693082"));
- // $newdata = array('$set' => array('userType' => 'admin'));
- // $col->update(array('username' => 'admin'), $newdata);
+	$title=array('pl'=>'tytul', 'en'=>'title');
+  $newdata = array('$set' => array('title' => $title));
+ // $col->update(array('name' => 'test1'), $newdata);
 // $newdata = array('$set' => array("type" => "user"));
 // $col->update(array("username" => "baranwoj"), $newdata);
 	//$m->lic->users->insert($item);
@@ -60,7 +61,7 @@ echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // var_dump($obj->{$t});
 
 
-   // 	ob_start();
+// ob_start();
 // var_dump($valto);
 // $result = ob_get_clean();
 ?>
