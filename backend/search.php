@@ -1,11 +1,7 @@
-<?php 
-include('settings.php'); 
-//db connection
-$con = mysql_connect($host,$dbuser,$dbpass);
-if (!$con){
-  die(mysql_error());
-}
-mysql_select_db($dbname, $con);
+<?php
+//Chosse Mongo Collection
+$m = new MongoClient();
+$db = $m->lic;
 //Functions
 //request data:
 $res='';
@@ -13,24 +9,26 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata, true);
 if($request['type']=='simple'){
 	$table=$request['table'];
+	$col = $db->{$table};
 	$condition=$request['condition'];
 	$order=$request['order'];
-	$query="SELECT * FROM $table";
+	$query= array();
 	if($condition){
-		$query.=" WHERE $condition";
+		$con = array();
+		$asArr = explode( ',', $condition);
+		foreach( $asArr as $val ){
+		  $tmp = explode( ':', $val );
+		  $con[ $tmp[0] ] = $tmp[1];
+		}
+		$query=$con;
 	}
 	if($order){
-		$query.=" ORDER BY $order";
+		//$query.=" ORDER BY $order";
 	}
-	$res = array();
-	$result = mysql_query($query);
-	while($row = mysql_fetch_array($result)){
-		//substr(key($row),-4) == 'data'
-		if(substr(key($row),-4) == 'data' || $row['data']){
-			$data=json_decode($row['data'], true);
-			$row = array_merge($row, $data);
-		}
-		array_push($res, $row);
+	$res=array();
+	$cursor = $col->find($query);
+	foreach ($cursor as $value) {
+		$res[]=$value;
 	}
 }
 echo json_encode($res);

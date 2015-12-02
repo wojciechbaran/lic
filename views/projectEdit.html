@@ -53,9 +53,9 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='description'">
                 <div class="panel-body">
-                    <div ng-multilang itype="'text'" flabel="'Tytuł'" fname="'titledata'" val="singleProject[0].titledata" fid="singleProject[0].id"></div>
+                    <div ng-multilang itype="'text'" flabel="'Tytuł'" fname="'title'" val="singleProject[0].title" fid="singleProject[0].id"></div>
                     <hr/>
-                    <div ng-multilang itype="'textarea'" flabel="'Opis'" fname="'descriptiondata'" val="singleProject[0].descriptiondata" fid="singleProject[0].id"></div>
+                    <div ng-multilang itype="'textarea'" flabel="'Opis'" fname="'description'" val="singleProject[0].description" fid="singleProject[0].id"></div>
                     <hr/>
                     <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('dates','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
@@ -104,7 +104,26 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='status'">
                 <div class="panel-body">
-                    status
+                    Obecny status: {{ singleProject[0].status }}
+                    <hr/>
+                    Zmień status na:
+                    <ul>
+                        <li>
+                            <a ng-click="setStatus(0)">Nieopublikowany</a>
+                        </li>
+                        <li>
+                            <a ng-click="setStatus(2)">Informacja wstępna</a>
+                        </li>
+                        <li>
+                            <a ng-click="setStatus(4)">Opublikowany, z możlwoścą zapisów</a>
+                        </li>
+                        <li>
+                            <a ng-click="setStatus(6)">Opublikowany, bez możlwosci zapisów</a>
+                        </li>
+                        <li>
+                            <a ng-click="setStatus(8)">Zakończony</a>
+                        </li>
+                    </ul>
                     <hr/>
                     <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('bilans','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
