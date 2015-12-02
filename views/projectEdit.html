@@ -104,7 +104,26 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='status'">
                 <div class="panel-body">
-                    status
+                    Obecny status: {{ singleProject[0].status }}
+                    <hr/>
+                    Zmień status na:
+                    <ul>
+                        <li>
+                            <a ng-click="setStatus(0)">Nieopublikowany</a>
+                        </li>
+                        <li>
+                            <a ng-click="setStatus(2)">Informacja wstępna</a>
+                        </li>
+                        <li>
+                            <a ng-click="setStatus(4)">Opublikowany, z możlwoścą zapisów</a>
+                        </li>
+                        <li>
+                            <a ng-click="setStatus(6)">Opublikowany, bez możlwosci zapisów</a>
+                        </li>
+                        <li>
+                            <a ng-click="setStatus(8)">Zakończony</a>
+                        </li>
+                    </ul>
                     <hr/>
                     <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('bilans','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
