@@ -104,24 +104,12 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='status'">
                 <div class="panel-body">
-                    Obecny status: {{ singleProject[0].status }}
+                    Obecny status: {{ config.projectStatus[singleProject[0].projectStatus].label  }}
                     <hr/>
                     Zmień status na:
                     <ul>
-                        <li>
-                            <a ng-click="setStatus(0)">Nieopublikowany</a>
-                        </li>
-                        <li>
-                            <a ng-click="setStatus(2)">Informacja wstępna</a>
-                        </li>
-                        <li>
-                            <a ng-click="setStatus(4)">Opublikowany, z możlwoścą zapisów</a>
-                        </li>
-                        <li>
-                            <a ng-click="setStatus(6)">Opublikowany, bez możlwosci zapisów</a>
-                        </li>
-                        <li>
-                            <a ng-click="setStatus(8)">Zakończony</a>
+                        <li ng-repeat="status in config.projectStatus">
+                            <a ng-click="setStatus(singleProject[0].id,status.id)">{{ status.label }}</a>
                         </li>
                     </ul>
                     <hr/>
