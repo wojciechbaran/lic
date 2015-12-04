@@ -1,9 +1,9 @@
-testApp.constant('CONFIG', {
+﻿testApp.constant('CONFIG', {
   'route': 'lic',
   'languages': [{
     'key': 'pl',
     'label': 'Polski'
-  },{
+  }, {
     'key': 'en',
     'label': 'English'
   }],
@@ -23,5 +23,21 @@ testApp.constant('CONFIG', {
     'name': 'email',
     'label': 'Adres mail',
     'required': false
+  }],
+  'projectStatus': [{
+    id: 0,
+    label: 'Nieopublikowany'
+  }, {
+    id: 1,
+    label: 'Informacja wstępna'
+  }, {
+    id: 2,
+    label: 'Opublikowany, z możlwoścą zapisów'
+  }, {
+    id: 3,
+    label: 'Opublikowany, bez możlwosci zapisów'
+  }, {
+    id: 4,
+    label: 'Zakończony'
   }]
 });

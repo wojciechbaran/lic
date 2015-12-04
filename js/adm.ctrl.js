@@ -63,9 +63,9 @@
     var data = {
       name: $scope.newContractorD.contractorname,
       servicetype: $scope.newContractorD.servicetype,
-      description: $scope.newContractorD.contractordescription, 
-      street: $scope.newContractorD.street, 
-      kode: $scope.newContractorD.kode, 
+      description: $scope.newContractorD.contractordescription,
+      street: $scope.newContractorD.street,
+      kode: $scope.newContractorD.kode,
       city: $scope.newContractorD.city,
       nip: $scope.newContractorD.nip,
       regon: $scope.newContractorD.regon
@@ -118,6 +118,9 @@
   $scope.editProject = function(id) {
     $scope.setTab('editProject');
     SearchService.search('simple', 'id:' + id, 'projects', '', function(response) {
+      if (!response[0].projectStatus) {
+        response[0].projectStatus = 0;
+      }
       $scope.singleProject = response;
     });
   };
@@ -132,6 +135,17 @@
     SearchService.search('simple', 'id:' + id, 'users', '', function(response) {
       $scope.singleUser = response;
     });
+  };
+  $scope.setStatus = function(id, status) {
+    var data = [{
+      projectStatus: status
+    }];
+    CUDService.Go('update', data, 'projects', id, function(response) {
+      if (response.success) {
+        $scope.singleProject[0].projectStatus = status;
+      }
+    });
+
   };
   $scope.init = function() {
     $scope.listProjectS();
