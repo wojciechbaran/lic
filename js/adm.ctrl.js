@@ -2,6 +2,7 @@
   $scope.config = CONFIG;
   $scope.tab = 'start';
   $scope.projectTab = 'start';
+  $scope.dd ='11.10.1988';
   AuthenticationService.AllowAdmin();
 
   $scope.listProjectCols = [{
@@ -147,6 +148,10 @@
     });
 
   };
+$scope.formcalendarS = function() {
+    console.log($scope.formcalendar.date);
+  };
+
   $scope.init = function() {
     $scope.listProjectS();
     $scope.listUsersS();
