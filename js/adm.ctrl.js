@@ -2,7 +2,6 @@
   $scope.config = CONFIG;
   $scope.tab = 'start';
   $scope.projectTab = 'start';
-  $scope.dd ='11.10.1988';
   AuthenticationService.AllowAdmin();
 
   $scope.listProjectCols = [{

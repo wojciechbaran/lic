@@ -1,2 +1,22 @@
-<input type="text" name="{{ field }}" id="{{ field }}" class="form-control" ng-model="val"/>
-<div ng-click="show()">TTT</div>
+﻿<input type="text" name="{{ field }}" id="{{ field }}" class="form-control" ng-model="date.show"/>
+<span ng-click="showCal()" class="glyphicon glyphicon-calendar"></span>
+<div ng-if="calOn">
+    <div class="panel panel-default" style="width: 300px;">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <span ng-click="prevM()" class="pull-left glyphicon glyphicon-triangle-left"></span>
+                <span>{{ months[date.month-1] }} {{ date.year}} </span>
+                <span ng-click="hideCal()" class="pull-right glyphicon glyphicon-remove"></span>
+                <span ng-click="nextM()" class="pull-right glyphicon glyphicon-triangle-right"></span>
+            </div>
+        </div>
+        <div class="panel-body panel-daybox">
+            <div class="daybox" ng-repeat="day in dayOfWeek">
+                <span class="singleDay  {{ day.t }}">{{ day.day }}</span>
+            </div>
+            <div class="daybox" ng-repeat="day in date.cal">
+                <span class="singleDay {{ day.t }}"><a ng-click="setDate(day.day)">{{ day.day }}</a></span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -100,3 +100,34 @@ a {
   display: inline-block;
   margin-left: 5px;
 }
+
+
+/*calendar*/
+
+.daybox {
+  width: 14%;
+  display: inline-flex;
+}
+
+.panel-daybox {
+  text-align: left;
+}
+
+.singleDay {
+  text-align: center;
+  width: 100%;
+}
+
+.daybox .holly,
+.daybox .holly a {
+  color: red;
+}
+
+.daybox .active {
+  background-color: #337ab7;
+}
+
+.daybox .active a,
+.daybox .active a:hover {
+  color: #ffffff;
+}
