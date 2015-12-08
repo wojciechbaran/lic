@@ -103,7 +103,12 @@ a {
 
 
 /*calendar*/
-
+.calendarbox {
+  position: absolute;
+    z-index: 99;
+    width: 300px;
+    box-shadow: #888 4px 4px 8px;
+}
 .daybox {
   width: 14%;
   display: inline-flex;

@@ -29,7 +29,7 @@
       day: 'Nd',
       t: 'holly'
     }];
-    scope.months={
+    scope.months = {
       0: 'Styczeń',
       1: 'Luty',
       2: 'Marzec',
@@ -45,7 +45,6 @@
     };
     scope.showCal = function() {
       scope.calOn = true;
-      console.log(scope.date);
     };
     scope.hideCal = function() {
       scope.calOn = false;
@@ -70,9 +69,9 @@
       scope.date.year = val.getFullYear();
       scope.date.month = val.getMonth() + 1;
       scope.date.day = val.getDate();
-      if(scope.date.month<10){
+      if (scope.date.month < 10) {
         scope.date.show = scope.date.day + '.0' + scope.date.month + '.' + scope.date.year;
-      }else{
+      } else {
         scope.date.show = scope.date.day + '.' + scope.date.month + '.' + scope.date.year;
       }
       scope.date.dayShufle = new Date(scope.date.year, scope.date.month - 1, 0).getDay();
@@ -89,7 +88,7 @@
           if ((new Date(scope.date.year, scope.date.month - 1, i - scope.date.dayShufle).getDay()) == 6) {
             t = 'holly';
           }
-          if (scope.date.day + scope.date.dayShufle -1 == i) {
+          if (scope.date.day + scope.date.dayShufle - 1 == i) {
             t = 'active';
           }
           scope.date.cal[i] = {
@@ -99,7 +98,6 @@
         }
 
       };
-      console.log(scope.date);
     }
     scope.initDate(scope.val);
   }
