@@ -2,8 +2,7 @@
   function link(scope) {
     scope.val = new Date();
     if(scope.formcalendardate){
-      var fdatearr = scope.formcalendardate.split("/");
-      scope.val = new Date(fdatearr[2], fdatearr[1]-1, fdatearr[0],0,0,0,0);
+      scope.val = new Date(scope.formcalendardate);
     }
     scope.calOn = false;
     scope.date = {};

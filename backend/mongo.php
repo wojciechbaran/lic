@@ -21,8 +21,8 @@
 	//    );
 	//$m->lic->users->insert($item);
   // $col->remove(array('id' => "565d714f2b6bf"));
-  // $col->remove(array('id' => "565d7196c79fe"));
-  // $col->remove(array('id' => "565d804693082"));
+   // $col->remove(array('id' => "565db0a6be596"));
+   // $col->remove(array('id' => "565db0ac63eb7"));
 	$title=array('pl'=>'tytul', 'en'=>'title');
   $newdata = array('$set' => array('title' => $title));
  // $col->update(array('name' => 'test1'), $newdata);

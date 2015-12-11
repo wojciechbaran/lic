@@ -151,10 +151,14 @@
     $scope.setDateD.error = '';
     $scope.setDateD.success = '';
     $scope.dataLoading = true;
+    var fdsarr = $scope.singleProject[0].startDate.split("/");
+    var startDate = new Date(fdsarr[2], fdsarr[1]-1, fdsarr[0],0,0,0,0);
+    fdsarr = $scope.singleProject[0].endDate.split("/");
+    var endDate = new Date(fdsarr[2], fdsarr[1]-1, fdsarr[0],0,0,0,0);
     var data = [{
-      startDate: $scope.singleProject[0].startDate
+      startDate: startDate
     },{
-      endDate: $scope.singleProject[0].endDate
+      endDate: endDate
     }];
     CUDService.Go('update', data, 'projects', $scope.singleProject[0].id, function(response) {
       if (response.success) {
