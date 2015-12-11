@@ -146,8 +146,24 @@
     });
 
   };
-  $scope.formcalendarS = function() {
-    console.log($scope.formcalendar.date);
+  $scope.setDate = function() {
+    $scope.setDateD={};
+    $scope.setDateD.error = '';
+    $scope.setDateD.success = '';
+    $scope.dataLoading = true;
+    var data = [{
+      startDate: $scope.singleProject[0].startDate
+    },{
+      endDate: $scope.singleProject[0].endDate
+    }];
+    CUDService.Go('update', data, 'projects', $scope.singleProject[0].id, function(response) {
+      if (response.success) {
+        $scope.setDateD.success = response.message;
+      } else {
+        $scope.setDateD.error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
   };
 
   $scope.init = function() {

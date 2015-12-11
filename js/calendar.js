@@ -1,9 +1,9 @@
 ﻿testApp.directive('ngCalendar', function(CONFIG,$filter) {
   function link(scope) {
-    if (scope.val instanceof Date) {
-      console.log(scope.val);
-    } else {
-      scope.val = new Date();
+    scope.val = new Date();
+    if(scope.formcalendardate){
+      var fdatearr = scope.formcalendardate.split("/");
+      scope.val = new Date(fdatearr[2], fdatearr[1]-1, fdatearr[0],0,0,0,0);
     }
     scope.calOn = false;
     scope.date = {};
