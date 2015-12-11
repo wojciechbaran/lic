@@ -1,4 +1,4 @@
-﻿testApp.directive('ngCalendar', function(CONFIG, CUDService) {
+﻿testApp.directive('ngCalendar', function(CONFIG,$filter) {
   function link(scope) {
     if (scope.val instanceof Date) {
       console.log(scope.val);
@@ -69,11 +69,6 @@
       scope.date.year = val.getFullYear();
       scope.date.month = val.getMonth() + 1;
       scope.date.day = val.getDate();
-      if (scope.date.month < 10) {
-        scope.date.show = scope.date.day + '.0' + scope.date.month + '.' + scope.date.year;
-      } else {
-        scope.date.show = scope.date.day + '.' + scope.date.month + '.' + scope.date.year;
-      }
       scope.date.dayShufle = new Date(scope.date.year, scope.date.month - 1, 0).getDay();
       scope.date.daysInMonth = new Date(scope.date.year, scope.date.month, 0).getDate();
       scope.date.cal = [];
@@ -98,14 +93,14 @@
         }
 
       };
+      scope.formcalendardate=$filter('date')(val, 'dd/MM/yyyy');
     }
     scope.initDate(scope.val);
   }
   return {
     restrict: 'A',
     scope: {
-      field: '=',
-      val: '='
+      formcalendardate: '=inp'
     },
     templateUrl: CONFIG.route + '/views/calendar.html',
     link: link

@@ -6,9 +6,10 @@
     <div class="row text-center" ng-show="tab=='start'">
         <h1>Panel Administracyjny</h1>
         <form role="form" ng-submit="formcalendarS()">
-            <div class="form-group" ng-init="formcalendar">
+            <div class="form-group" ng-init="formcalendar={date: ''}">
                 <label for="datadod">Test calendar</label>
-                <span ng-calendar val="dd" field="'datadod'"></span>
+                <input type="text" name="datadod" id="datadod" class="form-control" ng-model="formcalendar.date"/>
+                <span ng-calendar inp="formcalendar.date"></span>
             </div>
             <div class="form-actions">
                 <button type="submit" ng-disabled="formMl.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
