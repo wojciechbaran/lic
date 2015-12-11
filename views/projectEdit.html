@@ -69,11 +69,11 @@
                             <form role="form" ng-submit="setDate()">
                                 <div class="form-group">
                                     <label for="startDate">Data rozpoczęcia <span ng-calendar inp="singleProject[0].startDate"></span></label>
-                                    <input type="text" name="startDate" id="startDate" class="form-control" ng-model="singleProject[0].startDate"/>
+                                    <input type="text" name="startDate" id="startDate" class="form-control" ng-model="singleProject[0].startDate" disabled />
                                 </div>
                                 <div class="form-group">
                                     <label for="endDate">Data zakończenia <span ng-calendar inp="singleProject[0].endDate"></span></label>
-                                    <input type="text" name="endDate" id="endDate" class="form-control" ng-model="singleProject[0].endDate"/>
+                                    <input type="text" name="endDate" id="endDate" class="form-control" ng-model="singleProject[0].endDate" disabled />
                                 </div>
                                 <div class="form-actions">
                                     <button type="submit" ng-disabled="formMl.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
@@ -81,6 +81,7 @@
                                 </div>
                             </form>
                         </div>
+                        <p class="col-md-offset-1">Do ustawienia daty użyj kalendarza <span class="glyphicon glyphicon-calendar"></span></p>
                     </div>
                     <hr/>
                     <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('place','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>

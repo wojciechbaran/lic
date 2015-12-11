@@ -160,6 +160,10 @@
     },{
       endDate: endDate
     }];
+    if(endDate<startDate){
+      endDate=startDate;
+      $scope.singleProject[0].endDate=$scope.singleProject[0].startDate;
+    }
     CUDService.Go('update', data, 'projects', $scope.singleProject[0].id, function(response) {
       if (response.success) {
         $scope.setDateD.success = response.message;

@@ -103,12 +103,18 @@ a {
 
 
 /*calendar*/
+
+.showCal {
+  cursor: pointer;
+}
+
 .calendarbox {
   position: absolute;
-    z-index: 99;
-    width: 300px;
-    box-shadow: #888 4px 4px 8px;
+  z-index: 99;
+  width: 300px;
+  box-shadow: #888 4px 4px 8px;
 }
+
 .daybox {
   width: 14%;
   display: inline-flex;
