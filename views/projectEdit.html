@@ -1,6 +1,6 @@
 <div class="panel panel-default" ng-controller="projectController">
     <div class="panel-heading">
-        <h3 class="panel-title">Edycja projektu: {{ singleProject[0].name }} (id:{{ singleProject[0].id }}) <a ng-click="setTab('listProject')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
+        <h3 class="panel-title">Edycja projektu: {{ singleProject[0].name }} (id:{{ singleProject[0].id }}) Status: {{ config.projectStatus[singleProject[0].projectStatus].label }}<a ng-click="setTab('listProject')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
     </div>
     <div class="panel-body">
         <div class="col-md-2">
@@ -53,9 +53,9 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='description'">
                 <div class="panel-body">
-                    <div ng-multilang itype="'text'" flabel="'Tytuł'" fname="'title'" val="singleProject[0].title" fid="singleProject[0].id"></div>
+                    <div ng-multilang itype="text" flabel="Tytuł" fname="title" val="singleProject[0].title" fid="singleProject[0].id"></div>
                     <hr/>
-                    <div ng-multilang itype="'textarea'" flabel="'Opis'" fname="'description'" val="singleProject[0].description" fid="singleProject[0].id"></div>
+                    <div ng-multilang itype="textarea" flabel="Opis" fname="description" val="singleProject[0].description" fid="singleProject[0].id"></div>
                     <hr/>
                     <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('dates','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
@@ -96,7 +96,8 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='plan'">
                 <div class="panel-body">
-                    plan
+                    <div ng-multilang itype="textarea" flabel="Plan" fname="plan" val="singleProject[0].plan" fid="singleProject[0].id"></div>
+                    <hr/>
                     <hr/>
                     <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('guest','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>

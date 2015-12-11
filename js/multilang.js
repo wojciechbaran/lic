@@ -45,9 +45,9 @@ testApp.directive('ngMultilang', function(CONFIG, CUDService) {
   return {
     restrict: 'A',
     scope: {
-      itype: '=',
-      fname: '=',
-      flabel: '=',
+      itype: '@',
+      fname: '@',
+      flabel: '@',
       fid: '=',
       val: '='
     },
