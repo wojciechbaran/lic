@@ -178,7 +178,7 @@
     $scope.setPlaceD.success = '';
     $scope.dataLoading = true;
     var data=[{
-      place: $scope.singleProject[0].place;
+      place: $scope.singleProject[0].place
     }];
     CUDService.Go('update', data, 'projects', $scope.singleProject[0].id, function(response) {
       if (response.success) {
@@ -189,7 +189,6 @@
       $scope.dataLoading = false;
     });
   };
-  $scope.
 
   $scope.init = function() {
     $scope.listProjectS();
