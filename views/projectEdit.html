@@ -94,7 +94,7 @@
                     <div class="row">
                         <div ng-show="setPlaceD.error" class="alert alert-danger">{{setPlaceD.error}}</div>
                         <div ng-show="setPlaceD.success" class="alert alert-success">{{setPlaceD.success}}</div>
-                        <form name="setPlaceD" ng-submit="setPlaceS()" role="form" class="col-md-8 col-md-offset-1" ng-init="setPlaceD['type']='contractor'">
+                        <form name="setPlace" ng-submit="setPlaceS()" role="form" class="col-md-8 col-md-offset-1">
                             <div class="form-group col-md-12">
                                 <label for="name">Nazwa</label>
                                 <input type="text" name="name" id="name" class="form-control" ng-model="singleProject[0].place.name" required/>
@@ -128,9 +128,9 @@
                                 <textarea name="extra" id="extra" class="form-control" rows="3" ng-model="singleProject[0].place.extra"></textarea>
                             </div>
                             <div class="form-actions col-md-12">
-                                <button type="submit" ng-disabled="setPlaceD.$invalid || dataLoading" class="btn btn-primary">Zapisz</button>
+                                <button type="submit" ng-disabled="setPlace.$invalid || dataLoading" class="btn btn-primary">Zapisz</button>
                                 <img ng-if="dataLoading" src="lic/images/loading.gif"  />
-                                <button ng-click="addToFav()" ng-disabled="setPlaceD.$invalid || dataLoading" class="btn btn-primary">Dodaj do podwykonawców</button>
+                                <span ng-click="addToFav()" class="btn btn-default">Dodaj do podwykonawców</span>
                             </div>
                         </form>
                     </div>

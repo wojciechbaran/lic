@@ -174,6 +174,7 @@
     });
   };
   $scope.setPlaceS = function() {
+    $scope.setPlaceD={};
     $scope.setPlaceD.error = '';
     $scope.setPlaceD.success = '';
     $scope.dataLoading = true;
@@ -182,9 +183,9 @@
     }];
     CUDService.Go('update', data, 'projects', $scope.singleProject[0].id, function(response) {
       if (response.success) {
-        $scope.setDateD.success = response.message;
+        $scope.setPlaceD.success = response.message;
       } else {
-        $scope.setDateD.error = response.message;
+        $scope.setPlaceD.error = response.message;
       }
       $scope.dataLoading = false;
     });
@@ -197,7 +198,7 @@
     $scope.listGuestsS();
     $scope.listAdminsS();
     $scope.listContractorsS();
-    //$scope.editProject(1);
+    $scope.editProject('565f6c6dbcd47');
   };
   $scope.init();
 });
