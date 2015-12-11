@@ -173,6 +173,23 @@
       $scope.dataLoading = false;
     });
   };
+  $scope.setPlaceS = function() {
+    $scope.setPlaceD.error = '';
+    $scope.setPlaceD.success = '';
+    $scope.dataLoading = true;
+    var data=[{
+      place: $scope.singleProject[0].place;
+    }];
+    CUDService.Go('update', data, 'projects', $scope.singleProject[0].id, function(response) {
+      if (response.success) {
+        $scope.setDateD.success = response.message;
+      } else {
+        $scope.setDateD.error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
+  };
+  $scope.
 
   $scope.init = function() {
     $scope.listProjectS();
