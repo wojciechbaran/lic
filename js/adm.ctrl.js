@@ -3,7 +3,6 @@
   $scope.tab = 'start';
   $scope.projectTab = 'start';
   AuthenticationService.AllowAdmin();
-
   $scope.listProjectCols = [{
     name: 'name',
     label: 'Nazwa'
@@ -147,6 +146,10 @@
     });
 
   };
+  $scope.formcalendarS = function() {
+    console.log($scope.formcalendar.date);
+  };
+
   $scope.init = function() {
     $scope.listProjectS();
     $scope.listUsersS();
