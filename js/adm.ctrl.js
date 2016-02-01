@@ -33,6 +33,16 @@
     name: 'city',
     label: 'Miejscowość'
   }];
+  $scope.listPlacesCols = [{
+    name: 'placename',
+    label: 'Nazwa'
+  }, {
+    name: 'city',
+    label: 'Miasto'
+  }, {
+    name: 'placedescription',
+    label: 'Opis'
+  }];
   $scope.setTab = function(tab) {
     $scope.tab = tab;
   };
@@ -102,6 +112,12 @@
       $scope.listGuests = response;
     });
   };
+  $scope.listPlacesS = function() {
+    // type, condition, table, order
+    SearchService.search('simple', '', 'places', 'id:ASC', function(response) {
+      $scope.listPlaces = response;
+    });
+  };
   $scope.listLecturersS = function() {
     // type, condition, table, order
     SearchService.search('simple', 'userType:lecturer', 'users', 'id:ASC', function(response) {
@@ -133,6 +149,12 @@
     $scope.setTab('editUser');
     SearchService.search('simple', 'id:' + id, 'users', '', function(response) {
       $scope.singleUser = response;
+    });
+  };
+  $scope.editPlace = function(id) {
+    $scope.setTab('editPlace');
+    SearchService.search('simple', 'id:' + id, 'places', '', function(response) {
+      $scope.singlePlace = response;
     });
   };
   $scope.setStatus = function(id, status) {
@@ -190,15 +212,39 @@
       $scope.dataLoading = false;
     });
   };
+  $scope.addToFavPlace = function() {
+    $scope.setPlaceD={};
+    $scope.setPlaceD.error = '';
+    $scope.setPlaceD.success = '';
+    $scope.dataLoading = true;
+    var data = {
+      placename: $scope.singleProject[0].place.placename,
+      placedescription: $scope.singleProject[0].place.placedescription,
+      street: $scope.singleProject[0].place.street,
+      kode: $scope.singleProject[0].place.kode,
+      city: $scope.singleProject[0].place.city,
+      nip: $scope.singleProject[0].place.nip,
+      regon: $scope.singleProject[0].place.regon
+    };
+    CUDService.Go('add', data, 'places', 'placename', function(response) {
+      if (response.success) {
+        $scope.setPlaceD.success = response.message;
+      } else {
+        $scope.setPlaceD.error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
+  };
 
   $scope.init = function() {
     $scope.listProjectS();
     $scope.listUsersS();
+    $scope.listPlacesS();
     $scope.listLecturersS();
     $scope.listGuestsS();
     $scope.listAdminsS();
     $scope.listContractorsS();
-    $scope.editProject('565f6c6dbcd47');
+    $scope.editProject('565db019650cb');
   };
   $scope.init();
 });

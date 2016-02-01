@@ -3,11 +3,12 @@
 // create Collection
     $m = new MongoClient();
 	$db = $m->lic;
-	$col = $db->projects;
+	$col = $db->places;
 	//$col = $db->projects;
    // $collection = $db->createCollection("users");
 	//$collection = $db->createCollection("projects");
 	//$collection = $db->createCollection("contractors");
+	//$collection = $db->createCollection("places");
 	// $id = uniqid();
 	// $item = array( 
 	//       "id" => $id, 

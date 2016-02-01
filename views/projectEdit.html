@@ -89,7 +89,7 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='place'">
                 <div class="panel-body">
-                    <h4 ng-if="singleProject[0].place.name">Miejsce: {{ singleProject[0].place.name }}</h4>
+                    <h4 ng-if="singleProject[0].place.name">Miejsce: {{ singleProject[0].place.placename }}</h4>
                     <h4 ng-if="!singleProject[0].place.name">Miejsce: Brak miejsca!</h4>
                     <div class="row">
                         <div ng-show="setPlaceD.error" class="alert alert-danger">{{setPlaceD.error}}</div>
@@ -97,11 +97,11 @@
                         <form name="setPlace" ng-submit="setPlaceS()" role="form" class="col-md-8 col-md-offset-1">
                             <div class="form-group col-md-12">
                                 <label for="name">Nazwa</label>
-                                <input type="text" name="name" id="name" class="form-control" ng-model="singleProject[0].place.name" required/>
+                                <input type="text" name="name" id="name" class="form-control" ng-model="singleProject[0].place.placename" required/>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="description">Opis ogólny</label>
-                                <textarea name="description" id="description" class="form-control" rows="3" ng-model="singleProject[0].place.description"></textarea>
+                                <textarea name="description" id="description" class="form-control" rows="3" ng-model="singleProject[0].place.placedescription"></textarea>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="street">Ulica i numer</label>
@@ -130,7 +130,7 @@
                             <div class="form-actions col-md-12">
                                 <button type="submit" ng-disabled="setPlace.$invalid || dataLoading" class="btn btn-primary">Zapisz</button>
                                 <img ng-if="dataLoading" src="lic/images/loading.gif"  />
-                                <span ng-click="addToFav()" class="btn btn-default">Dodaj do podwykonawców</span>
+                                <span ng-click="addToFavPlace()" class="btn btn-default">Dodaj do podwykonawców</span>
                             </div>
                         </form>
                     </div>

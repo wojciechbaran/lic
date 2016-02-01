@@ -140,7 +140,7 @@
                     <h3 class="panel-title">Miejsca</h3>
                 </div>
                 <div class="panel-body">
-                    blablabla
+                    <div ng-tab tab="listPlaces" cols="listPlacesCols" limit="10" callback-fn="editPlace(id)"></div>
                 </div>
             </div>
         </div>
@@ -364,6 +364,57 @@
                 </div>
             </div>
         </div>
+        <!-- Edycja miejsca -->
+        <div class="col-md-12" ng-if="tab=='editPlace'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Edycja Miejsca: {{ singlePlace[0].name }} (id:{{ singlePlace[0].id }})<a ng-click="setTab('places')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
+                </div>
+                <div class="panel-body">
+                    <div class=" col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Etykietka</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td>Id</td>
+                                        <td>{{ singlePlace[0].id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nazwa</td>
+                                        <td>
+                                            {{ singlePlace[0].placename }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Opis</td>
+                                        <td>{{ singlePlace[0].placedescription }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Adres</td>
+                                        <td>{{ singlePlace[0].street }}, {{ singlePlace[0].kode }} {{ singlePlace[0].city }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NIP</td>
+                                        <td>{{ singlePlace[0].nip }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>REGON</td>
+                                        <td>{{ singlePlace[0].regon }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-6">
+                        Jakieś opcje
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- koniec edycji -->
     </div>
 </div>
 <div ng-include="config.route + '/views/footer.html'"></div>
