@@ -24,7 +24,7 @@
     label: 'Ostatnie logowanie',
   }];
   $scope.contractorsCols = [{
-    name: 'name',
+    name: 'contractorname',
     label: 'Nazwa'
   }, {
     name: 'servicetype',
@@ -70,9 +70,9 @@
     $scope.newContractorD.success = '';
     $scope.dataLoading = true;
     var data = {
-      name: $scope.newContractorD.contractorname,
+      contractorname: $scope.newContractorD.contractorname,
       servicetype: $scope.newContractorD.servicetype,
-      description: $scope.newContractorD.contractordescription,
+      contractordescription: $scope.newContractorD.contractordescription,
       street: $scope.newContractorD.street,
       kode: $scope.newContractorD.kode,
       city: $scope.newContractorD.city,
