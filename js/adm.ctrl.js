@@ -244,7 +244,7 @@
     $scope.listGuestsS();
     $scope.listAdminsS();
     $scope.listContractorsS();
-    $scope.editProject('565db019650cb');
+    //$scope.editProject('565db019650cb');
   };
   $scope.init();
 });
