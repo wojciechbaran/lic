@@ -116,7 +116,36 @@
                     <h3 class="panel-title">Dodaj użytkownika</h3>
                 </div>
                 <div class="panel-body">
-                    blablabla
+                    <div ng-show="newUserD.error" class="alert alert-danger">{{newUserD.error }}</div>
+                    <div ng-show="newUserD.success" class="alert alert-success">{{newUserD.success }}</div>
+                    <form name="form" ng-submit="newUserS()" role="form" ng-init="newUserD['type']='register'; newUserD.data['password']=''; newUserD.data['password']=''">
+                        <div class="form-group">
+                            <label for="username">Login</label>
+                            <input type="text" name="username" id="username" class="form-control" ng-model="newUserD.data['username']" required/>
+                            <span class="help-block">Pole wymagane</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Hasło</label>
+                            <a ng-click="generatePassword()">Generuj hasło</a>
+                            <span class="help-block" ng-show="newUserD.showPass">Wygenerowane hasło: {{ newUserD.data['passwordrep'] }}</span>
+                            <input type="password" name="password" id="password" class="form-control" ng-model="newUserD.data['password']" required/>
+                            <span class="help-block">Pole wymagane</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordrep">Powtórz hasło</label>
+                            <input type="password" name="passwordrep" id="passwordrep" class="form-control" ng-model="newUserD.data['passwordrep']" required/>
+                            <span class="help-block">Pole wymagane</span>
+                        </div>
+                        <div ng-repeat="userDataFild in config.userDataFilds" class="form-group">
+                            <label for="{{ userDataFild.name }}">{{ userDataFild.label }}</label>
+                            <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="newUserD.data[userDataFild.name]" ng-required="userDataFild.required"/>
+                            <span ng-show="userDataFild.required" class="help-block">Pole wymagane</span>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Dodaj użytkownika</button>
+                            <img ng-if="dataLoading" src="lic/images/loading.gif"  />
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -79,6 +79,25 @@
       $scope.dataLoading = false;
     });
   };
+  $scope.newUserS = function() {
+    $scope.dataLoading = true;
+    AuthenticationService.Register($scope.newUserD, function(response) {
+      if (response.success) {
+        $scope.newUserD.success = 'Dodano nowego użytkownika';
+        $scope.listUsersS();
+      } else {
+        $scope.newUserD.error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
+  };
+  $scope.generatePassword = function() { 
+    AuthenticationService.GeneratePassword(function(response){ 
+      $scope.newUserD.showPass = true;
+      $scope.newUserD.data['password'] = response;
+      $scope.newUserD.data['passwordrep'] = response;
+    });
+  }
   $scope.listProjectS = function() {
     // type, condition, table, order
     SearchService.search('simple', '', 'projects', 'id:ASC', function(response) {
@@ -196,7 +215,7 @@
     $scope.listGuestsS();
     $scope.listAdminsS();
     $scope.listContractorsS();
-    $scope.editProject('565f6c6dbcd47');
+    $scope.editProject('565db46f61fff');
   };
   $scope.init();
 });
