@@ -46,7 +46,56 @@
         <div class="col-md-10">
             <div class="panel panel-default"  ng-show="projectTab=='start'">
                 <div class="panel-body">
-                    Start
+                    <p>Podsumowanie:</p>
+                    <table class="table">
+                        <tr>
+                            <td>Id</td>
+                            <td>{{ singleProject[0].id }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nazwa</td>
+                            <td>{{ singleProject[0].name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>{{ config.projectStatus[singleProject[0].projectStatus].label }}</td>
+                        </tr>
+                        <tr>
+                            <td>Czas trwania</td>
+                            <td>
+                                <span ng-if="singleProject[0].startDate">{{ singleProject[0].startDate }} - {{ singleProject[0].endDate }}</span>
+                                <span ng-if="!singleProject[0].startDate" class="alert-danger">Brak daty!</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tytuł</td>
+                            <td>
+                                <span ng-if="singleProject[0].title">{{ singleProject[0].title.pl }}</span>
+                                <span ng-if="!singleProject[0].title" class="alert-danger">Brak tytułu!</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Opis</td>
+                            <td>
+                                <span ng-if="singleProject[0].description">Dodano</span>
+                                <span ng-if="!singleProject[0].description" class="alert-warning">Brak opisu!</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Miejsce</td>
+                            <td>
+                                <span ng-if="singleProject[0].place.name">{{ singleProject[0].place.name }}</span>
+                                <span ng-if="!singleProject[0].place.name" class="alert-danger">Brak miejsca!</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Plan</td>
+                            <td>
+                                <span ng-if="singleProject[0].plan">Dodano</span>
+                                <span ng-if="!singleProject[0].plan" class="alert-danger">Brak planu!</span>
+                            </td>
+                        </tr>
+                    </table>
                     <hr/>
                     <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('description','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>
