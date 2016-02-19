@@ -1,4 +1,4 @@
-<div class="panel panel-default" ng-controller="projectController">
+<div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Edycja projektu: {{ singleProject[0].name }} (id:{{ singleProject[0].id }}) Status: {{ config.projectStatus[singleProject[0].projectStatus].label }}<a ng-click="setTab('listProject')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
     </div>
@@ -217,6 +217,7 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='status'">
                 <div class="panel-body">
+                    <div ng-show="setStatus.message" class="alert alert-success">{{ setStatus.message }}</div>
                     Obecny status: {{ config.projectStatus[singleProject[0].projectStatus].label  }}
                     <hr/>
                     Zmień status na:

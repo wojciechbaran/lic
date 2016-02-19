@@ -159,6 +159,7 @@
     CUDService.Go('update', data, 'projects', id, function(response) {
       if (response.success) {
         $scope.singleProject[0].projectStatus = status;
+        $scope.setStatus.message = 'Zmieniono status';
       }
     });
 
@@ -215,7 +216,8 @@
     $scope.listGuestsS();
     $scope.listAdminsS();
     $scope.listContractorsS();
-    $scope.editProject('565db46f61fff');
+        //$scope.editProject('565db46f61fff');
+    //$scope.editProject('56c764d23781c');
   };
   $scope.init();
 });

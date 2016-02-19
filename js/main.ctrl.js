@@ -1,11 +1,10 @@
-testApp.controller('mainController', function($scope, CONFIG, $rootScope, $route) {
+testApp.controller('mainController', function($scope, CONFIG, $rootScope, $route, SearchService) {
   $scope.config = CONFIG;
   $scope.tab = 'start';
   $scope.currentUser = $rootScope.currentUser;
   if(!$rootScope.defaultLanguage){
     $rootScope.defaultLanguage = $scope.config.defaultLanguage;
   }
-
   $scope.setTab = function(tab) {
     $scope.tab = tab;
   };

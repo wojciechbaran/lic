@@ -22,11 +22,17 @@ if($request['type']=='simple'){
 		}
 		$query=$con;
 	}
-	if($order){
-		//$query.=" ORDER BY $order";
-	}
 	$res=array();
 	$cursor = $col->find($query);
+	foreach ($cursor as $value) {
+		$res[]=$value;
+	}
+}
+if($request['type']=='advenced'){
+	$table=$request['table'];
+	$col = $db->{$table};
+	$obj = json_decode($postdata);
+	$cursor = $col->find($obj->condition);
 	foreach ($cursor as $value) {
 		$res[]=$value;
 	}

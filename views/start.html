@@ -1,6 +1,6 @@
 ﻿<div ng-include="config.route + '/views/header.html'"></div>
 <div ng-if="currentUser.userid" ng-include="config.route + '/views/userBar.html'"></div>
-<div class="start">
+<div class="start" ng-controller="startController">
     <div class="row text-center">
         <h1>Start</h1>
     </div>
