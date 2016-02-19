@@ -11,7 +11,9 @@
                     <h3 class="panel-title">{{'Nowe konferencje' | translate }}</h3>
                 </div>
                 <div class="panel-body">
-                    Nowe konferencje
+                    <ul>
+                        <li ng-repeat="project in newProjects">{{ project.title[defaultLanguage] }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -21,7 +23,9 @@
                     <h3 class="panel-title">{{'Poprzednie konferencje' | translate }}</h3>
                 </div>
                 <div class="panel-body">
-                    Lista konferencji
+                    <ul>
+                        <li ng-repeat="project in oldProjects">{{ project.title[defaultLanguage] }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
