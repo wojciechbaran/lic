@@ -1,21 +1,21 @@
 <div class="smallMenu row btn-toolbar">
     <button type="button" class="btn btn-default" ng-click="setTab('start')">Start</button>
     <div class="btn-group">
-        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='newProject' || tab=='listProject') ? 'btn-primary' : 'btn-default'">Konferencje <span class="caret"></span></button>
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='newProject' || tab=='listProject' || tab=='editProject') ? 'btn-primary' : 'btn-default'">Konferencje <span class="caret"></span></button>
         <ul class="dropdown-menu">
             <li ng-class="tab=='listProject' ? 'active' : ''"><a ng-click="setTab('listProject')">Lista konferencji</a></li>
             <li ng-class="tab=='newProject' ? 'active' : ''"><a ng-click="setTab('newProject')">Nowa konferencja</a></li>
         </ul>
     </div>
     <div class="btn-group">
-        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='listUser' || tab=='newUser') ? 'btn-primary' : 'btn-default'">Użytkownicy <span class="caret"></span></button>
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='listUser' || tab=='newUser' || tab=='editUser') ? 'btn-primary' : 'btn-default'">Użytkownicy <span class="caret"></span></button>
         <ul class="dropdown-menu">
             <li ng-class="tab=='listUser' ? 'active' : ''"><a ng-click="setTab('listUser')">Lista użytkowników</a></li>
             <li ng-class="tab=='newUser' ? 'active' : ''"><a ng-click="setTab('newUser')">Dodaj użytkownika</a></li>
         </ul>
     </div>
     <div class="btn-group">
-        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='guest' || tab=='newContractor' || tab=='contractors' || tab=='lecturer') ? 'btn-primary' : 'btn-default'">Dodatki <span class="caret"></span></button>
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='guest' || tab=='newContractor' || tab=='editContractor' || tab=='contractors' || tab=='lecturer') ? 'btn-primary' : 'btn-default'">Dodatki <span class="caret"></span></button>
         <ul class="dropdown-menu">
             <li ng-class="tab=='guest' ? 'active' : ''"><a ng-click="setTab('guest')">Lista Gości</a></li>
             <li ng-class="tab=='lecturer' ? 'active' : ''"><a ng-click="setTab('lecturer')">Lista Wykładowców</a></li>
@@ -28,7 +28,6 @@
         <ul class="dropdown-menu">
             <li ng-class="tab=='listAdmin' ? 'active' : ''"><a ng-click="setTab('listAdmin')">Lista Administratorów</a></li>
             <li ng-class="tab=='basicData' ? 'active' : ''"><a ng-click="setTab('basicData')">Podstawowe dane</a></li>
-            <li ng-class="tab=='lang' ? 'active' : ''"><a ng-click="setTab('lang')">Opcje językowe</a></li>
         </ul>
     </div>
 </div>
