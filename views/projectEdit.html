@@ -124,13 +124,12 @@
                                 <input type="text" name="regon" id="regon" class="form-control" ng-model="singleProject[0].place.regon" />
                             </div>
                             <div class="form-group col-md-12">
-                                <label for="description">Informacje dodatkowe - tylko dla danego projektu</label>
+                                <label for="description">Informacje dodatkowe</label>
                                 <textarea name="extra" id="extra" class="form-control" rows="3" ng-model="singleProject[0].place.extra"></textarea>
                             </div>
                             <div class="form-actions col-md-12">
                                 <button type="submit" ng-disabled="setPlace.$invalid || dataLoading" class="btn btn-primary">Zapisz</button>
                                 <img ng-if="dataLoading" src="lic/images/loading.gif"  />
-                                <span ng-click="addToFav()" class="btn btn-default">Dodaj do podwykonawców</span>
                             </div>
                         </form>
                     </div>

@@ -42,7 +42,6 @@
                     <ul>
                         <li><a ng-click="setTab('guest')">Lista Gości</a></li>
                         <li><a ng-click="setTab('lecturer')">Lista Wykładowców</a></li>
-                        <li><a ng-click="setTab('places')">Miejsca</a></li>
                         <li><a ng-click="setTab('contractors')">Lista podwykonawców</a></li>
                         <li><a ng-click="setTab('newContractor')">Dodaj podwykonawę</a></li>
                     </ul>
@@ -130,17 +129,6 @@
                 </div>
                 <div class="panel-body">
                     <div ng-tab tab="listGuests" cols="listUsersCols" limit="10" callback-fn="editUser(id)"></div>
-                </div>
-            </div>
-        </div>
-        <!-- Miejsca -->
-        <div class="col-md-12" ng-show="tab=='places'">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Miejsca</h3>
-                </div>
-                <div class="panel-body">
-                    blablabla
                 </div>
             </div>
         </div>
