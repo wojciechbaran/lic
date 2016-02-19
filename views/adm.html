@@ -56,7 +56,6 @@
                 <div class="panel-body">
                     <ul>
                         <li><a ng-click="setTab('listAdmin')">Lista Administratorów</a></li>
-                        <li><a ng-click="setTab('addAdmin')">Dodaj Administratora</a></li>
                         <li><a ng-click="setTab('basicData')">Podstawowe dane</a></li>
                         <li><a ng-click="setTab('lang')">Opcje językowe</a></li>
                     </ul>
@@ -274,8 +273,8 @@
                                     <tr>
                                         <td>Typ konta</td>
                                         <td>
-                                            <span ng-if="singleUser[0].type=='admin'">Administrator</span>
-                                            <span ng-if="singleUser[0].type=='user'">Użytkownik</span>
+                                            <span ng-if="singleUser[0].userType=='admin'">Administrator</span>
+                                            <span ng-if="singleUser[0].userType=='user'">Użytkownik</span>
                                         </td>
                                     </tr>
                                     <tr>

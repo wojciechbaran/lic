@@ -44,7 +44,8 @@
     $scope.newProject.success = '';
     $scope.dataLoading = true;
     var data = {
-      name: $scope.newProject.projectName
+      name: $scope.newProject.projectName,
+      projectStatus: 0
     }
     CUDService.Go('add', data, 'projects', 'name', function(response) {
       if (response.success) {
@@ -117,9 +118,6 @@
   $scope.editProject = function(id) {
     $scope.setTab('editProject');
     SearchService.search('simple', 'id:' + id, 'projects', '', function(response) {
-      if (!response[0].projectStatus) {
-        response[0].projectStatus = 0;
-      }
       $scope.singleProject = response;
     });
   };
