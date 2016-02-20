@@ -23,8 +23,8 @@ testApp.config(function($routeProvider, $locationProvider, $httpProvider, CONFIG
       controller: 'conferenceController'
     })
     //choosen conference for guest
-    .when('/' + CONFIG.route + '/conference/:id', {
-      templateUrl: CONFIG.route + '/views/conference.html',
+    .when('/' + CONFIG.route + '/conference/:projectId', {
+      templateUrl: CONFIG.route + '/views/conferences.html',
       controller: 'conferenceController'
     })
     //user account
