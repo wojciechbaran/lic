@@ -246,7 +246,9 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='users'">
                 <div class="panel-body">
-                    users
+                    Uczestnicy
+                    <hr/>
+                    <div ng-tab tab="projectUsersList" cols="listUsersCols" limit="10" callback-fn="editUser(id)"></div>
                     <hr/>
                     <button type="button" class="btn btn-success pull-right" ng-click="setTabEdit('print','projectTab')">Dalej <span class="glyphicon glyphicon-play"></span></button>
                 </div>

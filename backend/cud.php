@@ -94,6 +94,26 @@ if($request['type']=='add'){
 	$error='Dane zostały zmienione!';
 	$success=true;
 	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
+} else if($request['type']=='singIn'){
+	$error='';
+	$success=false;
+	$projectId=$request['id'];
+	$userId=$request['table'];
+	$inOrOut=$request['data'];
+	if($inOrOut=='in'){
+		$col = $db->projects;
+		$col->update(array('id' => $projectId),array('$push' => array('users'=>$userId)));
+		$col = $db->users;
+		$col->update(array('id' => $userId),array('$push' => array('projects'=>$projectId)));
+	} else {
+		$col = $db->projects;
+		$col->update(array('id' => $projectId),array('$pull' => array('users'=>$userId)));
+		$col = $db->users;
+		$col->update(array('id' => $userId),array('$pull' => array('projects'=>$projectId)));
+	}
+	$error='Dane zostały zmienione!';
+	$success=true;
+	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
 }
 
 

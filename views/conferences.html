@@ -7,24 +7,72 @@
 				<h3 class="panel-title">
 					{{'Konferencja' | translate }}: {{ singleProject[0].title[defaultLanguage] }}
 				</h3>
+				<span ng-if="singleProject[0].projectStatus==2">
+					<span ng-hide="singInStatus" class="pull-right">
+						<button ng-if="currentUser.id" class="btn btn-success" ng-click="singIn(currentUser.id,singleProject[0].id)">{{ 'Zapisz się' | translate }}</button>
+						<button ng-hide="currentUser.id" class="btn btn-success" ng-click="goTo('/login')">{{ 'Zapisz się' | translate }}</button>
+					</span>
+					<span ng-if="singInStatus" class="pull-right">
+						<button class="btn btn-success">{{ 'Jesteś już zapisany' | translate }}</button>
+					</span>
+				</span>
 			</div>
 			<div class="panel-body">
-			<h3>{{ 'Termin' | translate }}:</h3>
-				<span ng-if="singleProject[0].startDate==singleProject[0].endDate">
-                    {{ singleProject[0].startDate | date:'dd/MM/yyyy' }}
-                </span>
-                <span ng-if="singleProject[0].startDate!=singleProject[0].endDate">
-                    {{ singleProject[0].startDate | date:'dd/MM/yyyy' }} - {{ singleProject[0].endDate | date:'dd/MM/yyyy' }}
-                </span>
-            <h3>{{ 'Opis' | translate }}:</h3>
-            	{{ singleProject[0].description[defaultLanguage] }}
-            <h3>{{ 'Miejsce' | translate }}:</h3>
-				{{ singleProject[0].place.name }}<br/>
-				{{ singleProject[0].place.street }} <br/>
-				{{ singleProject[0].place.kode }} {{ singleProject[0].place.city }}
-			<h3>{{ 'Plan' | translate }}:</h3>
-            	{{ singleProject[0].plan[defaultLanguage] }}
-            	
+				<div class="col-md-10">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								{{ 'Termin' | translate }}
+							</h3>
+						</div>
+						<div class="panel-body">
+							<span ng-if="singleProject[0].startDate==singleProject[0].endDate">
+			                    {{ singleProject[0].startDate | date:'dd/MM/yyyy' }}
+			                </span>
+			                <span ng-if="singleProject[0].startDate!=singleProject[0].endDate">
+			                    {{ singleProject[0].startDate | date:'dd/MM/yyyy' }} - {{ singleProject[0].endDate | date:'dd/MM/yyyy' }}
+			                </span>	
+						</div>
+					</div>
+				</div>
+				<div class="col-md-10">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								{{ 'Miejsce' | translate }}
+							</h3>
+						</div>
+						<div class="panel-body">
+							{{ singleProject[0].place.name }}<br/>
+							{{ singleProject[0].place.street }} <br/>
+							{{ singleProject[0].place.kode }} {{ singleProject[0].place.city }}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-10">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								{{ 'Opis' | translate }}
+							</h3>
+						</div>
+						<div class="panel-body">
+							{{ singleProject[0].description[defaultLanguage] }}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-10">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								{{ 'Plan' | translate }}
+							</h3>
+						</div>
+						<div class="panel-body">
+							{{ singleProject[0].plan[defaultLanguage] }}
+						</div>
+					</div>
+				</div>      	
 			</div>
 		</div>	
 	</div>

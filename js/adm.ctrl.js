@@ -138,6 +138,15 @@
     $scope.setTab('editProject');
     SearchService.search('simple', 'id:' + id, 'projects', '', function(response) {
       $scope.singleProject = response;
+      //set users singIn
+      if($scope.singleProject[0].users){
+        $scope.projectUsersList=[]
+        $scope.singleProject[0].users.forEach(function(id){
+          SearchService.search('simple', 'id:' + id, 'users', '', function(response) {
+            $scope.projectUsersList.push(response[0]);
+          });
+        });
+      }
     });
   };
   $scope.editContractor = function(id) {

@@ -23,8 +23,9 @@ angular.module('testApp').service('AuthenticationService', function($http, CONFI
     },
     SetCredentials: function(userData) {
       $rootScope.currentUser = userData;
-      $cookies.putObject('currentUser', $rootScope.currentUser);
-
+      var d = new Date();
+      d.setHours(d.getHours() + 1);
+      $cookies.putObject('currentUser', userData, {expires: d});
     },
     Register: function(userData, callback) {
       $http.post(CONFIG.baseURL + '/' + CONFIG.route + '/backend/authentication.php', userData)
