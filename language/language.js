@@ -7,6 +7,7 @@
   'Powtórz hasło':'Repeat password',
   'Zarejestruj':'Register',
   'Anuluj':'Cancel',
+  'Brak':'None',
   'Nowe konferencje':'New conferences',
   'Poprzednie konferencje':'Previous conferences',
   'Moje konferencje':'My conferences',

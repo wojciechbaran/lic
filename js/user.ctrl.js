@@ -7,6 +7,14 @@ testApp.controller('userController', function($scope, CONFIG, AuthenticationServ
   SearchService.search('advenced', query, 'projects', '', function(response) {
     $scope.newProjects = response;
   });
+  if($scope.currentUser.projects){
+    $scope.myProjects=[]
+    $scope.currentUser.projects.forEach(function(id){
+      SearchService.search('simple', 'id:' + id, 'projects', '', function(response) {
+        $scope.myProjects.push(response[0]);
+      });
+    });
+  }
   $scope.setTab = function(tab) {
     $scope.tab = tab;
   };
