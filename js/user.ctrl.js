@@ -3,12 +3,18 @@ testApp.controller('userController', function($scope, CONFIG, AuthenticationServ
   $scope.tab = 'start';
   AuthenticationService.Allow();
   $scope.currentUser = $rootScope.currentUser;
+  $scope.newProjectsC = false;
+  $scope.myProjectsC = false;
   var query = {$or: [{projectStatus:1},{projectStatus:2}]};
   SearchService.search('advenced', query, 'projects', '', function(response) {
     $scope.newProjects = response;
+    if($scope.newProjects && Object.prototype.toString.call( $scope.newProjects ) === '[object Array]'){
+      $scope.newProjectsC=true;
+    }
   });
   if($scope.currentUser.projects){
     $scope.myProjects=[]
+    $scope.myProjectsC = true;
     $scope.currentUser.projects.forEach(function(id){
       SearchService.search('simple', 'id:' + id, 'projects', '', function(response) {
         $scope.myProjects.push(response[0]);

@@ -11,8 +11,9 @@
                     <h3 class="panel-title">{{'Nowe konferencje' | translate }}</h3>
                 </div>
                 <div class="panel-body">
-                    <ul>
-                        <li ng-repeat="project in newProjects">
+                    <span ng-hide="newProjectsC">{{ 'Brak' | translate }}</span>
+                    <ul ng-if="newProjectsC">
+                        <li ng-repeat="project in newProjects track by $index">
                             <a href="{{ config.route }}/conference/{{ project.id }}">{{ project.title[defaultLanguage] }}</a>
                        </li>
                     </ul>
@@ -25,8 +26,9 @@
                     <h3 class="panel-title">{{'Poprzednie konferencje' | translate }}</h3>
                 </div>
                 <div class="panel-body">
-                    <ul>
-                        <li ng-repeat="project in oldProjects">
+                    <span ng-hide="oldProjectsC">{{ 'Brak' | translate }}</span>
+                    <ul ng-if="oldProjectsC">
+                        <li ng-repeat="project in oldProjects track by $index">
                             <a href="{{ config.route }}/conference/{{ project.id }}">{{ project.title[defaultLanguage] }}</a>
                         </li>
                     </ul>
