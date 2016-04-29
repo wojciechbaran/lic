@@ -1,24 +1,28 @@
 <div ng-include="config.route + '/views/header.html'"></div>
-<div ng-include="config.route + '/views/userBar.html'"></div>
+<div ng-include="config.route + '/views/smallStartMenu.html'"></div>
 <div class="user">
     <div class="row text-center clo-xs-4">
-        <h3>Witaj  {{ currentUser.name }} {{ currentUser.surname }}</h3>
+        <h3>{{ 'Witaj' | translate }} {{ currentUser.name }} {{ currentUser.surname }}</h3>
     </div>
     <div class="userMainMenu" ng-show="tab=='start'">
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Nowe konferencje</h3>
+                    <h3 class="panel-title">{{'Nowe konferencje' | translate }}</h3>
                 </div>
                 <div class="panel-body">
-                    Nowe konferencje
+                    <ul>
+                        <li ng-repeat="project in newProjects">
+                            <a href="{{ config.route }}/conference/{{ project.id }}">{{ project.title[defaultLanguage] }}</a>
+                       </li>
+                    </ul>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Moje konferencje</h3>
+                    <h3 class="panel-title">{{'Moje konferencje' | translate }}</h3>
                 </div>
                 <div class="panel-body">
                     Moje konferencje
@@ -28,12 +32,12 @@
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Ustawienia</h3>
+                    <h3 class="panel-title">{{'Ustawienia' | translate }}</h3>
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li><a ng-click="setTab('userData')">Moje dane</a></li>
-                        <li><a ng-click="setTab('changePassword')">Zmiana hasła</a></li>
+                        <li><a ng-click="setTab('userData')">{{'Moje dane' | translate }}</a></li>
+                        <li><a ng-click="setTab('changePassword')">{{'Zmiana hasła' | translate }}</a></li>
                     </ul>
                 </div>
             </div>

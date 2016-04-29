@@ -1,9 +1,12 @@
-testApp.controller('userController', function($scope, CONFIG, AuthenticationService, CUDService, $location, $rootScope, $cookies) {
+testApp.controller('userController', function($scope, CONFIG, AuthenticationService, CUDService, $location, $rootScope, $cookies,SearchService) {
   $scope.config = CONFIG;
   $scope.tab = 'start';
   AuthenticationService.Allow();
   $scope.currentUser = $rootScope.currentUser;
-
+  var query = {$or: [{projectStatus:1},{projectStatus:2}]};
+  SearchService.search('advenced', query, 'projects', '', function(response) {
+    $scope.newProjects = response;
+  });
   $scope.setTab = function(tab) {
     $scope.tab = tab;
   };

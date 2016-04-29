@@ -13,6 +13,10 @@ testApp.config(function($routeProvider, $locationProvider, $httpProvider, CONFIG
       templateUrl: CONFIG.route + '/views/login.html',
       controller: 'loginController'
     })
+    .when('/' + CONFIG.route + '/about', {
+      templateUrl: CONFIG.route + '/views/about.html',
+      controller: 'mainController'
+    })
     .when('/' + CONFIG.route + '/register', {
       templateUrl: CONFIG.route + '/views/register.html',
       controller: 'registerController'

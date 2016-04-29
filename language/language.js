@@ -9,6 +9,7 @@
   'Anuluj':'Cancel',
   'Nowe konferencje':'New conferences',
   'Poprzednie konferencje':'Previous conferences',
+  'Moje konferencje':'My conferences',
   'Dołącz do nas':'Join us',
   'Więcej':'More',
   'O projekcie':'About the project',
@@ -16,7 +17,19 @@
   'Imie':'First name',
   'Nazwisko':'Surname',
   'Adres mail':'Email adress',
-  'Zaloguj':'Login'
+  'Zaloguj':'Login',
+  'Wyloguj':'Logout',
+  'Termin':'Date',
+  'Opis':'Description',
+  'Miejsce':'Place',
+  'Plan':'Schedule',
+  'Zapisz się':'Sing in',
+  'Zrezygnuj':'Sing out',
+  'Konferencja':'Conference',
+  'Ustawienia':'Settings',
+  'Witaj':'Welcome',
+  'Moje dane':'My data',
+  'Zmiana hasła':'Change my password'
 });
 testApp.constant('DE', {
   'Logowanie': 'Login',

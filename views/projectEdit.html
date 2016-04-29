@@ -61,9 +61,16 @@
                             <td>{{ config.projectStatus[singleProject[0].projectStatus].label }}</td>
                         </tr>
                         <tr>
-                            <td>Czas trwania</td>
+                            <td>Termin</td>
                             <td>
-                                <span ng-if="singleProject[0].startDate">{{ singleProject[0].startDate }} - {{ singleProject[0].endDate }}</span>
+                                <span ng-if="singleProject[0].startDate">
+                                    <span ng-if="singleProject[0].startDate==singleProject[0].endDate">
+                                        {{ singleProject[0].startDate | date:'dd/MM/yyyy' }}
+                                    </span>
+                                    <span ng-if="singleProject[0].startDate!=singleProject[0].endDate">
+                                        {{ singleProject[0].startDate | date:'dd/MM/yyyy' }} - {{ singleProject[0].endDate | date:'dd/MM/yyyy' }}
+                                    </span>
+                                </span>
                                 <span ng-if="!singleProject[0].startDate" class="alert-danger">Brak daty!</span>
                             </td>
                         </tr>

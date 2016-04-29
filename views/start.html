@@ -1,5 +1,5 @@
 ﻿<div ng-include="config.route + '/views/header.html'"></div>
-<div ng-if="currentUser.userid" ng-include="config.route + '/views/userBar.html'"></div>
+<div ng-if="currentUser.id" ng-include="config.route + '/views/smallStartMenu.html'"></div>
 <div class="start" ng-controller="startController">
     <div class="row text-center">
         <h1>Start</h1>
@@ -12,10 +12,10 @@
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li ng-repeat="project in newProjects">{{ project.title[defaultLanguage] }}</li>
+                        <li ng-repeat="project in newProjects">
+                            <a href="{{ config.route }}/conference/{{ project.id }}">{{ project.title[defaultLanguage] }}</a>
+                       </li>
                     </ul>
-                    <!-- <a href="{{ config.route }}/conference">conference</a><br />
-                    <a href="{{ config.route }}/conference/22">conference/22</a> -->
                 </div>
             </div>
         </div>
@@ -26,7 +26,9 @@
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li ng-repeat="project in oldProjects">{{ project.title[defaultLanguage] }}</li>
+                        <li ng-repeat="project in oldProjects">
+                            <a href="{{ config.route }}/conference/{{ project.id }}">{{ project.title[defaultLanguage] }}</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -51,8 +53,8 @@
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li><a ng-click="setTab('userData')">{{'O projekcie' | translate }}</a></li>
-                        <li><a href="www.up.krakow.pl">{{'Strona główna UP' | translate }}</a></li>
+                        <li><a href="{{ config.route }}/about">{{'O projekcie' | translate }}</a></li>
+                        <li><a href="www.up.krakow.pl" target="_blanck">{{'Strona główna UP' | translate }}</a></li>
                         <li><a href="{{ config.route }}/adm">ADM</a></li>
                     </ul>
                 </div>

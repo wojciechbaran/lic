@@ -1,7 +1,8 @@
-testApp.controller('mainController', function($scope, CONFIG, $rootScope, $route, SearchService) {
+testApp.controller('mainController', function($scope, CONFIG, $rootScope, $route, AuthenticationService, $location) {
   $scope.config = CONFIG;
   $scope.tab = 'start';
   $scope.currentUser = $rootScope.currentUser;
+
   if(!$rootScope.defaultLanguage){
     $rootScope.defaultLanguage = $scope.config.defaultLanguage;
   }
@@ -12,5 +13,11 @@ testApp.controller('mainController', function($scope, CONFIG, $rootScope, $route
     $rootScope.defaultLanguage = lang;
     $route.reload();
   };
-
+  $scope.goTo = function(loc) {
+    $location.path( $scope.config.route + loc );
+  };
+  $scope.logout = function() {
+    AuthenticationService.ClearCredentials();
+    $location.path('/' + $scope.config.route);
+  };
 });
