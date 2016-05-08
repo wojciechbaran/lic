@@ -49,6 +49,7 @@
     }
     CUDService.Go('add', data, 'projects', 'name', function(response) {
       if (response.success) {
+        $scope.listProjectS();
         $scope.editProject(response.newid);
       } else {
         $scope.newProject.error = response.message;

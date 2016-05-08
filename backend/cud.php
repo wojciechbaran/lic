@@ -105,6 +105,11 @@ if($request['type']=='add'){
 		$col->update(array('id' => $projectId),array('$push' => array('users'=>$userId)));
 		$col = $db->users;
 		$col->update(array('id' => $userId),array('$push' => array('projects'=>$projectId)));
+	} elseif($inOrOut=='lecturer'){
+		$col = $db->projects;
+		$col->update(array('id' => $projectId),array('$push' => array('lecturers'=>$userId)));
+		$col = $db->users;
+		$col->update(array('id' => $userId),array('$push' => array('projects'=>$projectId)));
 	} else {
 		$col = $db->projects;
 		$col->update(array('id' => $projectId),array('$pull' => array('users'=>$userId)));

@@ -1,0 +1,65 @@
+<div ng-include="config.route + '/views/header.html'"></div>
+<div ng-hide="currentUser" class="mainContent" ng-controller="registerController">
+    <div class="col-md-6 col-md-offset-3" >
+        <h2>{{ 'Rejestracja' | translate }}</h2>
+        <div ng-show="userData.error" class="alert alert-danger">{{userData.error | translate}}</div>
+        <form name="form" ng-submit="register()" role="form" ng-init="userData['type']='register'">
+            <div class="form-group">
+                <label for="username">{{ 'Login' | translate }}</label>
+                <input type="text" name="username" id="username" class="form-control" ng-model="userData.data['username']" required/>
+                <span class="help-block">Pole wymagane</span>
+            </div>
+            <div class="form-group">
+                <label for="password">{{ 'Hasło'  | translate }}</label>
+                <input type="password" name="password" id="password" class="form-control" ng-model="userData.data['password']" required/>
+                <span class="help-block">Pole wymagane</span>
+            </div>
+            <div class="form-group">
+                <label for="passwordrep">{{ 'Powtórz hasło' | translate }}</label>
+                <input type="password" name="passwordrep" id="passwordrep" class="form-control" ng-model="userData.data['passwordrep']" required/>
+                <span class="help-block">Pole wymagane</span>
+            </div>
+            <div ng-repeat="userDataFild in config.userDataFilds" class="form-group">
+                <label for="{{ userDataFild.name }}">{{ userDataFild.label | translate }}</label>
+                <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="userData.data[userDataFild.name]" ng-required="true"/>
+                <span class="help-block">Pole wymagane</span>
+            </div>
+            <div ng-repeat="userDataFild in config.lecturerDataFilds" class="form-group">
+                <label for="{{ userDataFild.name }}">{{ userDataFild.label | translate }}</label>
+                <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="userData.data[userDataFild.name]" ng-required="true"/>
+                <span class="help-block">Pole wymagane</span>
+            </div>
+            <span ng-init="userData.data['userType']='lecturer'" ></span>
+            <div class="form-actions">
+                <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">{{ 'Zarejestruj' | translate }}</button>
+                <img ng-if="dataLoading" src="lic/images/loading.gif"  />
+                <a href="/" class="btn btn-link">{{ 'Anuluj' | translate }}</a>
+            </div>
+        </form>
+    </div>
+</div>
+<div ng-if="currentUser" class="mainContent">
+    <div class="col-md-6 col-md-offset-3" >
+        <h2>{{ 'Podaj dodatkowe dane' | translate }}</h2>
+        <div ng-show="userData.error" class="alert alert-danger">{{userData.error | translate}}</div>
+        <form name="form" ng-submit="upgradeUser()" role="form" ng-init="userData['type']='update'">
+            <div ng-repeat="userDataFild in config.userDataFilds" class="form-group">
+                <label for="{{ userDataFild.name }}">{{ userDataFild.label | translate }}</label>
+                <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="currentUser[userDataFild.name]" ng-required="true"/>
+                <span class="help-block">Pole wymagane</span>
+            </div>
+            <div ng-repeat="userDataFild in config.lecturerDataFilds" class="form-group">
+                <label for="{{ userDataFild.name }}">{{ userDataFild.label | translate }}</label>
+                <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="currentUser[userDataFild.name]" ng-required="true"/>
+                <span class="help-block">Pole wymagane</span>
+            </div>
+            <span ng-init="currentUser['userType']='lecturer'" ></span>
+            <div class="form-actions">
+                <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">{{ 'Dodaj' | translate }}</button>
+                <img ng-if="dataLoading" src="lic/images/loading.gif"  />
+                <a href="/" class="btn btn-link">{{ 'Anuluj' | translate }}</a>
+            </div>
+        </form>
+    </div>
+</div>
+<div ng-include="config.route + '/views/footer.html'"></div>

@@ -7,6 +7,15 @@
 				<h3 class="panel-title">
 					{{'Konferencja' | translate }}: {{ singleProject[0].title[defaultLanguage] }}
 				</h3>
+				<span ng-if="singleProject[0].projectStatus==1">
+					<span ng-hide="singInStatus" class="pull-right">
+						<button ng-if="currentUser.id" class="btn btn-success" ng-click="singInLecturer(currentUser.id,singleProject[0].id)">{{ 'Zapisz się jako wykładowca' | translate }}</button>
+						<button ng-hide="currentUser.id" class="btn btn-success" ng-click="goTo('/login')">{{ 'Zapisz się jako wykładowca' | translate }}</button>
+					</span>
+					<span ng-if="singInStatus" class="pull-right">
+						<button class="btn btn-success">{{ 'Jesteś już zapisany' | translate }}</button>
+					</span>
+				</span>
 				<span ng-if="singleProject[0].projectStatus==2">
 					<span ng-hide="singInStatus" class="pull-right">
 						<button ng-if="currentUser.id" class="btn btn-success" ng-click="singIn(currentUser.id,singleProject[0].id)">{{ 'Zapisz się' | translate }}</button>

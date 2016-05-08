@@ -75,8 +75,7 @@ if($request['type']=='register'){
 			    'username' => $username, 
 			    'password' => $password,
 			    'register' => "$now",
-			    'lastlogin' => "$now",
-			    'userType' => 'user'
+			    'lastlogin' => "$now"
 			   );
 			foreach($request['data'] as $name => $val){
 				if($name!='password' && $name!='passwordrep' && $name!='username'){

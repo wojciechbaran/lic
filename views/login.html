@@ -16,6 +16,7 @@
                 <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">{{'Zaloguj' | translate }}</button>
                 <img ng-if="dataLoading" src="lic/images/loading.gif" />
                 <a href="{{ config.route }}/register" class="btn btn-link">{{ 'Rejestracja' | translate }}</a>
+                <a href="{{ config.route }}/lecturer" class="btn btn-link">{{ 'Rejestracja jako wykładowca' | translate }}</a>
                 <a href="/" class="btn btn-link">{{ 'Anuluj' | translate }}</a>
             </div>
         </form>

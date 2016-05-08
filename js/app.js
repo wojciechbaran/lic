@@ -36,6 +36,10 @@ testApp.config(function($routeProvider, $locationProvider, $httpProvider, CONFIG
       templateUrl: CONFIG.route + '/views/user.html',
       controller: 'userController'
     })
+    .when('/' + CONFIG.route + '/lecturer', {
+      templateUrl: CONFIG.route + '/views/lecturer.html',
+      controller: 'lecturerController'
+    })
     .otherwise({
       redirectTo: '/' + CONFIG.route
     });
