@@ -2,6 +2,7 @@
   $scope.config = CONFIG;
   $scope.tab = 'start';
   $scope.projectTab = 'start';
+  $scope.userTab = 'start';
   AuthenticationService.AllowAdmin();
   $scope.listProjectCols = [{
     name: 'name',
@@ -92,11 +93,47 @@
       $scope.dataLoading = false;
     });
   };
-  $scope.generatePassword = function() { 
+  $scope.userDataEditS = function() {
+    $scope.userDataEdit={};
+    $scope.dataLoading = true;
+    var data=[];
+    $scope.config.userDataFilds.forEach(function(userDataFild) {
+      var t={};
+      t[userDataFild.name]=$scope.singleUser[0][userDataFild.name];
+      data.push(t);
+    });
+    $scope.config.lecturerDataFilds.forEach(function(userDataFild) {
+      var t={};
+      t[userDataFild.name]=$scope.singleUser[0][userDataFild.name];
+      data.push(t);
+    });
+    CUDService.Go('update', data, 'users', $scope.singleUser[0].id, function(response) {
+      if (response.success) {
+        $scope.userDataEdit.success = 'Zmieniono dane użytkownika';
+        $scope.listUsersS();
+      } else {
+        $scope.userDataEdit.error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
+  };
+  $scope.newLecturerS = function() {
+    $scope.dataLoading = true;
+    AuthenticationService.Register($scope.newLecturerD, function(response) {
+      if (response.success) {
+        $scope.newLecturerD.success = 'Dodano nowego wykładowce';
+        $scope.listLecturersS();
+      } else {
+        $scope.newLecturerD.error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
+  };
+  $scope.generatePassword = function(dataBox) { 
     AuthenticationService.GeneratePassword(function(response){ 
-      $scope.newUserD.showPass = true;
-      $scope.newUserD.data['password'] = response;
-      $scope.newUserD.data['passwordrep'] = response;
+      $scope[dataBox].showPass = true;
+      $scope[dataBox].data['password'] = response;
+      $scope[dataBox].data['passwordrep'] = response;
     });
   }
   $scope.listProjectS = function() {

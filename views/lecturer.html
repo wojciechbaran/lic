@@ -53,7 +53,6 @@
                 <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="currentUser[userDataFild.name]" ng-required="true"/>
                 <span class="help-block">Pole wymagane</span>
             </div>
-            <span ng-init="currentUser['userType']='lecturer'" ></span>
             <div class="form-actions">
                 <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">{{ 'Dodaj' | translate }}</button>
                 <img ng-if="dataLoading" src="lic/images/loading.gif"  />

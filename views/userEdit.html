@@ -1,0 +1,81 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+       <h3 class="panel-title">Edycja użytkownika: {{ singleUser[0].name }} {{ singleUser[0].surname }} (id:{{ singleUser[0].id }})<a ng-click="setTab('listUser')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-2">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" ng-class="(userTab=='start' || userTab=='')? 'active' : ''">
+                    <a ng-click="setTabEdit('start','userTab')">Etykieta</a>
+                </li>
+                <li role="presentation" ng-class="userTab=='editData' ? 'active' : ''">
+                    <a ng-click="setTabEdit('editData','userTab')">Edycja danych</a>
+                </li>
+                <li role="presentation" ng-class="userTab=='setType' ? 'active' : ''">
+                    <a ng-click="setTabEdit('setType','userTab')">Zmień typ</a>
+                </li>
+                <li role="presentation" ng-class="userTab=='setAdmin' ? 'active' : ''">
+                    <a ng-click="setTabEdit('setAdmin','userTab')">Ustaw prawa</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <div class="panel panel-default"  ng-show="userTab=='start'">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Etykietka</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <td>Id</td>
+                            <td>{{ singleUser[0].id }}</td>
+                        </tr>
+                        <tr>
+                            <td>Typ konta</td>
+                            <td>
+                                <span ng-if="singleUser[0].userType=='admin'">Administrator</span>
+                                <span ng-if="singleUser[0].userType=='user'">Użytkownik</span>
+                                <span ng-if="singleUser[0].userType=='lecturer'">Wykładowca</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Login</td>
+                            <td>{{ singleUser[0].username }}</td>
+                        </tr>
+                        <tr ng-repeat="userData in config.userDataFilds">
+                            <td>{{ userData.label }}</td>
+                            <td>{{ singleUser[0][userData.name] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ostatnie logowanie</td>
+                            <td>{{ singleUser[0].lastlogin | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="userTab=='editData'">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Edycja danych</h4>
+                </div>
+                <div class="panel-body">
+                    <div ng-show="userDataEdit.error" class="alert alert-danger">{{userDataEdit.error | translate}}</div>
+                    <div ng-show="userDataEdit.success" class="alert alert-success">{{userDataEdit.success | translate}}</div>
+                    <form name="userDataEditform" ng-submit="userDataEditS()" role="form">
+                         <div ng-repeat="userDataFild in config.userDataFilds" class="form-group">
+                            <label for="{{ userDataFild.name }}">{{ userDataFild.label | translate }}</label>
+                            <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="singleUser[0][userDataFild.name]" />
+                        </div>
+                        <div ng-repeat="userDataFild in config.lecturerDataFilds" class="form-group">
+                            <label for="{{ userDataFild.name }}">{{ userDataFild.label | translate }}</label>
+                            <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="singleUser[0][userDataFild.name]" />
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" ng-disabled="dataLoading" class="btn btn-primary">{{ 'Zmień' | translate }}</button>
+                            <img ng-if="dataLoading" src="lic/images/loading.gif"  />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
