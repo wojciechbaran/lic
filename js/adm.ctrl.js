@@ -247,6 +247,25 @@
       }
     });
   };
+  $scope.editSessionUpdateS = function(taskMessage,index) {
+    $scope[taskMessage]={};
+    $scope.dataLoading = true;
+    var ftmp = $scope.singleProject[0].sessions[index];
+    delete ftmp.$$hashKey;
+    var data = ['sessions','name',$scope.singleProject[0].sessions[index].name];
+    var where = [{
+      id: $scope.singleProject[0].id,
+      'sessions.number': $scope.singleProject[0].sessions[index].number
+    }];
+    CUDService.Go('deepUpdate', data, 'projects', where, function(response) {
+      if (response.success) {
+        $scope[taskMessage].success = 'Zmieniono dane';
+      } else {
+        $scope[taskMessage].error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
+  };
   $scope.editContractor = function(id) {
     if($scope.singleContractor){
       delete $scope.singleContractor;
@@ -338,7 +357,7 @@
     $scope.listGuestsS();
     $scope.listAdminsS();
     $scope.listContractorsS();
-    //$scope.editProject('572f4f7c18dd9');
+    $scope.editProject('572f4f7c18dd9');
   };
   $scope.init();
 });

@@ -64,4 +64,31 @@ echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // ob_start();
 // var_dump($valto);
 // $result = ob_get_clean();
+
+echo '<br/>';
+echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br/>';
+$error='';
+	$success=false;
+	$id='572f4f7c18dd9';
+	$table='projects';
+	$col = $db->{$table};
+	$newdata = array('$set' => $valto);
+ 	//$col->update(array('id' => $id, 'sessions.name' => '$scope.projectAddSession.name'), array('$set' => array('sessions.$.number' => 1)));
+ 	$col->update(array('id' => $id), array('$set' => array('name' => 'dla wykładowcow')));
+	$error='Dane zostały zmienione!';
+echo $error;
+
+$query=array('id' => '572f4f7c18dd9');
+$cursor = $col->find($query);
+//$cursor = $col->find();
+echo '<br/>';
+var_dump($cursor->count());
+echo '<br/>';
+echo '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br/>';
+   // iterate cursor to display title of documents
+	echo '<br/>';
+   foreach ($cursor as $document) {
+      var_dump($document);
+      echo '<br/>';
+   }
 ?>

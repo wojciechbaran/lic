@@ -135,6 +135,22 @@ if($request['type']=='add'){
 	$error='Dane zostały zmienione!';
 	$success=true;
 	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
+}else if($request['type']=='deepUpdate'){
+	$error='';
+	$success=false;
+	$place= array();
+	foreach ($request['id'] as $filds) {
+		foreach($filds as $name => $val){
+			$place[$name]=$val;
+		}
+	}
+	$table=$request['table'];
+	$col = $db->{$table};
+	$data=$request['data'];	
+	$col->update($place,array('$set' => array( $data[0].'.$.'.$data[1] => $data[2])));
+	$error='Dane zostały zmienione!';
+	$success=true;
+	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
 }
 
 echo json_encode($res);
