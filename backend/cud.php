@@ -119,8 +119,23 @@ if($request['type']=='add'){
 	$error='Dane zostały zmienione!';
 	$success=true;
 	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
+} else if($request['type']=='push'){
+	$error='';
+	$success=false;
+	$id=$request['id'];
+	$table=$request['table'];
+	$col = $db->{$table};
+	$valto= array();
+	foreach ($request['data'] as $filds) {
+		foreach($filds as $name => $val){
+			$valto[$name]=$val;
+		}
+	}
+	$col->update(array('id' => $id),array('$push' => $valto));
+	$error='Dane zostały zmienione!';
+	$success=true;
+	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
 }
-
 
 echo json_encode($res);
 ?>

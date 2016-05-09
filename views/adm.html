@@ -292,17 +292,6 @@
                 </div>
             </div>
         </div>
-        <!-- Dodaj Administratora -->
-        <div class="col-md-12" ng-show="tab=='addAdmin'">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Dodaj Administratora</h3>
-                </div>
-                <div class="panel-body">
-                    blablabla
-                </div>
-            </div>
-        </div>
         <!-- Podstawowe dane -->
         <div class="col-md-12" ng-show="tab=='basicData'">
             <div class="panel panel-default">
@@ -314,21 +303,21 @@
                 </div>
             </div>
         </div>
-        <!-- Opcje językowe -->
-        <div class="col-md-12" ng-show="tab=='lang'">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Opcje językowe</h3>
-                </div>
-                <div class="panel-body">
-                    blablabla
-                </div>
-            </div>
-        </div>
+
         <!-- Edycja użytkownika -->
         <div class="col-md-12" ng-if="tab=='editUser'" ng-include="config.route + '/views/userEdit.html'"></div>
         <!-- Edycja projektu -->
         <div class="col-md-12" ng-if="tab=='editProject'" ng-include="config.route + '/views/projectEdit.html'"></div>
+        <div class="col-md-12" ng-if="tab=='editSession'">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                   <h3 class="panel-title">Konferencja: {{ singleProject[0].name }} -> Sesja {{ singleProject[0].sessions[projectEditSessionId].number }}: {{ singleProject[0].sessions[projectEditSessionId].name }}<a ng-click="setTab('editProject')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
+                </div>
+                <div class="panel-body">
+                ff
+                </div>
+            </div>      
+        </div>
         <!-- Edycja podwykonawcy -->
         <div class="col-md-12" ng-if="tab=='editContractor'">
             <div class="panel panel-default">

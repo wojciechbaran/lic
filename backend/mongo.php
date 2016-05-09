@@ -3,8 +3,8 @@
 // create Collection
     $m = new MongoClient();
 	$db = $m->lic;
-	$col = $db->users;
-	//$col = $db->projects;
+	//$col = $db->users;
+	$col = $db->projects;
    // $collection = $db->createCollection("users");
 	//$collection = $db->createCollection("projects");
 	//$collection = $db->createCollection("contractors");

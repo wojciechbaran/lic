@@ -76,6 +76,28 @@
                     </form>
                 </div>
             </div>
+            <div class="panel panel-default"  ng-show="userTab=='setType'">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Zmień typ konta</h4>
+                </div>
+                <div class="panel-body">
+                    <div ng-show="userSetType.error" class="alert alert-danger">{{userSetType.error | translate}}</div>
+                    <div ng-show="userSetType.success" class="alert alert-success">{{userSetType.success | translate}}</div>
+                    <button ng-if="singleUser[0].userType=='user'" type="button" class="btn btn-default" ng-click="userSetTypeS('lecturer')">Zmień typ na Wykładowcę</button>
+                    <button ng-if="singleUser[0].userType=='lecturer'" type="button" class="btn btn-default" ng-click="userSetTypeS('user')">Zmień typ na Użytkownika</button>  
+                </div>
+            </div>
+            <div class="panel panel-default"  ng-show="userTab=='setAdmin'">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Zmień uprawnienia administracyjne</h4>
+                </div>
+                <div class="panel-body">
+                    <div ng-show="userSetTypeA.error" class="alert alert-danger">{{userSetTypeA.error | translate}}</div>
+                    <div ng-show="userSetTypeA.success" class="alert alert-success">{{userSetTypeA.success | translate}}</div>
+                    <button ng-if="singleUser[0].userType=='user' || singleUser[0].userType=='lecturer'" type="button" class="btn btn-default" ng-click="userSetTypeAS('admin')">Nadaj uprawnienia Administracyjne</button>
+                    <button ng-if="singleUser[0].userType=='admin'" type="button" class="btn btn-default" ng-click="userSetTypeAS('user')">Odbierz uprawnienia Administracyjne</button>  
+                </div>
+            </div>
         </div>
     </div>
 </div>

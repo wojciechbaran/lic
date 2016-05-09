@@ -1,7 +1,7 @@
 <div class="smallMenu row btn-toolbar">
     <button type="button" class="btn btn-default" ng-click="setTab('start')">Start</button>
     <div class="btn-group">
-        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='newProject' || tab=='listProject' || tab=='editProject') ? 'btn-primary' : 'btn-default'">Konferencje <span class="caret"></span></button>
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='newProject' || tab=='listProject' || tab=='editProject' || tab=='editSession') ? 'btn-primary' : 'btn-default'">Konferencje <span class="caret"></span></button>
         <ul class="dropdown-menu">
             <li ng-class="tab=='listProject' ? 'active' : ''"><a ng-click="setTab('listProject')">Lista konferencji</a></li>
             <li ng-class="tab=='newProject' ? 'active' : ''"><a ng-click="setTab('newProject')">Nowa konferencja</a></li>

@@ -3,13 +3,21 @@
   $scope.tab = 'start';
   $scope.projectTab = 'start';
   $scope.userTab = 'start';
-  AuthenticationService.AllowAdmin();
+  $scope.projectAddSession={};
+  //AuthenticationService.AllowAdmin();
   $scope.listProjectCols = [{
     name: 'name',
     label: 'Nazwa'
   }, {
     name: 'startDate',
     label: 'Data rozpoczęcia'
+  }];
+  $scope.sessionsCols = [{
+    name: 'name',
+    label: 'Nazwa'
+  }, {
+    name: 'number',
+    label: 'Numer Sesji'
   }];
   $scope.listUsersCols = [{
     name: 'username',
@@ -117,6 +125,34 @@
       $scope.dataLoading = false;
     });
   };
+  $scope.userSetTypeS = function(userType) {
+    $scope.userSetType={};
+    var data=[{'userType':userType}];
+    CUDService.Go('update', data, 'users', $scope.singleUser[0].id, function(response) {
+      if (response.success) {
+        $scope.userSetType.success = 'Zmieniono typ użytkownika';
+        $scope.singleUser[0].userType=userType;
+        $scope.listUsersS();
+        $scope.listLecturersS();
+      } else {
+        $scope.userSetType.error = response.message;
+      }
+    });
+  };
+  $scope.userSetTypeAS = function(userType) {
+    $scope.userSetTypeA={};
+    var data=[{'userType':userType}];
+    CUDService.Go('update', data, 'users', $scope.singleUser[0].id, function(response) {
+      if (response.success) {
+        $scope.userSetTypeA.success = 'Zmieniono uprawnienia użytkownika';
+        $scope.singleUser[0].userType=userType;
+        $scope.listUsersS();
+        $scope.listAdminsS();
+      } else {
+        $scope.userSetTypeA.error = response.message;
+      }
+    });
+  };
   $scope.newLecturerS = function() {
     $scope.dataLoading = true;
     AuthenticationService.Register($scope.newLecturerD, function(response) {
@@ -135,7 +171,25 @@
       $scope[dataBox].data['password'] = response;
       $scope[dataBox].data['passwordrep'] = response;
     });
-  }
+  };
+  $scope.projectAddSessionS = function() {
+    $scope.dataLoading = true;
+    var fname = {};
+      fname.sessions = {
+        number: $scope.projectAddSession.number,
+        name: $scope.projectAddSession.name
+      };
+    var data = [fname];
+    CUDService.Go('push', data, 'projects', $scope.singleProject[0].id, function(response) {
+      if (response.success) {
+        $scope.projectAddSession.success = 'Dodano sesje';
+        $scope.singleProject[0].sessions.push(fname.sessions);
+      } else {
+        $scope.projectAddSession.error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
+  };
   $scope.listProjectS = function() {
     // type, condition, table, order
     SearchService.search('simple', '', 'projects', 'id:ASC', function(response) {
@@ -174,8 +228,14 @@
   };
   $scope.editProject = function(id) {
     $scope.setTab('editProject');
+    $scope.projectTab = 'start';
     SearchService.search('simple', 'id:' + id, 'projects', '', function(response) {
       $scope.singleProject = response;
+      if($scope.singleProject[0].sessions){
+        $scope.projectAddSession.number=$scope.singleProject[0].sessions.length+1;
+      }else{
+        $scope.projectAddSession.number=1;
+      }
       //set users singIn
       if($scope.singleProject[0].users){
         $scope.projectUsersList=[]
@@ -188,10 +248,17 @@
     });
   };
   $scope.editContractor = function(id) {
+    if($scope.singleContractor){
+      delete $scope.singleContractor;
+    }
     $scope.setTab('editContractor');
     SearchService.search('simple', 'id:' + id, 'contractors', '', function(response) {
       $scope.singleContractor = response;
     });
+  };
+  $scope.projectEditSession = function(id) {
+    $scope.setTab('editSession');
+    $scope.projectEditSessionId=id;
   };
   $scope.editUser = function(id) {
     $scope.setTab('editUser');
@@ -220,15 +287,23 @@
     var startDate = new Date(fdsarr[2], fdsarr[1]-1, fdsarr[0],0,0,0,0);
     fdsarr = $scope.singleProject[0].endDate.split("/");
     var endDate = new Date(fdsarr[2], fdsarr[1]-1, fdsarr[0],0,0,0,0);
-    var data = [{
-      startDate: startDate
-    },{
-      endDate: endDate
-    }];
+    fdsarr = $scope.singleProject[0].endDateLecturer.split("/");
+    var endDateLecturer = new Date(fdsarr[2], fdsarr[1]-1, fdsarr[0],0,0,0,0);
+    fdsarr = $scope.singleProject[0].endDateUser.split("/");
+    var endDateUser = new Date(fdsarr[2], fdsarr[1]-1, fdsarr[0],0,0,0,0);
     if(endDate<startDate){
       endDate=startDate;
       $scope.singleProject[0].endDate=$scope.singleProject[0].startDate;
     }
+    var data = [{
+      startDate: startDate
+    },{
+      endDate: endDate
+    },{
+      endDateLecturer: endDateLecturer
+    },{
+      endDateUser: endDateUser
+    }];
     CUDService.Go('update', data, 'projects', $scope.singleProject[0].id, function(response) {
       if (response.success) {
         $scope.setDateD.success = response.message;
@@ -263,8 +338,7 @@
     $scope.listGuestsS();
     $scope.listAdminsS();
     $scope.listContractorsS();
-        //$scope.editProject('565db46f61fff');
-    //$scope.editProject('56c764d23781c');
+    //$scope.editProject('572f4f7c18dd9');
   };
   $scope.init();
 });
