@@ -393,8 +393,7 @@
                                         <div class="panel panel-body" ng-init="lectureId=singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures?singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures.length+1:1;singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures[lectureId]">
                                             <div class="col-md-3">
                                                 {{ 'Czas trwania' | translate }}:                           
-                                                <input type="text" style="width: 50px;" name="duration" id="duration" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures[lectureId].duration" />
-                                                
+                                                <input type="text" style="width: 50px;" name="duration" id="duration" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures[lectureId].duration" />                                                
                                             </div>
                                             <div lass="form-group col-md-3">
                                             <select class="col-md-3" type="text" name="lectureType" id="lectureType" class="form-control" ng-model="lectureType">

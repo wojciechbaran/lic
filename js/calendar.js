@@ -1,9 +1,12 @@
 ﻿testApp.directive('ngCalendar', function(CONFIG,$filter) {
   function link(scope) {
-    scope.val = new Date();
-    if(scope.formcalendardate){
+    console.log(scope.formcalendardate);
+    if(scope.formcalendardate && scope.formcalendardate!=''){
       scope.val = new Date(scope.formcalendardate);
+    }else{
+      scope.val = new Date();
     }
+    console.log(scope.formcalendardate);
     scope.calOn = false;
     scope.date = {};
     scope.dayOfWeek = [{
@@ -65,6 +68,14 @@
       scope.calOn = false;
     }
     scope.initDate = function(val) {
+      if ( Object.prototype.toString.call(val) === "[object Date]" ) {
+        if ( isNaN( val.getTime() ) ) {
+          val = new Date();
+        }
+      }else{
+        val = new Date();
+      }
+
       scope.date.year = val.getFullYear();
       scope.date.month = val.getMonth() + 1;
       scope.date.day = val.getDate();
