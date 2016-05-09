@@ -1,12 +1,10 @@
 ﻿testApp.directive('ngCalendar', function(CONFIG,$filter) {
   function link(scope) {
-    console.log(scope.formcalendardate);
-    if(scope.formcalendardate && scope.formcalendardate!=''){
+    if(scope.formcalendardate){
       scope.val = new Date(scope.formcalendardate);
     }else{
       scope.val = new Date();
     }
-    console.log(scope.formcalendardate);
     scope.calOn = false;
     scope.date = {};
     scope.dayOfWeek = [{
