@@ -373,44 +373,77 @@
                         </div>
                         <div class="panel panel-default"  ng-show="sessionTab=='blocks'">
                             <div class="panel-body">
-                            <p>Sala, dzień, godzina rozpoczęcia, prowadzący, wykłady(przerwy)</p>
-                            <div ng-show="addSessionsBlock.error" class="alert alert-danger">{{addSessionsBlock.error | translate}}</div>
+                                <div ng-show="addSessionsBlock.error" class="alert alert-danger">{{addSessionsBlock.error | translate}}</div>
                                 <div ng-show="addSessionsBlock.success" class="alert alert-success">{{addSessionsBlock.success | translate}}</div>
+                                <form name="addSessionsBlockform" ng-submit="addSessionsBlockS('addSessionsBlock',projectEditSessionId)" role="form">
+                                    <h3>{{ 'Podstawowe informacje' | translate }}</h3>
+                                    <div class="col-md-6" >
+                                        <div class="col-md-4">
+                                            {{ 'Dzień' | translate }}: <span ng-calendar inp="singleProject[0].sessions[projectEditSessionId].blocks[blockId].day"></span>
+                                        </div>
+                                        <div class="col-md-8" >
+                                            <input type="text" name="day" id="day" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].day" disable="true"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            {{ 'Sala' | translate }}: 
+                                        </div>
+                                        <div class="col-md-8" >
+                                            <input type="text" name="room" id="room" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].room" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            {{ 'Prowadzący' | translate }}:
+                                        </div>
+                                        <div class="col-md-8" >
+                                            <input type="text" name="chair" id="chair" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].chair" disable="true"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            {{ 'Godzina rozpoczęcia' | translate }}
+                                        </div>
+                                        <div class="col-md-8" >
+                                            <span ng-time hours="singleProject[0].sessions[projectEditSessionId].blocks[blockId].startHour" minutes="singleProject[0].sessions[projectEditSessionId].blocks[blockId].startMinute"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row"></div>
+                                    <h3>{{ 'Plan' | translate }}:</h3>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-md-2">{{ 'Czas trwania (minuty)' | translate }}</th>
+                                                <th class="col-md-4">{{ 'Typ' | translate }}</th>
+                                                <th class="col-md-7">{{ 'Wykład' | translate }}</th>
+                                                <th class="col-md-1"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="lecture in singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures">
+                                                <td>{{ lecture.duration }}</td>
+                                                <td>{{ lecture.lectureType | translate }}</td>
+                                                <td>{{ lecture.articleId }}</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr class="info">
+                                                <td>
+                                                    <input type="text" name="duration" id="duration" class="form-control" ng-model="addSessionsPlan.duration" />
+                                                </td>
+                                                <td>
+                                                    <select name="lectureType" id="lectureType" class="form-control" ng-model="addSessionsPlan.lectureType">
+                                                        <option value="Wykład">{{ 'Wykład' | translate }}</option>
+                                                        <option value="Dyskusja">{{ 'Dyskusja' | translate }}</option>
+                                                        <option value="Przerwa">{{ 'Przerwa' | translate }}</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <span ng-if="addSessionsPlan.lectureType=='Wykład'">Lista artykułów(wykładów)</span>
+                                                </td>
+                                                <td>
+                                                    <span ng-click="addSessionsPlanS()" class="glyphicon glyphicon-plus"></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div ng-if="addSessionsPlan.error" class="alert alert-danger">{{addSessionsPlan.error | translate}}</div>
 
-                            <form name="addSessionsBlockform" ng-submit="addSessionsBlockS('addSessionsBlock',projectEditSessionId)" role="form" ng-init="blockId=singleProject[0].sessions[projectEditSessionId].blocks?singleProject[0].sessions[projectEditSessionId].blocks.length+1:1;singleProject[0].sessions[projectEditSessionId].blocks[blockId]">
-                                    <div class="form-group">
-                                    <label for="room">{{ 'Sala' | translate }}</label>
-                                        <input type="text" name="room" id="room" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].room" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="startHour">{{ 'Godzina rozpoczęcia' | translate }}</label>
-                                        <div class="row">
-                                        <input class="col-md-1" type="text" name="startHour" id="startHour" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].startHour" />
-                                        <input class="col-md-1" type="text" name="startMinute" id="startMinute" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].startMinute"/>
-                                        </div>
-                                    </div>
-                                    <div ng-show="singleProject[0].sessions[projectEditSessionId].blocks[blockId].startHour>=0 && singleProject[0].sessions[projectEditSessionId].blocks[blockId].startHour<=23" class="panel">
-                                        <div class="panel panel-body" ng-init="lectureId=singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures?singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures.length+1:1;singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures[lectureId]">
-                                            <div class="col-md-3">
-                                                {{ 'Czas trwania' | translate }}:                           
-                                                <input type="text" style="width: 50px;" name="duration" id="duration" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures[lectureId].duration" />                                                
-                                            </div>
-                                            <div lass="form-group col-md-3">
-                                            <select class="col-md-3" type="text" name="lectureType" id="lectureType" class="form-control" ng-model="lectureType">
-                                            <option value="Wykład">Wykład</option>
-                                            <option value="Dyskusja">Dyskusja</option>
-                                            <option value="Przerwa">Przerwa</option>
-                                            </select>
-                                            </div>
-                                            <div ng-if="lectureType!='Wykład'">
-                                                  <span ng-init="singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures[lectureId].name=lectureType"></span>
-                                            </div>
-                                            <div ng-if="lectureType=='Wykład'">
-                                                  Wykładowca: <input class="col-md-1" type="text" name="duration" id="duration" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures[lectureId].lecturer" />
-                                                  Temat: <input class="col-md-1" type="text" name="duration" id="duration" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures[lectureId].topic" />
-                                            </div>                                           
-                                        </div>
-                                    </div>
+
                                     <div class="form-actions">
                                         <button type="submit" ng-disabled="dataLoading" class="btn btn-primary">{{ 'Dodaj' | translate }}</button>
                                         <img ng-if="dataLoading" src="lic/images/loading.gif"  />

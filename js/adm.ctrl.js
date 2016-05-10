@@ -1,7 +1,8 @@
 ﻿testApp.controller('admController', function($scope, CONFIG, SearchService, AuthenticationService, CUDService) {
   $scope.config = CONFIG;
   $scope.tab = 'start';
-  $scope.projectTab = 'start';
+  //$scope.projectTab = 'start';
+  $scope.projectTab = 'sessions';
   $scope.userTab = 'start';
   $scope.projectAddSession={};
   //AuthenticationService.AllowAdmin();
@@ -231,6 +232,7 @@
     $scope.projectTab = 'start';
     SearchService.search('simple', 'id:' + id, 'projects', '', function(response) {
       $scope.singleProject = response;
+        //some sessions and blocks elements
       if($scope.singleProject[0].sessions){
         $scope.projectAddSession.number=$scope.singleProject[0].sessions.length+1;
       }else{
@@ -278,7 +280,39 @@
   $scope.projectEditSession = function(id) {
     $scope.setTab('editSession');
     $scope.projectEditSessionId=id;
+    if($scope.singleProject[0].sessions[id].blocks){
+      $scope.blockId=$scope.singleProject[0].sessions[id].blocks.length;
+    }else{
+      $scope.singleProject[0].sessions[id].blocks=[];
+    }
+    if(!$scope.blockId){
+      $scope.blockId=0;
+    }
+    $scope.singleProject[0].sessions[id].blocks[$scope.blockId]={};
+    if($scope.singleProject[0].sessions[id].blocks[$scope.blockId].lectures){
+      $scope.lectureId=$scope.singleProject[0].sessions[id].blocks[$scope.blockId].lectures.length;
+    }else{
+      $scope.lectureId=$scope.singleProject[0].sessions[id].blocks[$scope.blockId].lectures=[];
+    }
+    if($scope.lectureId){
+      $scope.lectureId=0;
+    }
+    $scope.singleProject[0].sessions[id].blocks[$scope.blockId].lectures[$scope.lectureId]={};
   };
+  $scope.addSessionsPlan={};
+  $scope.addSessionsPlanS = function () {
+    if($scope.addSessionsPlan.duration=='' || $scope.addSessionsPlan.lectureType==''){
+      $scope.addSessionsPlan.error='Podaj poprawne wartości';
+      return;
+    }
+    console.log($scope.lectureId);
+    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].lectures[$scope.lectureId].duration=$scope.addSessionsPlan.duration;
+    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].lectures[$scope.lectureId].lectureType=$scope.addSessionsPlan.lectureType;
+    $scope.addSessionsPlan.duration='';
+    $scope.addSessionsPlan.lectureType='';
+    $scope.lectureId++;
+    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].lectures[$scope.lectureId]={};
+  }
   $scope.editUser = function(id) {
     $scope.setTab('editUser');
     SearchService.search('simple', 'id:' + id, 'users', '', function(response) {

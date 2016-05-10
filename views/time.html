@@ -1,0 +1,28 @@
+<div>
+    <table>
+        <tr>
+            <td>
+               <span class="glyphicon glyphicon-triangle-top" ng-click="changeTime('more','hours')"></span> 
+            </td>
+            <td>
+                <span class="glyphicon glyphicon-triangle-top" ng-click="changeTime('more','minutes')"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+               <span class="">{{ hoursShow }}</span>:
+            </td>
+            <td>
+                <span class="">{{ minutesShow }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+               <span class="glyphicon glyphicon-triangle-bottom" ng-click="changeTime('less','hours')"></span> 
+            </td>
+            <td>
+                <span class="glyphicon glyphicon-triangle-bottom" ng-click="changeTime('less','minutes')"></span>
+            </td>
+        </tr>
+    </table>
+</div>
