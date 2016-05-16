@@ -41,7 +41,7 @@
                     <h3 class="panel-title">{{'Moje artykuły' | translate }}</h3>
                 </div>
                 <div class="panel-body">
-                    <a ng-click="addArticle()">{{ 'Dodaj artykuł' | translate }}</a>
+                    <a ng-click="setTab('addArticle')">{{ 'Dodaj artykuł' | translate }}</a>
                     <ul ng-if="myProjectsC">
                         <li ng-repeat="article in currentUser.articles track by $index">
                             <a ng-click="editArticle($index)">{{ article.title[defaultLanguage] }}</a>
@@ -65,46 +65,62 @@
         </div>
     </div>
     <div class="userData col-md-6 col-md-offset-3" ng-show="tab=='userData'">
-        <div ng-show="formUD.error" class="alert alert-danger">{{formUD.error}}</div>
-         <div ng-show="formUD.success" class="alert alert-success">{{formUD.success}}</div>
+        <div ng-show="formUD.error" class="alert alert-danger">{{formUD.error | translate }}</div>
+         <div ng-show="formUD.success" class="alert alert-success">{{formUD.success | translate }}</div>
         <form name="formUD" ng-submit="changeUserData()" role="form">
             <div ng-repeat="userDataFild in config.userDataFilds" class="form-group">
-                <label for="{{ userDataFild.name }}">{{ userDataFild.label }}</label>
+                <label for="{{ userDataFild.name }}">{{ userDataFild.label | translate }}</label>
                 <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="currentUser[userDataFild.name]" ng-required="userDataFild.required"/>
-                <span ng-show="userDataFild.required" class="help-block">Pole wymagane</span>
+                <span ng-show="userDataFild.required" class="help-block">{{ 'Pole wymagane' | translate }}</span>
             </div>
             <div class="form-actions">
-                <button type="submit" ng-disabled="formUD.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
+                <button type="submit" ng-disabled="formUD.$invalid || dataLoading" class="btn btn-primary">{{ 'Zmień' | translate }}</button>
                 <img ng-if="dataLoading" src="lic/images/loading.gif"  />
-                <a ng-click="setTab('start')" class="btn btn-link">Anuluj</a>
+                <a ng-click="setTab('start')" class="btn btn-link">{{ 'Anuluj' | translate }}</a>
             </div>
         </form>
     </div>
     <div class="changePassword col-md-6 col-md-offset-3" ng-show="tab=='changePassword'">
-        <div ng-show="formCP.error" class="alert alert-danger">{{formCP.error}}</div>
-        <div ng-show="formCP.success" class="alert alert-success">{{formCP.success}}</div>
+        <div ng-show="formCP.error" class="alert alert-danger">{{formCP.error | translate }}</div>
+        <div ng-show="formCP.success" class="alert alert-success">{{formCP.success | translate }}</div>
         <form name="formCP" ng-submit="changePassword()" role="form">
             <div class="form-group">
-                <label for="password">Obecne hasło</label>
+                <label for="password">{{ 'Obecne hasło' | translate }}</label>
                 <input type="password" name="passwordold" id="password" class="form-control" ng-model="formCP.dt.passwordold" required/>
-                <span class="help-block">Pole wymagane</span>
+                <span class="help-block">{{ 'Pole wymagane' | translate }}</span>
             </div>
             <div class="form-group">
-                <label for="password">Nowe hasło</label>
+                <label for="password">{{ 'Nowe hasło' | translate }}</label>
                 <input type="password" name="password" id="password" class="form-control" ng-model="formCP.dt.password" required/>
-                <span class="help-block">Pole wymagane</span>
+                <span class="help-block">{{ 'Pole wymagane' | translate }}</span>
             </div>
             <div class="form-group">
-                <label for="passwordrep">Powtórz hasło</label>
+                <label for="passwordrep">{{ 'Powtórz hasło' | translate }}</label>
                 <input type="password" name="passwordrep" id="passwordrep" class="form-control" ng-model="formCP.dt.passwordrep" required/>
-                <span class="help-block">Pole wymagane</span>
+                <span class="help-block">{{ 'Pole wymagane' | translate }}</span>
             </div>
             <div class="form-actions">
-                <button type="submit" ng-disabled="formCP.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
+                <button type="submit" ng-disabled="formCP.$invalid || dataLoading" class="btn btn-primary">{{ 'Zmień' | translate }}</button>
                 <img ng-if="dataLoading" src="lic/images/loading.gif"  />
-                <a ng-click="setTab('start')" class="btn btn-link">Anuluj</a>
+                <a ng-click="setTab('start')" class="btn btn-link">{{ 'Anuluj' | translate }}</a>
             </div>
         </form>
+    </div>
+    <div class="col-md-8 col-md-offset-2" ng-show="tab=='addArticle'">
+        <div class="panel">
+            <div class="panel panel-header">
+                <h3>{{ 'Dodaj artykul' | translate }}</h3>
+            </div>
+            <div class="panel panel-body">
+                <div ng-show="addArticle.error" class="alert alert-danger">{{addArticle.error | translate }}</div>
+                <div ng-show="addArticle.success" class="alert alert-success">{{addArticle.success | translate }}</div>
+                Tytuł[pl]: <input type="text" ng-model="currentUser.articles[articleId].title.pl"></input><br>
+                Tytuł[en]: <input type="text" ng-model="currentUser.articles[articleId].title.en"></input><br>
+                <button type="submit" ng-disabled="dataLoading" class="btn btn-primary" ng-click="addArticleS()">{{ 'Dodaj' | translate }}</button>
+                <img ng-if="dataLoading" src="lic/images/loading.gif"  />
+                <a ng-click="setTab('start')" class="btn btn-link">{{ 'Anuluj' | translate }}</a>
+            </div>
+        </div>
     </div>
 </div>
 <div ng-include="config.route + '/views/footer.html'"></div>

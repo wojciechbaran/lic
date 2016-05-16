@@ -155,6 +155,7 @@
         name: $scope.projectAddSession.name
       };
     var data = [fname];
+    console.log(data);
     CUDService.Go('push', data, 'projects', $scope.singleProject[0].id, function(response) {
       if (response.success) {
         $scope.projectAddSession.success = 'Dodano sesje';
@@ -267,7 +268,6 @@
       $scope.addSessionsPlan.error='Podaj poprawne wartości';
       return;
     }
-    console.log($scope.lectureId);
     $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].lectures[$scope.lectureId].duration=$scope.addSessionsPlan.duration;
     $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].lectures[$scope.lectureId].lectureType=$scope.addSessionsPlan.lectureType;
     $scope.addSessionsPlan.duration='';

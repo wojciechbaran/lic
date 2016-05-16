@@ -3,6 +3,7 @@ testApp.controller('userController', function($scope, CONFIG, AuthenticationServ
   $scope.tab = 'start';
   AuthenticationService.Allow();
   $scope.currentUser = $rootScope.currentUser;
+  console.log($scope.currentUser);
   $scope.newProjectsC = false;
   $scope.myProjectsC = false;
   var query = {$or: [{projectStatus:1},{projectStatus:2}]};
@@ -12,7 +13,7 @@ testApp.controller('userController', function($scope, CONFIG, AuthenticationServ
       $scope.newProjectsC=true;
     }
   });
-  if($scope.currentUser.projects){
+  if($scope.currentUser && $scope.currentUser.projects){
     $scope.myProjects=[]
     $scope.myProjectsC = true;
     $scope.currentUser.projects.forEach(function(id){
@@ -24,6 +25,38 @@ testApp.controller('userController', function($scope, CONFIG, AuthenticationServ
   $scope.setTab = function(tab) {
     $scope.tab = tab;
   };
+  if($scope.currentUser){
+    if($scope.currentUser.articles){
+      $scope.articleId=$scope.currentUser.articles.length;
+    }else{
+      $scope.currentUser.articles=[];
+    }  
+    if(!$scope.articleId){
+      $scope.articleId=0;
+    }
+    $scope.currentUser.articles[$scope.articleId]={};
+    $scope.currentUser.articles[$scope.articleId].title={};
+    $scope.currentUser.articles[$scope.articleId].title.pl='';
+    $scope.currentUser.articles[$scope.articleId].title.en='';
+  }
+  $scope.addArticle={};
+  $scope.addArticleS = function(){
+    $scope.addArticle.error = '';
+    $scope.addArticle.success = '';
+    $scope.dataLoading = true;
+    var tart = {articles:$scope.currentUser.articles[$scope.articleId]};
+    var data=[tart];
+    console.log(data);
+    CUDService.Go('push', data, 'users', $scope.currentUser.id, function(response) {
+      if (response.success) {
+        $scope.addArticle.success = 'Dodano artykuł';
+        $scope.articleId++;
+      } else {
+        $scope.addArticle.error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
+  }
   $scope.changeUserData = function() {
     $scope.formUD.error = '';
     $scope.formUD.success = '';
