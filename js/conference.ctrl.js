@@ -21,19 +21,6 @@ testApp.controller('conferenceController', function($scope, CONFIG, $routeParams
     	}
     });
   };
-  $scope.singInLecturer = function(userId, projektID){
-    if($scope.currentUser && $scope.currentUser.userType=='lecturer'){
-      CUDService.Go('singIn', 'lecturer', userId, projektID, function(response) {
-        if (response.success) {
-          $scope.singInStatus=true;
-        }else{
-        $scope.singInMessage='Wystąpił błąd';
-        }
-      });
-    }else{
-      $location.path('/' + CONFIG.route + '/lecturer');
-    }
-  };
   $scope.singOut = function(userId, projektID){
     CUDService.Go('singIn', 'out', userId, projektID, function(response) {
       if (response.success) {

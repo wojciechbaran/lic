@@ -11,9 +11,6 @@
                 <li role="presentation" ng-class="userTab=='editData' ? 'active' : ''">
                     <a ng-click="setTabEdit('editData','userTab')">Edycja danych</a>
                 </li>
-                <li role="presentation" ng-class="userTab=='setType' ? 'active' : ''">
-                    <a ng-click="setTabEdit('setType','userTab')">Zmień typ</a>
-                </li>
                 <li role="presentation" ng-class="userTab=='setAdmin' ? 'active' : ''">
                     <a ng-click="setTabEdit('setAdmin','userTab')">Ustaw prawa</a>
                 </li>
@@ -35,7 +32,6 @@
                             <td>
                                 <span ng-if="singleUser[0].userType=='admin'">Administrator</span>
                                 <span ng-if="singleUser[0].userType=='user'">Użytkownik</span>
-                                <span ng-if="singleUser[0].userType=='lecturer'">Wykładowca</span>
                             </td>
                         </tr>
                         <tr>
@@ -65,26 +61,11 @@
                             <label for="{{ userDataFild.name }}">{{ userDataFild.label | translate }}</label>
                             <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="singleUser[0][userDataFild.name]" />
                         </div>
-                        <div ng-repeat="userDataFild in config.lecturerDataFilds" class="form-group">
-                            <label for="{{ userDataFild.name }}">{{ userDataFild.label | translate }}</label>
-                            <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="singleUser[0][userDataFild.name]" />
-                        </div>
                         <div class="form-actions">
                             <button type="submit" ng-disabled="dataLoading" class="btn btn-primary">{{ 'Zmień' | translate }}</button>
                             <img ng-if="dataLoading" src="lic/images/loading.gif"  />
                         </div>
                     </form>
-                </div>
-            </div>
-            <div class="panel panel-default"  ng-show="userTab=='setType'">
-                <div class="panel-heading">
-                    <h4 class="panel-title">Zmień typ konta</h4>
-                </div>
-                <div class="panel-body">
-                    <div ng-show="userSetType.error" class="alert alert-danger">{{userSetType.error | translate}}</div>
-                    <div ng-show="userSetType.success" class="alert alert-success">{{userSetType.success | translate}}</div>
-                    <button ng-if="singleUser[0].userType=='user'" type="button" class="btn btn-default" ng-click="userSetTypeS('lecturer')">Zmień typ na Wykładowcę</button>
-                    <button ng-if="singleUser[0].userType=='lecturer'" type="button" class="btn btn-default" ng-click="userSetTypeS('user')">Zmień typ na Użytkownika</button>  
                 </div>
             </div>
             <div class="panel panel-default"  ng-show="userTab=='setAdmin'">
