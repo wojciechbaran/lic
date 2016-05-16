@@ -15,11 +15,8 @@
         </ul>
     </div>
     <div class="btn-group">
-        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='guest' || tab=='newContractor' || tab=='contractors' || tab=='editContractors' || tab=='lecturer' || tab=='newLecturer') ? 'btn-primary' : 'btn-default'">Dodatki <span class="caret"></span></button>
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='newContractor' || tab=='contractors' || tab=='editContractors') ? 'btn-primary' : 'btn-default'">Dodatki <span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li ng-class="tab=='guest' ? 'active' : ''"><a ng-click="setTab('guest')">Lista Gości</a></li>
-            <li ng-class="tab=='lecturer' ? 'active' : ''"><a ng-click="setTab('lecturer')">Lista Wykładowców</a></li>
-            <li ng-class="tab=='newLecturer' ? 'active' : ''"><a ng-click="setTab('newLecturer')">Dodaj Wykładowcę</a></li>
             <li ng-class="tab=='contractors' ? 'active' : ''"><a ng-click="setTab('contractors')">Lista Podwykonawców</a></li>
             <li ng-class="tab=='newContractor' ? 'active' : ''"><a ng-click="setTab('newContractor')">Dodaj Podwykonawcę</a></li>
         </ul>

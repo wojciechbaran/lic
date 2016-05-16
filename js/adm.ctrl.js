@@ -126,20 +126,6 @@
       $scope.dataLoading = false;
     });
   };
-  $scope.userSetTypeS = function(userType) {
-    $scope.userSetType={};
-    var data=[{'userType':userType}];
-    CUDService.Go('update', data, 'users', $scope.singleUser[0].id, function(response) {
-      if (response.success) {
-        $scope.userSetType.success = 'Zmieniono typ użytkownika';
-        $scope.singleUser[0].userType=userType;
-        $scope.listUsersS();
-        $scope.listLecturersS();
-      } else {
-        $scope.userSetType.error = response.message;
-      }
-    });
-  };
   $scope.userSetTypeAS = function(userType) {
     $scope.userSetTypeA={};
     var data=[{'userType':userType}];
@@ -152,18 +138,6 @@
       } else {
         $scope.userSetTypeA.error = response.message;
       }
-    });
-  };
-  $scope.newLecturerS = function() {
-    $scope.dataLoading = true;
-    AuthenticationService.Register($scope.newLecturerD, function(response) {
-      if (response.success) {
-        $scope.newLecturerD.success = 'Dodano nowego wykładowce';
-        $scope.listLecturersS();
-      } else {
-        $scope.newLecturerD.error = response.message;
-      }
-      $scope.dataLoading = false;
     });
   };
   $scope.generatePassword = function(dataBox) { 
@@ -207,18 +181,6 @@
     // type, condition, table, order
     SearchService.search('simple', 'userType:admin', 'users', 'id:ASC', function(response) {
       $scope.listAdmins = response;
-    });
-  };
-  $scope.listGuestsS = function() {
-    // type, condition, table, order
-    SearchService.search('simple', 'userType:guest', 'users', 'id:ASC', function(response) {
-      $scope.listGuests = response;
-    });
-  };
-  $scope.listLecturersS = function() {
-    // type, condition, table, order
-    SearchService.search('simple', 'userType:lecturer', 'users', 'id:ASC', function(response) {
-      $scope.listLecturers = response;
     });
   };
   $scope.listContractorsS = function() {
@@ -387,8 +349,6 @@
   $scope.init = function() {
     $scope.listProjectS();
     $scope.listUsersS();
-    $scope.listLecturersS();
-    $scope.listGuestsS();
     $scope.listAdminsS();
     $scope.listContractorsS();
     $scope.editProject('572f4f7c18dd9');
