@@ -1,8 +1,7 @@
-testApp.controller('userController', function($scope, CONFIG, AuthenticationService, CUDService, $location, $rootScope, $cookies,SearchService) {
+﻿testApp.controller('userController', function($scope, CONFIG, AuthenticationService, CUDService, $location, $rootScope,SearchService) {
   $scope.config = CONFIG;
   $scope.tab = 'start';
   AuthenticationService.Allow();
-  $scope.currentUser = $rootScope.currentUser;
   console.log($scope.currentUser);
   $scope.newProjectsC = false;
   $scope.myProjectsC = false;
@@ -50,6 +49,7 @@ testApp.controller('userController', function($scope, CONFIG, AuthenticationServ
     CUDService.Go('push', data, 'users', $scope.currentUser.id, function(response) {
       if (response.success) {
         $scope.addArticle.success = 'Dodano artykuł';
+        AuthenticationService.SetCredentials($scope.currentUser);
         $scope.articleId++;
       } else {
         $scope.addArticle.error = response.message;
@@ -66,10 +66,10 @@ testApp.controller('userController', function($scope, CONFIG, AuthenticationServ
       surname: $scope.currentUser.surname,
       email: $scope.currentUser.email
     }];
-    //CUDService.UserUpdate($scope.currentUser, $scope.currentUser.userid, function(response) {
     CUDService.Go('update', data, 'users', $scope.currentUser.id, function(response) {
       if (response.success) {
         $scope.formUD.success = response.message;
+        AuthenticationService.SetCredentials($scope.currentUser);
       } else {
         $scope.formUD.error = response.message;
       }

@@ -1,7 +1,7 @@
-testApp.controller('mainController', function($scope, CONFIG, $rootScope, $route, AuthenticationService, $location, $cookies) {
+testApp.controller('mainController', function($scope, CONFIG, $rootScope, $route, AuthenticationService, $location) {
   $scope.config = CONFIG;
   $scope.tab = 'start';
-  $scope.currentUser = $rootScope.currentUser;
+  AuthenticationService.IsLogin();
   if(!$rootScope.defaultLanguage){
     $rootScope.defaultLanguage = $scope.config.defaultLanguage;
   }
