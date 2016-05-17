@@ -76,7 +76,7 @@
             <div class="form-actions">
                 <button type="submit" ng-disabled="formUD.$invalid || dataLoading" class="btn btn-primary">{{ 'Zmień' | translate }}</button>
                 <img ng-if="dataLoading" src="lic/images/loading.gif"  />
-                <a ng-click="setTab('start')" class="btn btn-link">{{ 'Anuluj' | translate }}</a>
+                <a ng-click="setTab('start')" class="btn btn-link">{{ 'Wstecz' | translate }}</a>
             </div>
         </form>
     </div>
@@ -102,23 +102,37 @@
             <div class="form-actions">
                 <button type="submit" ng-disabled="formCP.$invalid || dataLoading" class="btn btn-primary">{{ 'Zmień' | translate }}</button>
                 <img ng-if="dataLoading" src="lic/images/loading.gif"  />
-                <a ng-click="setTab('start')" class="btn btn-link">{{ 'Anuluj' | translate }}</a>
+                <a ng-click="setTab('start')" class="btn btn-link">{{ 'Wstecz' | translate }}</a>
             </div>
         </form>
     </div>
     <div class="col-md-8 col-md-offset-2" ng-show="tab=='addArticle'">
-        <div class="panel">
-            <div class="panel panel-header">
-                <h3>{{ 'Dodaj artykul' | translate }}</h3>
+        <div class="panel panel-default">
+            <div class="panel panel-heading">
+                <h3 class="panel-title">{{ 'Dodaj artykuł' | translate }}</h3>
             </div>
             <div class="panel panel-body">
                 <div ng-show="addArticle.error" class="alert alert-danger">{{addArticle.error | translate }}</div>
                 <div ng-show="addArticle.success" class="alert alert-success">{{addArticle.success | translate }}</div>
-                Tytuł[pl]: <input type="text" ng-model="currentUser.articles[articleId].title.pl"></input><br>
-                Tytuł[en]: <input type="text" ng-model="currentUser.articles[articleId].title.en"></input><br>
-                <button type="submit" ng-disabled="dataLoading" class="btn btn-primary" ng-click="addArticleS()">{{ 'Dodaj' | translate }}</button>
-                <img ng-if="dataLoading" src="lic/images/loading.gif"  />
-                <a ng-click="setTab('start')" class="btn btn-link">{{ 'Anuluj' | translate }}</a>
+                <form name="addArticle" ng-submit="addArticleS()" role="form">
+                    <div class="form-group" ng-repeat="language in config.languages">
+                        <label for="title">{{ 'Tytuł' | translate }}: [{{ language.label | translate }}]</label>
+                        <input type="text" name="title" id="title" class="form-control" ng-model="currentUser.articles[articleId].title[language.key]"/>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label for="file">{{ 'Prześlij pliki' | translate }}</label>
+                        <input type="file" file-upload multiple/>
+                        <ul>
+                            <li ng-repeat="file in files track by $index">{{file.name}} <span class="glyphicon glyphicon-remove" ng-click="fileListRemove($index)"></span></li>
+                        </ul>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" ng-disabled="dataLoading" class="btn btn-primary">{{ 'Dodaj' | translate }}</button>
+                        <img ng-if="dataLoading" src="lic/images/loading.gif"  />
+                        <a ng-click="setTab('start')" class="btn btn-link">{{ 'Wstecz' | translate }}</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

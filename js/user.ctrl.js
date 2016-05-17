@@ -2,7 +2,7 @@
   $scope.config = CONFIG;
   $scope.tab = 'start';
   AuthenticationService.Allow();
-  console.log($scope.currentUser);
+ // console.log($scope.currentUser);
   $scope.newProjectsC = false;
   $scope.myProjectsC = false;
   var query = {$or: [{projectStatus:1},{projectStatus:2}]};
@@ -39,18 +39,62 @@
     $scope.currentUser.articles[$scope.articleId].title.en='';
   }
   $scope.addArticle={};
+  $scope.files = [];
+  $scope.$on("fileSelected", function (event, args) {
+      $scope.$apply(function () { 
+          $scope.files.push(args.file);
+          if( $scope.files.length>1){
+            $scope.files.splice(0, 1);
+          }
+      });
+  });
+  $scope.fileListRemove = function(index){
+    $scope.files.splice(index, 1);
+  }
   $scope.addArticleS = function(){
     $scope.addArticle.error = '';
     $scope.addArticle.success = '';
     $scope.dataLoading = true;
-    var tart = {articles:$scope.currentUser.articles[$scope.articleId]};
-    var data=[tart];
-    console.log(data);
-    CUDService.Go('push', data, 'users', $scope.currentUser.id, function(response) {
+    if($scope.files.length==0){
+      $scope.addArticle.error = 'Prześlij co najmniej jeden plik';
+      $scope.dataLoading = false;
+      return;
+    }
+    var artName='';
+    $scope.config.languages.forEach(function(item){
+      if($scope.currentUser.articles[$scope.articleId].title[item.key]!=''){
+        artName=$scope.currentUser.articles[$scope.articleId].title[item.key];
+      }
+    });
+    if(artName==''){
+      $scope.addArticle.error = 'Podaj tytuł w co najmniej jednym języku';
+      $scope.dataLoading = false;
+      return;
+    }else{
+      $scope.config.languages.forEach(function(item){
+        if($scope.currentUser.articles[$scope.articleId].title[item.key]==''){
+          $scope.currentUser.articles[$scope.articleId].title[item.key]=artName;
+        }
+      });
+    }
+    CUDService.FileUpload($scope.files[0], $scope.config.fileUploadPath, $scope.currentUser.id, function(response) {
       if (response.success) {
-        $scope.addArticle.success = 'Dodano artykuł';
-        AuthenticationService.SetCredentials($scope.currentUser);
-        $scope.articleId++;
+          $scope.currentUser.articles[$scope.articleId].file={
+            'fileName':response.name,
+            'link':response.link
+          };
+          var tart = {articles:$scope.currentUser.articles[$scope.articleId]};
+          var data=[tart];         
+          CUDService.Go('push', data, 'users', $scope.currentUser.id, function(response) {
+            if (response.success) {
+              $scope.addArticle.success = 'Dodano artykuł';
+              AuthenticationService.SetCredentials($scope.currentUser);
+              $scope.articleId++;
+            } else {
+              $scope.addArticle.error = response.message;
+            }
+            $scope.dataLoading = false;
+          });
       } else {
         $scope.addArticle.error = response.message;
       }

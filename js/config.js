@@ -11,6 +11,7 @@
   'siteName': 'System do Organizacji Konferencji Naukowych',
   //'baseURL': 'http://wojbaran.webd.pl',
   'baseURL': '',
+  'fileUploadPath':'uploads',
   'userDataFilds': [{
     'name': 'name',
     'label': 'Imie',

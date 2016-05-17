@@ -13,6 +13,7 @@ testApp.controller('mainController', function($scope, CONFIG, $rootScope, $route
     $route.reload();
   };
   $scope.goTo = function(loc) {
+    $scope.tab = 'start';
     $location.path( $scope.config.route + loc );
   };
   $scope.logout = function() {
