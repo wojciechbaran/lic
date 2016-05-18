@@ -2,7 +2,7 @@
   $scope.config = CONFIG;
   $scope.tab = 'start';
   AuthenticationService.Allow();
- // console.log($scope.currentUser);
+  console.log($scope.currentUser);
   $scope.newProjectsC = false;
   $scope.myProjectsC = false;
   var query = {$or: [{projectStatus:1},{projectStatus:2}]};
@@ -84,7 +84,7 @@
             'link':response.link
           };
           var tart = {articles:$scope.currentUser.articles[$scope.articleId]};
-          var data=[tart];         
+          var data=[tart];       
           CUDService.Go('push', data, 'users', $scope.currentUser.id, function(response) {
             if (response.success) {
               $scope.addArticle.success = 'Dodano artykuł';

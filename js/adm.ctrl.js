@@ -262,6 +262,7 @@
     }
     $scope.singleProject[0].sessions[id].blocks[$scope.blockId].lectures[$scope.lectureId]={};
   };
+  $scope.addSessionsPlanlectureshow='';
   $scope.addSessionsPlan={};
   $scope.addSessionsPlanS = function () {
     if($scope.addSessionsPlan.duration=='' || $scope.addSessionsPlan.lectureType==''){

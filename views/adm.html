@@ -366,7 +366,10 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <span ng-if="addSessionsPlan.lectureType=='Wykład'">Lista artykułów(wykładów)</span>
+                                                    <div ng-if="addSessionsPlan.lectureType=='Wykład'">
+                                                        <input type="text" name="lecture" id="lecture" class="form-control col-md-12" ng-model="addSessionsPlanlectureshow" disabled="true" style="width: 90%;"/>
+                                                        <span ng-autocomplite from="projectUsersList" to="addSessionsPlan.lecture" show="addSessionsPlanlectureshow"></span>
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <span ng-click="addSessionsPlanS()" class="glyphicon glyphicon-plus"></span>
@@ -378,7 +381,7 @@
 
 
                                     <div class="form-actions">
-                                        <button type="submit" ng-disabled="dataLoading" class="btn btn-primary">{{ 'Dodaj' | translate }}</button>
+                                        <button type="submit" ng-disabled="dataLoading" class="btn btn-primary">{{ 'Dodaj blok' | translate }}</button>
                                         <img ng-if="dataLoading" src="lic/images/loading.gif"  />
                                     </div>
                                 </form>

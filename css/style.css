@@ -142,3 +142,10 @@ a {
 .daybox .active a:hover {
   color: #ffffff;
 }
+/*autocomplite*/
+.autocomplite-list{
+  z-index: 2;
+  position: absolute;
+  width: 50%;
+  margin-left: -10px;
+}

@@ -42,7 +42,7 @@
                 </div>
                 <div class="panel-body">
                     <a ng-click="setTab('addArticle')">{{ 'Dodaj artykuł' | translate }}</a>
-                    <ul ng-if="myProjectsC">
+                    <ul>
                         <li ng-repeat="article in currentUser.articles track by $index">
                             <a ng-click="editArticle($index)">{{ article.title[defaultLanguage] }}</a>
                        </li>
@@ -121,7 +121,7 @@
                     </div>
                     <hr />
                     <div class="form-group">
-                        <label for="file">{{ 'Prześlij pliki' | translate }}</label>
+                        <label for="file">{{ 'Prześlij plik' | translate }}</label>
                         <input type="file" file-upload multiple/>
                         <ul>
                             <li ng-repeat="file in files track by $index">{{file.name}} <span class="glyphicon glyphicon-remove" ng-click="fileListRemove($index)"></span></li>
