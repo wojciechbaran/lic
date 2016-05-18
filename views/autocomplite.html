@@ -1,0 +1,21 @@
+<span class="glyphicon glyphicon-search" ng-click="showList()"></span>
+<div ng-if="listOn">
+    <div class="panel panel-default autocomplite-list">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <span><input type="text" ng-model="search"/></span>
+                <span ng-click="hideList()" class="pull-right glyphicon glyphicon-remove"></span>
+            </div>
+        </div>
+        <div class="panel-body">
+        	<ul>
+        		<li ng-repeat="user in from | filter:search">
+        			<span ng-repeat="article in user.articles track by $index">
+        				<span class="row" ng-click="chosseArticle(article.file.link,user.name+' '+user.surname+': '+article.title[config.defaultLanguage])">{{ user.name }} {{ user.surname }}: {{ article.title[config.defaultLanguage] }}</span>
+        			</span>
+
+        		</li>
+        	</ul>
+        </div>
+    </div>
+</div>

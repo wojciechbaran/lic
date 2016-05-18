@@ -31,7 +31,7 @@ testApp.directive('ngMultilang', function(CONFIG, CUDService) {
         en: scope.eval.en
       };
       var data = [fname];
-      CUDService.Go('update', data, 'projects', scope.fid, function(response) {
+      CUDService.Go('update', data, scope.fcollection, scope.fid, function(response) {
         if (response.success) {
           scope.success = response.message;
         } else {
@@ -48,6 +48,7 @@ testApp.directive('ngMultilang', function(CONFIG, CUDService) {
       itype: '@',
       fname: '@',
       flabel: '@',
+      fcollection: '@',
       fid: '=',
       val: '='
     },

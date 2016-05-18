@@ -1,4 +1,4 @@
-testApp.controller('startController', function($scope, CONFIG, SearchService) {
+testApp.controller('startController', function($scope, CONFIG, SearchService, $rootScope) {
   $scope.newProjectsC = false;
   $scope.oldProjectsC = false;
   var query = {$or: [{projectStatus:1},{projectStatus:2}]};

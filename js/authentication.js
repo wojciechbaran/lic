@@ -19,13 +19,23 @@ angular.module('testApp').service('AuthenticationService', function($http, CONFI
     },
     ClearCredentials: function() {
       $rootScope.currentUser = {};
-      $cookies.remove('currentUser');
+      $cookies.remove('currentUser',{'path':'/'+CONFIG.baseURL});
     },
     SetCredentials: function(userData) {
       $rootScope.currentUser = userData;
       var d = new Date();
       d.setHours(d.getHours() + 1);
-      $cookies.putObject('currentUser', userData, {expires: d});
+      $cookies.put('currentUser', JSON.stringify(userData),{'path':'/'+CONFIG.baseURL,expires: d});
+    },
+    IsLogin: function() {
+      if ($rootScope.currentUser) {
+        return;
+      }
+      var userData = $cookies.get('currentUser');
+      if (userData) {
+        $rootScope.currentUser = JSON.parse(userData);
+        return;
+      }
     },
     Register: function(userData, callback) {
       $http.post(CONFIG.baseURL + '/' + CONFIG.route + '/backend/authentication.php', userData)
