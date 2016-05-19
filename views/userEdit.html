@@ -1,25 +1,25 @@
 ﻿<div class="panel panel-default">
     <div class="panel-heading">
-       <h3 class="panel-title">Edycja użytkownika: {{ singleUser[0].name }} {{ singleUser[0].surname }} (id:{{ singleUser[0].id }})<a ng-click="setTab('listUser')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
+       <h3 class="panel-title">{{ 'Edycja użytkownika' | translate }}: {{ singleUser[0].name }} {{ singleUser[0].surname }} (id:{{ singleUser[0].id }})<a ng-click="setTab('listUser')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
     </div>
     <div class="panel-body">
         <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation" ng-class="(userTab=='start' || userTab=='')? 'active' : ''">
-                    <a ng-click="setTabEdit('start','userTab')">Etykieta</a>
+                    <a ng-click="setTabEdit('start','userTab')">{{ 'Etykieta' | translate }}</a>
                 </li>
                 <li role="presentation" ng-class="userTab=='editData' ? 'active' : ''">
-                    <a ng-click="setTabEdit('editData','userTab')">Edycja danych</a>
+                    <a ng-click="setTabEdit('editData','userTab')">{{ 'Edycja danych' | translate }}</a>
                 </li>
                 <li role="presentation" ng-class="userTab=='setAdmin' ? 'active' : ''">
-                    <a ng-click="setTabEdit('setAdmin','userTab')">Ustaw prawa</a>
+                    <a ng-click="setTabEdit('setAdmin','userTab')">{{ 'Ustaw prawa' | translate }}</a>
                 </li>
             </ul>
         </div>
         <div class="col-md-10">
             <div class="panel panel-default"  ng-show="userTab=='start'">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Etykietka</h4>
+                    <h4 class="panel-title">{{ 'Etykieta' | translate }}</h4>
                 </div>
                 <div class="panel-body">
                     <table class="table">
@@ -28,14 +28,14 @@
                             <td>{{ singleUser[0].id }}</td>
                         </tr>
                         <tr>
-                            <td>Typ konta</td>
+                            <td>{{ 'Typ konta' | translate }}</td>
                             <td>
-                                <span ng-if="singleUser[0].userType=='admin'">Administrator</span>
-                                <span ng-if="singleUser[0].userType=='user'">Użytkownik</span>
+                                <span ng-if="singleUser[0].userType=='admin'">{{ 'Administrator' | translate }}</span>
+                                <span ng-if="singleUser[0].userType=='user'">{{ 'Użytkownik' | translate }}</span>
                             </td>
                         </tr>
                         <tr>
-                            <td>Login</td>
+                            <td>{{ 'Etykieta' | translate }}Login</td>
                             <td>{{ singleUser[0].username }}</td>
                         </tr>
                         <tr ng-repeat="userData in config.userDataFilds">
@@ -43,7 +43,7 @@
                             <td>{{ singleUser[0][userData.name] }}</td>
                         </tr>
                         <tr>
-                            <td>Ostatnie logowanie</td>
+                            <td>{{ 'Ostatnie logowanie' | translate }}</td>
                             <td>{{ singleUser[0].lastlogin | date:'dd/MM/yyyy HH:mm:ss' }}</td>
                         </tr>
                     </table>
@@ -51,7 +51,7 @@
             </div>
             <div class="panel panel-default"  ng-show="userTab=='editData'">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Edycja danych</h4>
+                    <h4 class="panel-title">{{ 'Edycja danych' | translate }}</h4>
                 </div>
                 <div class="panel-body">
                     <div ng-show="userDataEdit.error" class="alert alert-danger">{{userDataEdit.error | translate}}</div>
@@ -70,13 +70,13 @@
             </div>
             <div class="panel panel-default"  ng-show="userTab=='setAdmin'">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Zmień uprawnienia administracyjne</h4>
+                    <h4 class="panel-title">{{ 'Zmień uprawnienia administracyjne' | translate }}</h4>
                 </div>
                 <div class="panel-body">
                     <div ng-show="userSetTypeA.error" class="alert alert-danger">{{userSetTypeA.error | translate}}</div>
                     <div ng-show="userSetTypeA.success" class="alert alert-success">{{userSetTypeA.success | translate}}</div>
-                    <button ng-if="singleUser[0].userType=='user' || singleUser[0].userType=='lecturer'" type="button" class="btn btn-default" ng-click="userSetTypeAS('admin')">Nadaj uprawnienia Administracyjne</button>
-                    <button ng-if="singleUser[0].userType=='admin'" type="button" class="btn btn-default" ng-click="userSetTypeAS('user')">Odbierz uprawnienia Administracyjne</button>  
+                    <button ng-if="singleUser[0].userType=='user' || singleUser[0].userType=='lecturer'" type="button" class="btn btn-default" ng-click="userSetTypeAS('admin')">{{ 'Nadaj uprawnienia Administracyjne' | translate }}</button>
+                    <button ng-if="singleUser[0].userType=='admin'" type="button" class="btn btn-default" ng-click="userSetTypeAS('user')">{{ 'Odbierz uprawnienia Administracyjne' | translate }}</button>  
                 </div>
             </div>
         </div>

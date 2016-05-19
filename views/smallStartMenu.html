@@ -1,13 +1,13 @@
 <div class="smallMenu row btn-toolbar">
     <div class="col-md-8">
-        <button type="button" class="btn btn-default" ng-click="goTo('/')">Start</button>
+        <button type="button" class="btn btn-default" ng-click="goTo('/')">{{'Start' | translate }}</button>
         <button type="button" class="btn btn-default" ng-hide="currentUser.id" ng-click="goTo('/login')">{{'Logowanie' | translate }}</button>
         <button type="button" class="btn btn-default" ng-hide="currentUser.id" ng-click="goTo('/register')">{{'Rejestracja' | translate }}</button>
         <button type="button" class="btn btn-default" ng-click="goTo('/about')">{{'O projekcie' | translate }}</button>
     </div>
     <div ng-if="currentUser.id" class="pull-right">
        <button type="button" class="btn btn-default" ng-click="goTo('/user')">{{ currentUser.name }} {{ currentUser.surname }}</button>
-       <button type="button" ng-if="currentUser.userType=='admin'" class="btn btn-default" ng-click="goTo('/adm')">Panel Administracyjny</button>
+       <button type="button" ng-if="currentUser.userType=='admin'" class="btn btn-default" ng-click="goTo('/adm')">{{'Panel Administracyjny' | translate }}</button>
        <button type="button" class="btn btn-default" ng-click="logout()">{{'Wyloguj' | translate }}</button>
     </div>
 </div>

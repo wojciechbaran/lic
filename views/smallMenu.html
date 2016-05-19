@@ -1,17 +1,17 @@
 <div class="smallMenu row btn-toolbar">
     <button type="button" class="btn btn-default" ng-click="setTab('start')">Start</button>
     <div class="btn-group">
-        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='newProject' || tab=='listProject' || tab=='editProject' || tab=='editSession') ? 'btn-primary' : 'btn-default'">Konferencje <span class="caret"></span></button>
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='newProject' || tab=='listProject' || tab=='editProject' || tab=='editSession') ? 'btn-primary' : 'btn-default'">{{ 'Konferencje' | translate }} <span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li ng-class="tab=='listProject' ? 'active' : ''"><a ng-click="setTab('listProject')">Lista konferencji</a></li>
-            <li ng-class="tab=='newProject' ? 'active' : ''"><a ng-click="setTab('newProject')">Nowa konferencja</a></li>
+            <li ng-class="tab=='listProject' ? 'active' : ''"><a ng-click="setTab('listProject')">{{ 'Lista konferencji' | translate }}</a></li>
+            <li ng-class="tab=='newProject' ? 'active' : ''"><a ng-click="setTab('newProject')">{{ 'Nowa konferencja' | translate }}</a></li>
         </ul>
     </div>
     <div class="btn-group">
-        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='listUser' || tab=='newUser' || tab=='editUser') ? 'btn-primary' : 'btn-default'">Użytkownicy <span class="caret"></span></button>
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='listUser' || tab=='newUser' || tab=='editUser') ? 'btn-primary' : 'btn-default'">{{ 'Użytkownicy' | translate }} <span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li ng-class="tab=='listUser' ? 'active' : ''"><a ng-click="setTab('listUser')">Lista użytkowników</a></li>
-            <li ng-class="tab=='newUser' ? 'active' : ''"><a ng-click="setTab('newUser')">Dodaj użytkownika</a></li>
+            <li ng-class="tab=='listUser' ? 'active' : ''"><a ng-click="setTab('listUser')">{{ 'Lista użytkowników' | translate }}</a></li>
+            <li ng-class="tab=='newUser' ? 'active' : ''"><a ng-click="setTab('newUser')">{{ 'Dodaj użytkownika' | translate }}</a></li>
         </ul>
     </div>
     <div class="btn-group">
@@ -22,10 +22,10 @@
         </ul>
     </div>
     <div class="btn-group">
-        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='listAdmin' || tab=='basicData') ? 'btn-primary' : 'btn-default'">Ustawienia <span class="caret"></span></button>
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" ng-class="(tab=='listAdmin' || tab=='basicData') ? 'btn-primary' : 'btn-default'">{{ 'Ustawienia' | translate }} <span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li ng-class="tab=='listAdmin' ? 'active' : ''"><a ng-click="setTab('listAdmin')">Lista Administratorów</a></li>
-            <li ng-class="tab=='basicData' ? 'active' : ''"><a ng-click="setTab('basicData')">Podstawowe dane</a></li>
+            <li ng-class="tab=='listAdmin' ? 'active' : ''"><a ng-click="setTab('listAdmin')">{{ 'Lista Administratorów' | translate }}</a></li>
+            <li ng-class="tab=='basicData' ? 'active' : ''"><a ng-click="setTab('basicData')">{{ 'Podstawowe dane' | translate }}</a></li>
         </ul>
     </div>
 </div>

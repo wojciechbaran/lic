@@ -1,18 +1,18 @@
 <div class="row mlSelect">
     <div class="btn-group col-md-offset-1" role="group">
-        <button type="button" ng-repeat="lang in languages" ng-class="tab==lang.key ? 'active' : ''" class="btn btn-default" ng-click="setTab(lang.key)">{{ lang.label }}</button>
+        <button type="button" ng-repeat="lang in languages" ng-class="tab==lang.key ? 'active' : ''" class="btn btn-default" ng-click="setTab(lang.key)">{{ lang.label | translate }}</button>
     </div>
 </div>
-<div ng-show="error" class="alert alert-danger">{{error}}</div>
-<div ng-show="success" class="alert alert-success">{{success}}</div>
+<div ng-show="error" class="alert alert-danger">{{error | translate}}</div>
+<div ng-show="success" class="alert alert-success">{{success | translate}}</div>
 <form name="formMl" ng-submit="formMlS()" role="form" ng-repeat="lang in languages" ng-hide="tab!=lang.key">
     <div class="form-group">
-        <label for="{{ fname }}">{{ flabel }} ({{lang.key}})</label>
+        <label for="{{ fname }}">{{ flabel  | translate }} ({{lang.key}})</label>
         <input ng-if="itype=='text'" type="text" name="{{ fname }}" id="{{ fname }}" class="form-control" ng-model="eval[lang.key]"/>
         <textarea ng-if="itype=='textarea'" name="{{ fname }}" id="{{ fname }}" class="form-control" rows="5" ng-model="eval[lang.key]"></textarea>
     </div>
     <div class="form-actions">
-        <button type="submit" ng-disabled="formMl.$invalid || dataLoading" class="btn btn-primary">Zmień</button>
+        <button type="submit" ng-disabled="formMl.$invalid || dataLoading" class="btn btn-primary">{{ 'Zmień' | translate }}</button>
         <img ng-if="dataLoading" src="lic/images/loading.gif"  />
     </div>
 </form>
