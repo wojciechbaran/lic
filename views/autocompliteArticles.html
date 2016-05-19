@@ -10,7 +10,8 @@
         <div class="panel-body">
         	<ul>
         		<li ng-repeat="user in from | filter:searchText">
-        				<span class="row" ng-click="chosse(user.id,user.name+' '+user.surname)">{{ user.name }} {{ user.surname }}</span>
+        			<span ng-repeat="article in user.articles track by $index">
+        				<span class="row" ng-click="chosseArticle(article.file.link,user.name+' '+user.surname+': '+article.title[config.defaultLanguage])">{{ user.name }} {{ user.surname }}: {{ article.title[config.defaultLanguage] }}</span>
         			</span>
 
         		</li>

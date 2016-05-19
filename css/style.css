@@ -148,4 +148,8 @@ a {
   position: absolute;
   width: 50%;
   margin-left: -10px;
+  min-width: 325px;
+}
+.autocomplite-list li {
+  cursor: pointer;
 }

@@ -5,6 +5,9 @@
 	$db = $m->lic;
 	//$col = $db->users;
 	$col = $db->projects;
+	$block=array('a'=>'ddddddddddd','b'=>'rrrrrrrrr','c'=>3344);
+	//$col->update(array('id'=>'572f4f7c18dd9','sessions.name'=> '7'),array('$addToSet' => array('sessions.$.blocks'=>$block)));
+	$col->update(array('id'=>'572f4f7c18dd9','sessions.number'=> 6),array('$push' => array('sessions.$.blocks'=>$block)));
    // $collection = $db->createCollection("users");
 	//$collection = $db->createCollection("projects");
 	//$collection = $db->createCollection("contractors");

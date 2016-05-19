@@ -37,5 +37,19 @@ if($request['type']=='advenced'){
 		$res[]=$value;
 	}
 }
+if($request['type']=='files'){
+	$local=$request['condition'];
+	$path='../'.$local.'/';
+	$files = array();
+	if ($handle = opendir($path)) {
+	    while (false !== ($entry = readdir($handle))) {
+	        if ($entry != "." && $entry != "..") {
+	            array_push($files,array('link'=>$local.'/'.$entry,'authorId'=>substr($entry, 0,13)));
+	        }
+	    }
+	    closedir($handle);
+	}
+	$res=$files;
+}
 echo json_encode($res);
 ?>

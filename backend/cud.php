@@ -152,6 +152,23 @@ if($request['type']=='add'){
 	$success=true;
 	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
 }
-
+else if($request['type']=='deepPush'){
+	$error='';
+	$success=false;
+	$place= array();
+	foreach ($request['id'] as $filds) {
+		foreach($filds as $name => $val){
+			$place[$name]=$val;
+		}
+	}
+	$table=$request['table'];
+	$col = $db->{$table};
+	$data=$request['data'];	
+	$where=$data[0];
+	$col->update($place,array('$push' => array( $where => $data[1])));
+	$error='Dane zostały dodane!';
+	$success=true;
+	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error, 'where'=>$where, 'place'=>$place);
+}
 echo json_encode($res);
 ?>

@@ -1,4 +1,4 @@
-testApp.directive('ngAutocomplite', function(CONFIG, CUDService) {
+testApp.directive('ngAutocompliteArticles', function(CONFIG, CUDService) {
   function link(scope) {
   	scope.config=CONFIG;
     scope.listOn = false;
@@ -8,9 +8,9 @@ testApp.directive('ngAutocomplite', function(CONFIG, CUDService) {
     scope.hideList = function() {
       scope.listOn = false;
     };
-    scope.chosse = function(id,name){
-    	scope.to=id;
-      scope.show=name;
+    scope.chosseArticle = function(linki, name){
+    	scope.to=linki;
+    	scope.show=name;
     	scope.listOn = false;
     };
     
@@ -20,9 +20,9 @@ testApp.directive('ngAutocomplite', function(CONFIG, CUDService) {
     scope: {
       from: '=',
       to: '=',
-      show: '=',    
+      show: '=',      
     },
-    templateUrl: CONFIG.route + '/views/autocomplite.html',
+    templateUrl: CONFIG.route + '/views/autocompliteArticles.html',
     link: link
   };
 });

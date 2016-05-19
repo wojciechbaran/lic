@@ -25,19 +25,6 @@
     'label': 'Adres mail',
     'required': false
   }],
-  'lecturerDataFilds': [{
-    'name': 'collage',
-    'label': 'Uczelnia',
-    'required': true
-  }, {
-    'name': 'city',
-    'label': 'Miasto',
-    'required': true
-  }, {
-    'name': 'country',
-    'label': 'Kraj',
-    'required': true
-  }],
   'projectStatus': [{
     id: 0,
     label: 'Nieopublikowany'
