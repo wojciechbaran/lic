@@ -3,18 +3,18 @@
 <div class="adm">
     <!-- start -->
     <div class="row text-center" ng-show="tab=='start'">
-        <h1>Panel Administracyjny</h1>
+        <h1>{{ 'Panel Administracyjny' | translate }}</h1>
     </div>
     <div class="admMainMenu row" ng-show="tab=='start'">
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Konferencje</h3>
+                    <h3 class="panel-title">{{ 'Konferencje' | translate }}</h3>
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li><a ng-click="setTab('listProject')">Lista konferencji</a></li>
-                        <li><a ng-click="setTab('newProject')">Nowa konferencja</a></li>
+                        <li><a ng-click="setTab('listProject')">{{ 'Lista konferencji' | translate }}</a></li>
+                        <li><a ng-click="setTab('newProject')">{{ 'Nowa konferencja' | translate }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -22,12 +22,12 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Użytkownicy</h3>
+                    <h3 class="panel-title">{{ 'Użytkownicy' | translate }}</h3>
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li><a ng-click="setTab('listUser')">Lista użytkowników</a></li>
-                        <li><a ng-click="setTab('newUser')">Dodaj użytkownika</a></li>
+                        <li><a ng-click="setTab('listUser')">{{ 'Lista użytkowników' | translate }}</a></li>
+                        <li><a ng-click="setTab('newUser')">{{ 'Dodaj użytkownika' | translate }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -48,12 +48,12 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Ustawienia</h3>
+                    <h3 class="panel-title">{{ 'Ustawienia' | translate }}</h3>
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li><a ng-click="setTab('listAdmin')">Lista Administratorów</a></li>
-                        <li><a ng-click="setTab('basicData')">Podstawowe dane</a></li>
+                        <li><a ng-click="setTab('listAdmin')">{{ 'Lista Administratorów' | translate }}</a></li>
+                        <li><a ng-click="setTab('basicData')">{{ 'Podstawowe dane' | translate }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -65,18 +65,18 @@
         <div class="col-md-12" ng-show="tab=='newProject'">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Nowa Konferencja</h3>
+                    <h3 class="panel-title">{{ 'Nowa Konferencja' | translate }}</h3>
                 </div>
                 <div class="panel-body">
-                    <div ng-show="newProject.error" class="alert alert-danger">{{newProject.error}}</div>
-                    <div ng-show="newProject.success" class="alert alert-success">{{newProject.success}}</div>
+                    <div ng-show="newProject.error" class="alert alert-danger">{{newProject.error | translate }}</div>
+                    <div ng-show="newProject.success" class="alert alert-success">{{newProject.success | translate }}</div>
                     <form name="newProject" ng-submit="newProjectS()" role="form">
                         <div class="form-group">
-                            <label for="name">Nazwa projektu</label>
+                            <label for="name">{{ 'Nazwa projektu' | translate }}</label>
                             <input type="text" name="name" id="name" class="form-control" ng-model="newProject.projectName" required/>
                         </div>
                         <div class="form-actions">
-                            <button type="submit" ng-disabled="newProject.$invalid || dataLoading" class="btn btn-primary">Utwórz</button>
+                            <button type="submit" ng-disabled="newProject.$invalid || dataLoading" class="btn btn-primary">{{ 'Utwórz' | translate }}</button>
                             <img ng-if="dataLoading" src="lic/images/loading.gif"  />
                         </div>
                     </form>
@@ -87,7 +87,7 @@
         <div class="col-md-12" ng-show="tab=='listProject'" >
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Lista konferencji</h3>
+                    <h3 class="panel-title">{{ 'Lista konferencji' | translate }}</h3>
                 </div>
                 <div class="panel-body">
                     <div ng-tab tab="listProject" cols="listProjectCols" limit="10" callback-fn="editProject(id)"></div>
@@ -98,47 +98,47 @@
         <div class="col-md-12" ng-show="tab=='listUser'">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Lista użytkowników</h3>
+                    <h3 class="panel-title">{{ 'Lista użytkowników' | translate }}</h3>
                 </div>
                 <div class="panel-body">
                     <div ng-tab tab="listUsers" cols="listUsersCols" limit="10" callback-fn="editUser(id)"></div>
                 </div>
             </div>
         </div>
-        <!-- Dodaj użytkownika -->
+        <!-- {{ 'Dodaj użytkownika' | translate }} -->
         <div class="col-md-12" ng-show="tab=='newUser'">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Dodaj użytkownika</h3>
+                    <h3 class="panel-title">{{ 'Dodaj użytkownika' | translate }}</h3>
                 </div>
                 <div class="panel-body">
-                    <div ng-show="newUserD.error" class="alert alert-danger">{{newUserD.error }}</div>
-                    <div ng-show="newUserD.success" class="alert alert-success">{{newUserD.success }}</div>
+                    <div ng-show="newUserD.error" class="alert alert-danger">{{newUserD.error | translate }}</div>
+                    <div ng-show="newUserD.success" class="alert alert-success">{{newUserD.success | translate }}</div>
                     <form name="form" ng-submit="newUserS()" role="form" ng-init="newUserD['type']='register'; newUserD.data['password']=''; newUserD.data['passwordrep']=''; newUserD.data['userType']='user'">
                         <div class="form-group">
-                            <label for="username">Login</label>
+                            <label for="username">{{ 'Login' | translate }}</label>
                             <input type="text" name="username" id="username" class="form-control" ng-model="newUserD.data['username']" required/>
-                            <span class="help-block">Pole wymagane</span>
+                            <span class="help-block">{{ 'Pole wymagane' | translate }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="password">Hasło</label>
-                            <a ng-click="generatePassword('newUserD')">Generuj hasło</a>
-                            <span class="help-block" ng-show="newUserD.showPass">Wygenerowane hasło: {{ newUserD.data['passwordrep'] }}</span>
+                            <label for="password">{{ 'Hasło' | translate }}</label>
+                            <a ng-click="generatePassword('newUserD')">{{ 'Generuj hasło' | translate }}</a>
+                            <span class="help-block" ng-show="newUserD.showPass">{{ 'Wygenerowane hasło' | translate }}: {{ newUserD.data['passwordrep'] }}</span>
                             <input type="password" name="password" id="password" class="form-control" ng-model="newUserD.data['password']" required/>
-                            <span class="help-block">Pole wymagane</span>
+                            <span class="help-block">{{ 'Pole wymagane' | translate }}</span>
                         </div>
                         <div class="form-group">
-                            <label for="passwordrep">Powtórz hasło</label>
+                            <label for="passwordrep">{{ 'Powtórz hasło' | translate }}</label>
                             <input type="password" name="passwordrep" id="passwordrep" class="form-control" ng-model="newUserD.data['passwordrep']" required/>
-                            <span class="help-block">Pole wymagane</span>
+                            <span class="help-block">{{ 'Pole wymagane' | translate }}</span>
                         </div>
                         <div ng-repeat="userDataFild in config.userDataFilds" class="form-group">
                             <label for="{{ userDataFild.name }}">{{ userDataFild.label }}</label>
                             <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="newUserD.data[userDataFild.name]" ng-required="userDataFild.required"/>
-                            <span ng-show="userDataFild.required" class="help-block">Pole wymagane</span>
+                            <span ng-show="userDataFild.required" class="help-block">{{ 'Pole wymagane' | translate }}</span>
                         </div>
                         <div class="form-actions">
-                            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Dodaj użytkownika</button>
+                            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">{{ 'Dodaj użytkownika' | translate }}</button>
                             <img ng-if="dataLoading" src="lic/images/loading.gif"  />
                         </div>
                     </form>
@@ -163,8 +163,8 @@
                     <h3 class="panel-title">Dodaj nowego podwykonawę</h3>
                 </div>
                 <div class="panel-body">
-                    <div ng-show="newContractorD.error" class="alert alert-danger">{{newContractorD.error}}</div>
-                    <div ng-show="newContractorD.success" class="alert alert-success">{{newContractorD.success}}</div>
+                    <div ng-show="newContractorD.error" class="alert alert-danger">{{newContractorD.error | translate }}</div>
+                    <div ng-show="newContractorD.success" class="alert alert-success">{{newContractorD.success | translate }}</div>
                     <form name="newContractor" ng-submit="newContractorS()" role="form" class="col-md-6 col-md-offset-1" ng-init="newContractorD['type']='contractor'">
                         <div class="form-group col-md-12">
                             <label for="name">Nazwa</label>
@@ -215,7 +215,7 @@
         <div class="col-md-12" ng-show="tab=='listAdmin'">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Administratorzy</h3>
+                    <h3 class="panel-title">{{ 'Administratorzy' | translate }}</h3>
                 </div>
                 <div class="panel-body">
                     <div ng-tab tab="listAdmins" cols="listUsersCols" limit="10" callback-fn="editUser(id)"></div>
@@ -226,7 +226,7 @@
         <div class="col-md-12" ng-show="tab=='basicData'">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Podstawowe dane</h3>
+                    <h3 class="panel-title">{{ 'Podstawowe dane' | translate }}</h3>
                 </div>
                 <div class="panel-body">
                     blablabla
@@ -242,7 +242,7 @@
         <div class="col-md-12" ng-if="tab=='editSession'">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                   <h3 class="panel-title">Konferencja: {{ singleProject[0].name }} -> Sesja {{ singleProject[0].sessions[projectEditSessionId].number }}: {{ singleProject[0].sessions[projectEditSessionId].name }}<a ng-click="setTab('editProject')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
+                   <h3 class="panel-title">{{ 'Konferencja' | translate }}: {{ singleProject[0].name }} -> {{ 'Sesja' | translate }} {{ singleProject[0].sessions[projectEditSessionId].number }}: {{ singleProject[0].sessions[projectEditSessionId].name }}<a ng-click="setTab('editProject')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
                 </div>
                 <div class="panel-body">
                     <div class="col-md-2">
@@ -264,21 +264,10 @@
                     <div class="col-md-10">
                         <div class="panel panel-default"  ng-show="sessionTab=='start' || !sessionTab">
                             <div class="panel-body">
-                                <h3>Konferencja: {{ singleProject[0].title[defaultLanguage] }}</h3>
-                                <h4>Sesja: {{ singleProject[0].sessions[projectEditSessionId].number }} : {{ singleProject[0].sessions[projectEditSessionId].name }}</h4>
-                                <p>Organizatorzy:</p>
+                                <h3>{{ 'Konferencja' | translate }}: {{ singleProject[0].title[defaultLanguage] }}</h3>
+                                <h4>{{ 'Sesja' | translate }}: {{ singleProject[0].sessions[projectEditSessionId].number }} : {{ singleProject[0].sessions[projectEditSessionId].name }}</h4>
+                                <p>{{ 'Organizatorzy' | translate }}:</p>
                                 <div >
-                                    <p>Sala</p>
-                                    <p>Data</p>
-                                    <table class="table">
-                                        <tr>
-                                            <td>
-                                                Godzina<br/>
-                                                Wykładowca, temat
-
-                                            </td>
-                                        </tr>
-                                    </table>
                                 </div>
                             </div>
                         </div>

@@ -198,7 +198,7 @@
             </div>
             <div class="panel panel-default"  ng-show="projectTab=='sessions'">
                 <div class="panel-body" >
-                    <span ng-click="setTabEdit('addSession','projectTab')">{{ 'Dodaj nową sesję' | translate }}</span>
+                    <button type="button" class="btn btn-default" ng-click="setTabEdit('addSession','projectTab')">{{ 'Dodaj nową sesję' | translate }}</button>
                     <table class="table">
                         <tr ng-repeat="session in singleProject[0].sessions">
                             <td><a ng-click="projectEditSession($index)">{{ 'Sesja' | translate }} {{ session.number }} {{ session.name }}</a></td>
@@ -211,8 +211,10 @@
             <div class="panel panel-default"  ng-show="projectTab=='addSession'">
                 <div class="panel-body" >
                     <div class="panel">
-                        <div class="panel panel-header">{{ 'Dodaj nową sesję' | translate }}</div>
-                            <div class="panel panel-body">
+                        <div class="panel panel-heading">
+                            <h3 class="panel-title">{{ 'Dodaj nową sesję' | translate }}</h3>
+                        </div>
+                        <div class="panel panel-body">
                             <div ng-show="projectAddSession.error" class="alert alert-danger">{{projectAddSession.error | translate}}</div>
                             <div ng-show="projectAddSession.success" class="alert alert-success">{{projectAddSession.success | translate}}</div>
                             <form name="projectAddSessionform" ng-submit="projectAddSessionS()" role="form">
@@ -222,7 +224,15 @@
                                 </div>
                                 <div class="form-group">
                                 <label for="name">{{ 'Nazwa sesji' | translate }}</label>
-                                    <input type="text" name="name" id="name" class="form-control" ng-model="projectAddSession.name" />
+                                    <input type="text" name="name" id="name" class="form-control" ng-model="projectAddSession.name" required="true" />
+                                </div>
+                                <div class="form-group">
+                                <label for="name">{{ 'Organizatorzy' | translate }}</label>
+                                    <span ng-autocomplite from="projectUsersList" to="projectAddSession.organizers[organizersId].id" show="projectAddSession.organizers[organizersId].show"></span>
+                                    <input ng-repeat="organizer in projectAddSession.organizers track by $index" type="text" name="name" id="name" class="form-control" ng-model="projectAddSession.organizers[$index].show" disabled="true" ng-if="!$last"/>
+                                    <input type="text" name="name" id="name" class="form-control" ng-model="projectAddSession.organizers[organizersId].show" disabled="true"/>
+                                    <span ng-click="addSessionsOrganizer()" class="glyphicon glyphicon-plus"></span>
+
                                 </div>
                                 <div class="form-actions">
                                     <button type="submit" ng-disabled="dataLoading" class="btn btn-primary">{{ 'Dodaj' | translate }}</button>

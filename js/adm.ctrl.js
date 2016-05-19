@@ -1,11 +1,9 @@
 ﻿testApp.controller('admController', function($scope, CONFIG, SearchService, AuthenticationService, CUDService) {
   $scope.config = CONFIG;
   $scope.tab = 'start';
-  //$scope.projectTab = 'start';
-  $scope.projectTab = 'sessions';
+  $scope.projectTab = 'start';
   $scope.userTab = 'start';
-  $scope.projectAddSession={};
-  //AuthenticationService.AllowAdmin();
+  AuthenticationService.AllowAdmin();
   $scope.listProjectCols = [{
     name: 'name',
     label: 'Nazwa'
@@ -147,19 +145,40 @@
       $scope[dataBox].data['passwordrep'] = response;
     });
   };
+  $scope.projectAddSession={};
+  $scope.organizersId=0;
+  $scope.projectAddSession.organizers=[];
+  $scope.projectAddSession.organizers[$scope.organizersId]={};
+  $scope.addSessionsOrganizer = function() {
+    if($scope.projectAddSession.organizers[$scope.organizersId].id){
+      $scope.organizersId++;
+      $scope.projectAddSession.organizers[$scope.organizersId]={};
+    }
+  };
   $scope.projectAddSessionS = function() {
-    $scope.dataLoading = true;
+    //$scope.dataLoading = true;
     var fname = {};
-      fname.sessions = {
-        number: $scope.projectAddSession.number,
-        name: $scope.projectAddSession.name
-      };
+    fname.sessions = {
+      number: $scope.projectAddSession.number,
+      name: $scope.projectAddSession.name,
+    };
+    fname.sessions.organizers=$scope.projectAddSession.organizers;
+    fname.sessions.organizers.forEach(function(organizer){
+      delete organizer.show;
+    });
+    if(!fname.sessions.organizers[fname.sessions.organizers.length-1].id){
+      fname.sessions.organizers.pop();
+    }
     var data = [fname];
-    console.log(data);
     CUDService.Go('push', data, 'projects', $scope.singleProject[0].id, function(response) {
       if (response.success) {
         $scope.projectAddSession.success = 'Dodano sesje';
         $scope.singleProject[0].sessions.push(fname.sessions);
+        $scope.organizersId=0;
+        $scope.projectAddSession.number+1;
+        $scope.projectAddSession.name='';
+        $scope.projectAddSession.organizers=[];
+        $scope.projectAddSession.organizers[$scope.organizersId]={};
       } else {
         $scope.projectAddSession.error = response.message;
       }
