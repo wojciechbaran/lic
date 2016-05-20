@@ -133,7 +133,7 @@
                             <span class="help-block">{{ 'Pole wymagane' | translate }}</span>
                         </div>
                         <div ng-repeat="userDataFild in config.userDataFilds" class="form-group">
-                            <label for="{{ userDataFild.name }}">{{ userDataFild.label }}</label>
+                            <label for="{{ userDataFild.name }}">{{ userDataFild.label | translate }}</label>
                             <input type="text" name="{{ userDataFild.name }}" id="{{ userDataFild.name }}" class="form-control" ng-model="newUserD.data[userDataFild.name]" ng-required="userDataFild.required"/>
                             <span ng-show="userDataFild.required" class="help-block">{{ 'Pole wymagane' | translate }}</span>
                         </div>
@@ -248,13 +248,13 @@
                     <div class="col-md-2">
                         <ul class="nav nav-pills nav-stacked">
                             <li role="presentation" ng-class="(sessionTab=='start' || !sessionTab)? 'active' : ''">
-                                <a ng-click="setTabEdit('start','sessionTab')">Etykieta</a>
+                                <a ng-click="setTabEdit('start','sessionTab')">{{ 'Etykieta' | translate }}</a>
                             </li>
                             <li role="presentation" ng-class="sessionTab=='description' ? 'active' : ''">
-                                <a ng-click="setTabEdit('description','sessionTab')">Edytuj dane</a>
+                                <a ng-click="setTabEdit('description','sessionTab')">{{ 'Edytuj dane' | translate }}</a>
                             </li>
                             <li role="presentation" ng-class="sessionTab=='blocks' ? 'active' : ''">
-                                <a ng-click="setTabEdit('blocks','sessionTab')">Dodaj Blok</a>
+                                <a ng-click="setTabEdit('blocks','sessionTab')">{{ 'Dodaj Blok' | translate }}</a>
                             </li>
                             <li ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks track by $index" role="presentation" ng-class="sessionTab=='block'+block.id ? 'active' : ''" ng-if="!$last">
                                 <a ng-click="setTabEdit('block'+block.id,'sessionTab')">{{ 'Blok' | translate }} {{ block.id+1}}</a>

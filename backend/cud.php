@@ -6,7 +6,7 @@ $db = $m->lic;
 function chpass($pass1,$pass2){
 	if($pass1!=$pass2){
 		return 'Hasła nie pasują do siebie!';
-	} else if (strlen($pass1) < 8) {
+	} else if (strlen($pass1) < 6) {
 		return 'Podane hasło jest za krótkie!';
 	// } else if( !preg_match("#[A-Z]+#", $pass1) ) {
 	// 	//Password must include at least one CAPS!

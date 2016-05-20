@@ -100,16 +100,12 @@
       $scope.dataLoading = false;
     });
   };
+  
   $scope.userDataEditS = function() {
     $scope.userDataEdit={};
     $scope.dataLoading = true;
     var data=[];
     $scope.config.userDataFilds.forEach(function(userDataFild) {
-      var t={};
-      t[userDataFild.name]=$scope.singleUser[0][userDataFild.name];
-      data.push(t);
-    });
-    $scope.config.lecturerDataFilds.forEach(function(userDataFild) {
       var t={};
       t[userDataFild.name]=$scope.singleUser[0][userDataFild.name];
       data.push(t);
@@ -267,6 +263,7 @@
   };
   $scope.projectEditSession = function(id) {
     $scope.setTab('editSession');
+    $scope.sessionTab='start';
     $scope.projectEditSessionId=id;
     if($scope.singleProject[0].sessions[id].blocks){
       $scope.blockId=$scope.singleProject[0].sessions[id].blocks.length;

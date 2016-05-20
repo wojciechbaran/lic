@@ -5,7 +5,7 @@
     'label': 'Polski'
   }, {
     'key': 'en',
-    'label': 'English'
+    'label': 'Angielski'
   }],
   'defaultLanguage': 'pl',
   'siteName': 'System do Organizacji Konferencji Naukowych',
@@ -33,10 +33,10 @@
     label: 'Informacja wstępna'
   }, {
     id: 2,
-    label: 'Opublikowany, z możlwoścą zapisów'
+    label: 'Opublikowany, z możlwością zapisów'
   }, {
     id: 3,
-    label: 'Opublikowany, bez możlwosci zapisów'
+    label: 'Opublikowany, bez możlwości zapisów'
   }, {
     id: 4,
     label: 'Zakończony'
