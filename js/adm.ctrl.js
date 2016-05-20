@@ -233,16 +233,27 @@
       }
     });
   };
+  $scope.editSessionDescription={};
+  $scope.editSessionDescription.error='';
+  $scope.addSessionsOrganizerInEdition = function(){
+    if($scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers[$scope.organizerEditId] && $scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers[$scope.organizerEditId].id!=''){
+      $scope.organizerEditId++;
+      $scope.initNewOrganizer();
+      $scope.editSessionDescription.error='';
+    }else{
+      $scope.editSessionDescription.error='Wybierz osobę!'
+    }
+
+  }
   $scope.editSessionUpdateS = function(taskMessage,index) {
     $scope[taskMessage]={};
     $scope.dataLoading = true;
-    var ftmp = $scope.singleProject[0].sessions[index];
-    delete ftmp.$$hashKey;
-    var data = ['sessions','name',$scope.singleProject[0].sessions[index].name];
     var where = [{
       id: $scope.singleProject[0].id,
-      'sessions.number': $scope.singleProject[0].sessions[index].number
+      'sessions.number': $scope.singleProject[0].sessions[index].number      
     }];
+    var data = ['sessions.$.name',$scope.singleProject[0].sessions[index].name];
+    var where=[{'id':$scope.singleProject[0].id},{'sessions.number':$scope.singleProject[0].sessions[index].number}];
     CUDService.Go('deepUpdate', data, 'projects', where, function(response) {
       if (response.success) {
         $scope[taskMessage].success = 'Zmieniono dane';
@@ -251,6 +262,17 @@
       }
       $scope.dataLoading = false;
     });
+    if($scope.singleProject[0].sessions[index].organizers && $scope.singleProject[0].sessions[index].organizers.length>0){
+      data = ['sessions.$.organizers',$scope.singleProject[0].sessions[index].organizers];
+      CUDService.Go('deepUpdate', data, 'projects', where, function(response) {
+        if (response.success) {        
+          $scope[taskMessage].success = 'Zmieniono dane';
+        } else {
+          $scope[taskMessage].error = response.message;
+        }
+        $scope.dataLoading = false;
+      });
+    }
   };
   $scope.editContractor = function(id) {
     if($scope.singleContractor){
@@ -265,6 +287,7 @@
     $scope.setTab('editSession');
     $scope.sessionTab='start';
     $scope.projectEditSessionId=id;
+
     if(!$scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks){
       $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks=[];
       $scope.blockbegin=0;
@@ -278,7 +301,19 @@
       $scope.blockId=0;
     }
     $scope.initNewBlock($scope.blockId);
+    $scope.initNewOrganizer();
   };
+  $scope.initNewOrganizer = function(){
+    if($scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers){
+      $scope.organizerEditId=$scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers.length;
+    }else{
+      $scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers=[];
+      $scope.organizerEditId=0;
+    }
+    $scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers[$scope.organizerEditId]={}
+    $scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers[$scope.organizerEditId].id='';
+    $scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers[$scope.organizerEditId].show='';
+  };  
   $scope.initNewBlock = function(blockId){
     $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[blockId]={};
     $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[blockId].id=blockId;

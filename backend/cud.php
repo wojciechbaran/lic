@@ -147,12 +147,12 @@ if($request['type']=='add'){
 	$table=$request['table'];
 	$col = $db->{$table};
 	$data=$request['data'];	
-	$col->update($place,array('$set' => array( $data[0].'.$.'.$data[1] => $data[2])));
+	$where=$data[0];
+	$col->update($place,array('$set' => array( $where => $data[1])));
 	$error='Dane zostały zmienione!';
 	$success=true;
-	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error);
-}
-else if($request['type']=='deepPush'){
+	$res = array('type' => $request['type'], 'success' => $success, 'message' => $error, 'where'=>$where, 'place'=>$place);
+}else if($request['type']=='deepPush'){
 	$error='';
 	$success=false;
 	$place= array();

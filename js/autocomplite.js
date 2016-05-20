@@ -1,4 +1,4 @@
-testApp.directive('ngAutocomplite', function(CONFIG, CUDService) {
+testApp.directive('ngAutocomplite', function(CONFIG) {
   function link(scope) {
   	scope.config=CONFIG;
     scope.listOn = false;
