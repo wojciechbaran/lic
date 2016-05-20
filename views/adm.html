@@ -262,12 +262,35 @@
                         </ul>
                     </div>
                     <div class="col-md-10">
-                        <div class="panel panel-default"  ng-show="sessionTab=='start' || !sessionTab">
+                        <div class="panel panel-default"  ng-if="sessionTab=='start' || !sessionTab">
                             <div class="panel-body">
                                 <h3>{{ 'Konferencja' | translate }}: {{ singleProject[0].title[defaultLanguage] }}</h3>
                                 <h4>{{ 'Sesja' | translate }}: {{ singleProject[0].sessions[projectEditSessionId].number }} : {{ singleProject[0].sessions[projectEditSessionId].name }}</h4>
-                                <p>{{ 'Organizatorzy' | translate }}:</p>
-                                <div >
+                                <p>
+                                    <span>{{ 'Organizatorzy' | translate }}: </span>
+                                    <span ng-repeat="organizer in singleProject[0].sessions[projectEditSessionId].organizers track by $index">{{ organizer.id }} </span>
+                                </p>
+                                <div class="row"></div>
+                                <h3>{{ 'Plan' | translate }}:</h3>
+                                <div ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks track by $index" ng-init="blockbegin=block.begin " ng-if="!$last">
+                                    <h4>{{ 'Blok' | translate }} {{ block.id+1 }}</h4>
+                                    <p>{{ 'Dzień' | translate }}: {{ block.day  | date:'dd/MM'}}, {{ blockbegin }}</p>
+                                    <p>{{ 'Sala' | translate }}: {{ block.room }}, {{ 'Prowadzący' | translate }}: {{ block.chair }}</p>
+                                    <table class="table">
+                                        <tr ng-repeat="lecture in block.lectures" ng-init="duration=lecture.duration;
+                                        timeEnd=block.begin + duration; 
+                                        timeStart=block.begin;
+                                        block.begin = block.begin + lecture.duration;
+                                        ">
+                                            <td class="col-md-3">{{ timeStart }}-{{ timeEnd}}</td>
+                                            <td class="col-md-8" ng-if="lecture.lectureType!='Wykład'">{{ lecture.lectureType | translate }}</td>
+                                            <td class="col-md-8" ng-if="lecture.lectureType=='Wykład'">{{ lecture.label }}</td>
+                                        </tr>
+                                    </table>
+                                    <hr />
+                                </div>
+
+                                <div>
                                 </div>
                             </div>
                         </div>
@@ -330,6 +353,13 @@
                                     <label for="name">{{ 'Nazwa sesji' | translate }}</label>
                                         <input type="text" name="name" id="name" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].name" />
                                     </div>
+                                    <div class="form-group">
+                                        <label for="name">{{ 'Organizatorzy' | translate }}</label>
+                                        <span ng-autocomplite from="projectUsersList" to="singleProject[0].sessions[projectEditSessionId].organizers[organizerEditId].id" show="singleProject[0].sessions[projectEditSessionId].organizers[organizerEditId].show"></span>
+                                        <span ng-repeat="organizer in singleProject[0].sessions[projectEditSessionId].organizers track by $index"  ng-if="!$last">{{ organizer.id }}</span>
+                                        <input type="text" name="name" id="name" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].organizers[organizerEditId].show" disabled="true"/>
+                                        <span ng-click="addSessionsOrganizerInEdition()" class="glyphicon glyphicon-plus"></span>
+                                </div>
                                     <div class="form-actions">
                                         <button type="submit" ng-disabled="dataLoading" class="btn btn-primary">{{ 'Zmień' | translate }}</button>
                                         <img ng-if="dataLoading" src="lic/images/loading.gif"  />

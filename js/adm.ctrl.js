@@ -265,6 +265,10 @@
     $scope.setTab('editSession');
     $scope.sessionTab='start';
     $scope.projectEditSessionId=id;
+    if(!$scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks){
+      $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks=[];
+      $scope.blockbegin=0;
+    }      
     if($scope.singleProject[0].sessions[id].blocks){
       $scope.blockId=$scope.singleProject[0].sessions[id].blocks.length;
     }else{

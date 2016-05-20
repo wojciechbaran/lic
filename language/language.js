@@ -141,14 +141,16 @@
   'Typ':'Type',
   'Przerwa':'Coffe break',
   'Dyskusja':'Discussion',
-  'Dodaj blok':'Add panel',
+  'Dodaj Blok':'Add Panel',
   'Blok':'Panel',
   'Bloki':'Panels',
   'Edytuj blok':'Panel edit',
   'Znajdź':'Find',
   'Ilość sesji':'Number of sessions',
   'Podsumowanie':'Summary',
-  'Dodano':'Added'
+  'Dodano':'Added',
+  'Edytuj dane':'Edit data',
+  'Jesteś już zapisany':'You are already sign in'
 });
 testApp.constant('DE', {
   'Logowanie': 'Login',
