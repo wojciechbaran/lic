@@ -150,7 +150,8 @@
   'Podsumowanie':'Summary',
   'Dodano':'Added',
   'Edytuj dane':'Edit data',
-  'Jesteś już zapisany':'You are already sign in'
+  'Jesteś już zapisany':'You are already sign in',
+  'Przed dodaniem bloku, upewnij się, że dodałeś ostatnią pozycję na planie':'Before adding a panel , make sure that you have added the last item on the set',
 });
 testApp.constant('DE', {
   'Logowanie': 'Login',

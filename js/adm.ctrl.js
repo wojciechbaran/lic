@@ -267,6 +267,7 @@
       CUDService.Go('deepUpdate', data, 'projects', where, function(response) {
         if (response.success) {        
           $scope[taskMessage].success = 'Zmieniono dane';
+          $scope.addSessionsOrganizerInEdition();
         } else {
           $scope[taskMessage].error = response.message;
         }
