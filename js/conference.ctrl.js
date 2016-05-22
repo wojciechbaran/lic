@@ -7,10 +7,18 @@ testApp.controller('conferenceController', function($scope, CONFIG, $routeParams
   });
   SearchService.search('simple', 'id:' + $scope.id, 'projects', '', function(response) {
   	$scope.singleProject = response;
+    //set users singIn
+    if($scope.singleProject[0].users){
+      $scope.projectUsersList=[];
+      $scope.singleProject[0].users.forEach(function(id){
+        SearchService.search('simple', 'id:' + id, 'users', '', function(response) {
+          $scope.projectUsersList.push(response[0]);
+        });
+      });
+    }
   	if($scope.currentUser && $scope.currentUser.id){
   		if(jQuery.inArray( $scope.currentUser.id, $scope.singleProject[0].users ) != -1){
 	  		$scope.singInStatus=true;
-
 	  	}
   	}
   });

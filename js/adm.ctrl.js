@@ -192,7 +192,7 @@
       $scope.initAddNewSession();
       //set users singIn
       if($scope.singleProject[0].users){
-        $scope.projectUsersList=[]
+        $scope.projectUsersList=[];
         $scope.singleProject[0].users.forEach(function(id){
           SearchService.search('simple', 'id:' + id, 'users', '', function(response) {
             $scope.projectUsersList.push(response[0]);
@@ -397,7 +397,7 @@
     $scope.listUsersS();
     $scope.listAdminsS();
     $scope.listContractorsS();
-    $scope.editProject('5741b54616b77');
+    //$scope.editProject('5741b54616b77');
     $scope.listArticlesS();
   };
   $scope.init();

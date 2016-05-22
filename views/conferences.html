@@ -29,12 +29,6 @@
 						<li role="presentation" ng-class="sessionTab=='participants' ? 'active' : ''">
 							<a ng-click="setTabSession('participants')">{{ 'Uczestnicy' | translate }}</a>
 						</li>
-						<li role="presentation" ng-class="sessionTab=='plenaryspeakers' ? 'active' : ''">
-							<a ng-click="setTabSession('plenaryspeakers')">{{ 'Plenary speakers' | translate }}</a>
-						</li>
-						<li role="presentation" ng-class="sessionTab=='articles' ? 'active' : ''">
-							<a ng-click="setTabSession('articles')">{{ 'Artykuły' | translate }}</a>
-						</li>
 					</ul>
 				</div>
 				<div class="col-md-10">
@@ -120,26 +114,14 @@
 		            </div>
 		            <div class="panel panel-default"  ng-if="sessionTab=='participants'">
 						<div class="panel-heading">
-							<h4 class="panel-title">{{ 'Uczestnicy' | translate }}</h4>
+							<h4 class="panel-title">{{ 'Uczestnicy' | translate }}</h4>							
 						</div>
                         <div class="panel-body">
-                        	
-		                </div>
-		            </div>
-		            <div class="panel panel-default"  ng-if="sessionTab=='plenaryspeakers'">
-						<div class="panel-heading">
-							<h4 class="panel-title">{{ 'Plenary speakers' | translate }}</h4>
-						</div>
-                        <div class="panel-body">
-                        	
-		                </div>
-		            </div>
-		            <div class="panel panel-default"  ng-if="sessionTab=='articles'">
-						<div class="panel-heading">
-							<h4 class="panel-title">{{ 'Artykuły' | translate }}</h4>
-						</div>
-                        <div class="panel-body">
-                        	
+                        	<ul>
+								<li ng-repeat="user in projectUsersList | orderBy: 'user.surname'">
+									{{ user.name }} {{ user.surname }}
+								</li>
+							</ul>
 		                </div>
 		            </div>
 				</div>
