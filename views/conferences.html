@@ -89,11 +89,11 @@
 	                        		<div id="sessionInfo{{ session.number }}" class="sessionInfo hidden">
 	                        			<div ng-if="session.organizers && session.organizers[0].id!=''">
 	                        				{{ 'Organizatorzy' | translate }}:
-	                        				<span ng-repeat="organizer in session.organizers track by $index"><span ng-userfullname userid="organizer.id"></span>, </span>	                     
+	                        				<span ng-repeat="organizer in session.organizers track by $index"><span ng-userfullname userid="organizer"></span>, </span>	                     
 	                        			</div>
 		                                <p>{{ 'Plan' | translate }}:</p>
 		                                <div ng-repeat="block in session.blocks track by $index" ng-init="lecture.blockbegin=block.begin">
-		                                    <h4>{{ 'Blok' | translate }} {{ block.id+1 }}</h4>
+		                                    <h4>{{ 'Blok' | translate }} {{ $index+1 }}</h4>
 		                                    <p>{{ 'Dzień' | translate }}: {{ block.day  | date:'dd/MM'}}, <span ng-fulltime time="{{ lecture.blockbegin }}"></span></p>
 		                                    <p>{{ 'Sala' | translate }}: {{ block.room }}, {{ 'Prowadzący' | translate }}: <span ng-userfullname userid="block.chair"></p>
 		                                    <table class="table">

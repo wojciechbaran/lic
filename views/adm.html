@@ -266,14 +266,14 @@
                             <div class="panel-body">
                                 <h3>{{ 'Konferencja' | translate }}: {{ singleProject[0].title[defaultLanguage] }}</h3>
                                 <h4>{{ 'Sesja' | translate }}: {{ singleProject[0].sessions[projectEditSessionId].number }} : {{ singleProject[0].sessions[projectEditSessionId].name[defaultLanguage] }}</h4>
-                                <p ng-if="singleProject[0].sessions[projectEditSessionId].organizers && singleProject[0].sessions[projectEditSessionId].organizers.length>1">
+                                <p ng-if="singleProject[0].sessions[projectEditSessionId].organizers && singleProject[0].sessions[projectEditSessionId].organizers.length>0">
                                     <span>{{ 'Organizatorzy' | translate }}: </span>
-                                    <span ng-repeat="organizer in singleProject[0].sessions[projectEditSessionId].organizers track by $index" ng-if="!$last"><span ng-userfullname userid="organizer.id"></span>, </span>
+                                    <span ng-repeat="organizer in singleProject[0].sessions[projectEditSessionId].organizers track by $index" ><span ng-userfullname userid="organizer"></span>, </span>
                                 </p>
                                 <div class="row"></div>
                                 <h3>{{ 'Plan' | translate }}:</h3>
                                 <div ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks track by $index" ng-init="lecture.blockbegin=block.begin ">
-                                    <h4>{{ 'Blok' | translate }} {{ block.id+1 }}</h4>
+                                    <h4>{{ 'Blok' | translate }} {{ $index+1 }}</h4>
                                     <p>{{ 'Dzień' | translate }}: {{ block.day  | date:'dd/MM'}}, <span ng-fulltime time="{{ lecture.blockbegin }}"></span></p>
                                     <p>{{ 'Sala' | translate }}: {{ block.room }}, {{ 'Prowadzący' | translate }}: <span ng-userfullname userid="block.chair"></p>
                                     <table class="table">
@@ -342,30 +342,28 @@
                         </div>
                         <div class="panel panel-default"  ng-show="sessionTab=='description'">
                             <div class="panel-body">
-                                <div ng-show="editSessionDescription.error" class="alert alert-danger">{{editSessionDescription.error | translate}}</div>
-                                <div ng-show="editSessionDescription.success" class="alert alert-success">{{editSessionDescription.success | translate}}</div>
-                                <form name="editSessionDescriptionform" ng-submit="editSessionUpdateS('editSessionDescription',projectEditSessionId)" role="form">
+                                <div ng-show="updateSessionf.error" class="alert alert-danger">{{updateSessionf.error | translate}}</div>
+                                <div ng-show="updateSessionf.success" class="alert alert-success">{{updateSessionf.success | translate}}</div>
+                                <form name="editSessionDescriptionform" ng-submit="updateSessionS()" role="form">
                                     <div class="form-group">
                                         <label for="number">{{ 'Numer sesji' | translate }}</label>
                                         <input type="text" name="number" id="number" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].number" disabled="true" />
                                     </div>
-                                    <div class="form-group">
-                                    <label for="name">{{ 'Nazwa sesji' | translate }}</label>
-                                        <input type="text" name="name" id="name" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].name" />
+                                    <div class="form-group" ng-repeat="lang in config.languages">
+                                        <label for="name">{{ 'Nazwa sesji' | translate }} [{{ lang.label | translate }}]</label>
+                                        <input type="text" name="name" id="name" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].name[lang.key]" required="true" />
                                     </div>
-                                    <div class="form-group">
-                                        <label for="name">{{ 'Organizatorzy' | translate }}</label>
-                                        <p ng-repeat="organizer in singleProject[0].sessions[projectEditSessionId].organizers track by $index" ng-if="!$last" ><span ng-userfullname userid="organizer.id"></span></p>
-                                        {{ 'Znajdź' | translate }}<span ng-autocomplite from="projectUsersList" to="singleProject[0].sessions[projectEditSessionId].organizers[organizerEditId].id" show="singleProject[0].sessions[projectEditSessionId].organizers[organizerEditId].show"></span>
-                                        
-                                        <input type="text" name="name" id="name" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].organizers[organizerEditId].show" disabled="true"/>
-                                        <span ng-click="addSessionsOrganizerInEdition()" class="glyphicon glyphicon-plus"></span>
-                                </div>
+                                    <div class="form-group" ng-repeat="lang in config.languages">
+                                        <label for="name">{{ 'Cele' | translate }} [{{ lang.label | translate }}]</label>
+                                        <input type="text" name="name" id="name" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].aims[lang.key]"  />
+                                    </div>
+                                    <div ng-addusers userslist="projectUsersList" to="singleProject[0].sessions[projectEditSessionId].organizers" label="Organizatorzy"></div>
                                     <div class="form-actions">
                                         <button type="submit" ng-disabled="dataLoading" class="btn btn-primary">{{ 'Zmień' | translate }}</button>
                                         <img ng-if="dataLoading" src="lic/images/loading.gif"  />
-                                    </div>
+                                    </div>                                    
                                 </form>
+
 
                             </div>
                         </div>

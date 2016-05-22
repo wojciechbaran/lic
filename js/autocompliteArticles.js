@@ -10,7 +10,6 @@ testApp.directive('ngAutocompliteArticles', function(CONFIG, CUDService) {
     };
     scope.chosseArticle = function(linki, name){
     	scope.to=linki;
-    	scope.show=name;
     	scope.listOn = false;
     };
     
@@ -19,8 +18,7 @@ testApp.directive('ngAutocompliteArticles', function(CONFIG, CUDService) {
     restrict: 'A',
     scope: {
       from: '=',
-      to: '=',
-      show: '=',      
+      to: '='     
     },
     templateUrl: CONFIG.route + '/views/autocompliteArticles.html',
     link: link

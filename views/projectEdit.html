@@ -223,25 +223,14 @@
                                     <input type="text" name="number" id="number" class="form-control" ng-model="addNewSession.number" disabled="true" />
                                 </div>
                                 <div class="form-group" ng-repeat="lang in config.languages">
-                                <label for="name">{{ 'Nazwa sesji' | translate }} [{{ lang.label | translate }}]</label>
+                                    <label for="name">{{ 'Nazwa sesji' | translate }} [{{ lang.label | translate }}]</label>
                                     <input type="text" name="name" id="name" class="form-control" ng-model="addNewSession.name[lang.key]" required="true" />
                                 </div>
                                 <div class="form-group" ng-repeat="lang in config.languages">
-                                <label for="name">{{ 'Cele' | translate }} [{{ lang.label | translate }}]</label>
+                                    <label for="name">{{ 'Cele' | translate }} [{{ lang.label | translate }}]</label>
                                     <input type="text" name="name" id="name" class="form-control" ng-model="addNewSession.aims[lang.key]"  />
                                 </div>
-
-
-                                <!-- <div class="form-group">
-
-
-                                <label for="name">{{ 'Organizatorzy' | translate }}</label>
-                                    <span ng-autocomplite from="projectUsersList" to="projectAddSession.organizers[organizersId].id" show="projectAddSession.organizers[organizersId].show"></span>
-                                    <input ng-repeat="organizer in projectAddSession.organizers track by $index" type="text" name="name" id="name" class="form-control" ng-model="projectAddSession.organizers[$index].show" disabled="true" ng-if="!$last"/>
-                                    <input type="text" name="name" id="name" class="form-control" ng-model="projectAddSession.organizers[organizersId].show" disabled="true"/>
-                                    <span ng-click="addSessionsOrganizer()" class="glyphicon glyphicon-plus"></span>
-
-                                </div> -->
+                                <div ng-addusers userslist="projectUsersList" to="addNewSession.organizers" label="Organizatorzy"></div>
                                 <div class="form-actions">
                                     <button type="submit" ng-disabled="dataLoading" class="btn btn-primary">{{ 'Dodaj' | translate }}</button>
                                     <img ng-if="dataLoading" src="lic/images/loading.gif"  />

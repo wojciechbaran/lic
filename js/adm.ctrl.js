@@ -212,6 +212,7 @@
     $scope.addNewSession.cancel=false;
     $scope.addNewSession.aims={};
     $scope.addNewSession.blocks=[];
+    $scope.addNewSession.organizers=[];
   };
   $scope.initAddNewBlock = function() {
     $scope.addNewBlock = {};
@@ -243,7 +244,7 @@
     $scope.addNewLecture.duration=0;
   };
   $scope.addNewSessionS = function(){
-    //$scope.dataLoading = true;
+    $scope.dataLoading = true;
     $scope.addNewSessionf={};
     $scope.addNewSessionf.success='';
     $scope.addNewSessionf.error='';
@@ -255,7 +256,7 @@
       } else {
         $scope.addNewSessionf.error = response.message;
       }
-      //$scope.dataLoading = false;
+      $scope.dataLoading = false;
     });
   };
   $scope.projectEditSession = function(id) {
@@ -263,8 +264,6 @@
     $scope.sessionTab='start';
     $scope.projectEditSessionId=id;
     $scope.initAddNewBlock();
-
-    //$scope.initNewOrganizer();
   };
   $scope.addNewLectureS = function() {
     $scope.addNewLecturef={};
@@ -281,11 +280,10 @@
   };
   $scope.addNewBlockS = function() {
     $scope.addNewBlockf={};
-    console.log($scope.addNewBlock);
+    $scope.dataLoading = true;
     $scope.addNewBlockf.success='';
     $scope.addNewBlockf.error='';
     $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks.push($scope.addNewBlock);
-    console.log($scope.singleProject[0]);
     var where = [{id:$scope.singleProject[0].id}, {'sessions.number':$scope.singleProject[0].sessions[$scope.projectEditSessionId].number}];
     var data = ['sessions',$scope.singleProject[0].sessions];
     CUDService.Go('deepUpdate', data, 'projects', where, function(response) {
@@ -295,56 +293,24 @@
       } else {
         $scope.addNewSessionf.error = response.message;
       }
-      //$scope.dataLoading = false;
+      $scope.dataLoading = false;
     });
   };
-
-
-
-  $scope.editSessionDescription={};
-  $scope.editSessionDescription.error='';
-  $scope.addSessionsOrganizerInEdition = function(){
-    if($scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers[$scope.organizerEditId] && $scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers[$scope.organizerEditId].id!=''){
-      $scope.organizerEditId++;
-      $scope.initNewOrganizer();
-      $scope.editSessionDescription.error='';
-    }else{
-      $scope.editSessionDescription.error='Wybierz osobę!'
-    }
-
-  }
-  $scope.editSessionUpdateS = function(taskMessage,index) {
-    $scope[taskMessage]={};
+  $scope.updateSessionS = function() {
+    $scope.updateSessionf={};
+    $scope.updateSessionf.success='';
+    $scope.updateSessionf.error='';
     $scope.dataLoading = true;
-    var where = [{
-      id: $scope.singleProject[0].id,
-      'sessions.number': $scope.singleProject[0].sessions[index].number      
-    }];
-    var data = ['sessions.$.name',$scope.singleProject[0].sessions[index].name];
-    var where=[{'id':$scope.singleProject[0].id},{'sessions.number':$scope.singleProject[0].sessions[index].number}];
+    var where = [{id:$scope.singleProject[0].id}, {'sessions.number':$scope.singleProject[0].sessions[$scope.projectEditSessionId].number}];
+    var data = ['sessions',$scope.singleProject[0].sessions];
     CUDService.Go('deepUpdate', data, 'projects', where, function(response) {
       if (response.success) {
-        $scope[taskMessage].success = 'Zmieniono dane';
+        $scope.updateSessionf.success='Dane zostały zmienione!';
       } else {
-        $scope[taskMessage].error = response.message;
+        $scope.updateSessionf.error = response.message;
       }
       $scope.dataLoading = false;
     });
-    if($scope.singleProject[0].sessions[index].organizers && $scope.singleProject[0].sessions[index].organizers.length>0){
-      if($scope.singleProject[0].sessions[index].organizers[$scope.singleProject[0].sessions[index].organizers.length-1].id=''){
-        scope.singleProject[0].sessions[index].organizers.pop();
-      }
-      data = ['sessions.$.organizers',$scope.singleProject[0].sessions[index].organizers];
-      CUDService.Go('deepUpdate', data, 'projects', where, function(response) {
-        if (response.success) {        
-          $scope[taskMessage].success = 'Zmieniono dane';
-          $scope.addSessionsOrganizerInEdition();
-        } else {
-          $scope[taskMessage].error = response.message;
-        }
-        $scope.dataLoading = false;
-      });
-    }
   };
   $scope.editContractor = function(id) {
     if($scope.singleContractor){
