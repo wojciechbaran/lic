@@ -144,6 +144,7 @@
   $scope.projectAddSession={};
   $scope.organizersId=0;
   $scope.projectAddSession.organizers=[];
+  $scope.projectAddSession.blocks=[];
   $scope.projectAddSession.organizers[$scope.organizersId]={};
   $scope.addSessionsOrganizer = function() {
     if($scope.projectAddSession.organizers[$scope.organizersId].id){
@@ -165,11 +166,12 @@
     if(!fname.sessions.organizers[fname.sessions.organizers.length-1].id){
       fname.sessions.organizers.pop();
     }
+    $scope.projectAddSessionfname=fname;
     var data = [fname];
     CUDService.Go('push', data, 'projects', $scope.singleProject[0].id, function(response) {
       if (response.success) {
         $scope.projectAddSession.success = 'Dodano sesje';
-        $scope.singleProject[0].sessions.push(fname.sessions);
+        $scope.singleProject[0].sessions.push($scope.projectAddSessionfname.sessions);
         $scope.organizersId=0;
         $scope.projectAddSession.number+1;
         $scope.projectAddSession.name='';
@@ -263,6 +265,9 @@
       $scope.dataLoading = false;
     });
     if($scope.singleProject[0].sessions[index].organizers && $scope.singleProject[0].sessions[index].organizers.length>0){
+      if($scope.singleProject[0].sessions[index].organizers[$scope.singleProject[0].sessions[index].organizers.length-1].id=''){
+        scope.singleProject[0].sessions[index].organizers.pop();
+      }
       data = ['sessions.$.organizers',$scope.singleProject[0].sessions[index].organizers];
       CUDService.Go('deepUpdate', data, 'projects', where, function(response) {
         if (response.success) {        
@@ -369,8 +374,8 @@
     delete tmp.startHour;
     delete tmp.startMinute;
     delete tmp.chairShow;
-    var data = ['sessions.$.blocks',tmp];
     var where=[{'id':$scope.singleProject[0].id},{'sessions.number':projectEditSessionId+1}];
+    var data = ['sessions.$.blocks',tmp];
     CUDService.Go('deepPush', data, 'projects', where, function(response) {
       if (response.success) {
         $scope.addSessionsBlock.success = response.message;        
@@ -459,7 +464,7 @@
     $scope.listUsersS();
     $scope.listAdminsS();
     $scope.listContractorsS();
-    $scope.editProject('572f4f7c18dd9');
+    $scope.editProject('57410910be4f5');
     $scope.initAddSessionsPlan();
     $scope.listArticlesS();
   };

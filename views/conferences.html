@@ -18,61 +18,131 @@
 				</span>
 			</div>
 			<div class="panel-body">
-				<div class="col-md-10">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								{{ 'Termin' | translate }}
-							</h3>
-						</div>
-						<div class="panel-body">
-							<span ng-if="singleProject[0].startDate==singleProject[0].endDate">
-			                    {{ singleProject[0].startDate | date:'dd/MM/yyyy' }}
-			                </span>
-			                <span ng-if="singleProject[0].startDate!=singleProject[0].endDate">
-			                    {{ singleProject[0].startDate | date:'dd/MM/yyyy' }} - {{ singleProject[0].endDate | date:'dd/MM/yyyy' }}
-			                </span>	
-						</div>
-					</div>
+				<div class="col-md-2">
+					<ul class="nav nav-pills nav-stacked">
+						<li role="presentation" ng-class="(sessionTab=='start' || !sessionTab)? 'active' : ''">
+							<a ng-click="setTabSession('start')">{{ 'Podstawowe informacje' | translate }}</a>
+						</li>
+						<li role="presentation" ng-class="sessionTab=='sessions' ? 'active' : ''">
+							<a ng-click="setTabSession('sessions')">{{ 'Sesje' | translate }}</a>
+						</li>
+						<li role="presentation" ng-class="sessionTab=='participants' ? 'active' : ''">
+							<a ng-click="setTabSession('participants')">{{ 'Uczestnicy' | translate }}</a>
+						</li>
+						<li role="presentation" ng-class="sessionTab=='plenaryspeakers' ? 'active' : ''">
+							<a ng-click="setTabSession('plenaryspeakers')">{{ 'Plenary speakers' | translate }}</a>
+						</li>
+						<li role="presentation" ng-class="sessionTab=='articles' ? 'active' : ''">
+							<a ng-click="setTabSession('articles')">{{ 'Artykuły' | translate }}</a>
+						</li>
+					</ul>
 				</div>
 				<div class="col-md-10">
-					<div class="panel panel-default">
+					<div class="panel panel-default"  ng-if="sessionTab=='start' || !sessionTab">
 						<div class="panel-heading">
-							<h3 class="panel-title">
-								{{ 'Miejsce' | translate }}
-							</h3>
+							<h4 class="panel-title">{{ 'Podstawowe informacje' | translate }}</h4>
 						</div>
-						<div class="panel-body">
-							{{ singleProject[0].place.name }}<br/>
-							{{ singleProject[0].place.street }} <br/>
-							{{ singleProject[0].place.kode }} {{ singleProject[0].place.city }}
+                        <div class="panel-body">
+                        	<table class="table">		                  
+		                        <tr ng-if="singleProject[0].startDate">
+		                            <td class="col-md-3">{{ 'Termin' | translate }}</td>
+		                            <td class="col-md-9">
+	                                    <span ng-if="singleProject[0].startDate==singleProject[0].endDate">
+	                                        {{ singleProject[0].startDate | date:'dd/MM/yyyy' }}
+	                                    </span>
+	                                    <span ng-if="singleProject[0].startDate!=singleProject[0].endDate">
+	                                        {{ singleProject[0].startDate | date:'dd/MM/yyyy' }} - {{ singleProject[0].endDate | date:'dd/MM/yyyy' }}
+	                                    </span>
+		                            </td>
+		                        </tr>
+		                        <tr ng-if="singleProject[0].endDateUser">
+		                            <td class="col-md-3">{{ 'Data zakończenia zapisów' | translate }}</td>
+		                            <td class="col-md-9">{{ singleProject[0].endDateUser | date:'dd/MM/yyyy' }}</td>
+		                        </tr>
+		                        <tr ng-if="singleProject[0].endDateLecturer">
+		                            <td class="col-md-3">{{ 'Ostateczna data przesłania abstraktów' | translate }}</td>
+		                            <td class="col-md-9">{{ singleProject[0].endDateLecturer | date:'dd/MM/yyyy' }}</td>
+		                        </tr>
+								<tr ng-if="singleProject[0].place && singleProject[0].place.name">
+		                            <td class="col-md-3">{{ 'Miejsce' | translate }}</td>
+		                            <td class="col-md-9">
+		                            	{{ singleProject[0].place.name }}<br/>
+										{{ singleProject[0].place.street }} <br/>
+										{{ singleProject[0].place.kode }} {{ singleProject[0].place.city }}
+									</td>
+		                        </tr>
+		                        <tr ng-if="singleProject[0].description[defaultLanguage]">
+		                            <td class="col-md-3">{{ 'Opis' | translate }}</td>
+		                            <td class="col-md-9">{{ singleProject[0].description[defaultLanguage] }}</td>
+		                        </tr>
+		                    </table>
+		               	</div>
+		            </div>
+		            <div class="panel panel-default"  ng-if="sessionTab=='sessions'">
+						<div class="panel-heading">
+							<h4 class="panel-title">{{ 'Sesje' | translate }}</h4>
 						</div>
-					</div>
+                        <div class="panel-body">
+	                        <ul class="list-group">
+	                        	<li ng-repeat="session in singleProject[0].sessions track by $index" class="list-group-item">
+	                        		<a ng-click="showSessionInfo('sessionInfo'+session.number)">{{ 'Sesja' | translate }} {{ session.number }}: {{ session.name }}</a>
+	                        		<div id="sessionInfo{{ session.number }}" class="sessionInfo hidden">
+	                        			<div ng-if="session.organizers && session.organizers[0].id!=''">
+	                        				{{ 'Organizatorzy' | translate }}:
+	                        				<span ng-repeat="organizer in session.organizers track by $index"><span ng-userfullname userid="organizer.id"></span>, </span>	                     
+	                        			</div>
+		                                <p>{{ 'Plan' | translate }}:</p>
+		                                <div ng-repeat="block in session.blocks track by $index" ng-init="lecture.blockbegin=block.begin">
+		                                    <h4>{{ 'Blok' | translate }} {{ block.id+1 }}</h4>
+		                                    <p>{{ 'Dzień' | translate }}: {{ block.day  | date:'dd/MM'}}, <span ng-fulltime time="{{ lecture.blockbegin }}"></span></p>
+		                                    <p>{{ 'Sala' | translate }}: {{ block.room }}, {{ 'Prowadzący' | translate }}: <span ng-userfullname userid="block.chair"></p>
+		                                    <table class="table">
+		                                        <tr ng-repeat="lecture in block.lectures" ng-init="duration=lecture.duration;
+		                                        lecture.timeEnd=block.begin + duration; 
+		                                        lecture.timeStart=block.begin;
+		                                        block.begin = block.begin + lecture.duration;
+		                                        ">
+		                                            <td class="col-md-3"><span ng-fulltime time="{{ lecture.timeStart }}"></span>-<span ng-fulltime time="{{ lecture.timeEnd }}"></span></td><td class="col-md-8" ng-if="lecture.lectureType!='Wykład'">{{ lecture.lectureType | translate }}</td>
+		                                            <td class="col-md-8" ng-if="lecture.lectureType=='Wykład'">
+		                                            	<span ng-articlesfull articlelist="listArticles" articlelink="lecture.articleLink" user="true" cilcable="false"></span>
+		                                            </td>
+		                                        </tr>
+		                                    </table>
+		                                    <hr />
+		                                </div>
+		                                <div class="row">
+		                                	<button class="btn btn-primary pull-right" ng-click="showSessionInfo('sessionInfo'+session.number)">{{ 'Wstecz' | translate }}</button>
+		                                </div>		                                		                                
+	                        		</div>
+	                        	</li>
+	                        </ul>                
+		                </div>
+		            </div>
+		            <div class="panel panel-default"  ng-if="sessionTab=='participants'">
+						<div class="panel-heading">
+							<h4 class="panel-title">{{ 'Uczestnicy' | translate }}</h4>
+						</div>
+                        <div class="panel-body">
+                        	
+		                </div>
+		            </div>
+		            <div class="panel panel-default"  ng-if="sessionTab=='plenaryspeakers'">
+						<div class="panel-heading">
+							<h4 class="panel-title">{{ 'Plenary speakers' | translate }}</h4>
+						</div>
+                        <div class="panel-body">
+                        	
+		                </div>
+		            </div>
+		            <div class="panel panel-default"  ng-if="sessionTab=='articles'">
+						<div class="panel-heading">
+							<h4 class="panel-title">{{ 'Artykuły' | translate }}</h4>
+						</div>
+                        <div class="panel-body">
+                        	
+		                </div>
+		            </div>
 				</div>
-				<div class="col-md-10">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								{{ 'Opis' | translate }}
-							</h3>
-						</div>
-						<div class="panel-body">
-							{{ singleProject[0].description[defaultLanguage] }}
-						</div>
-					</div>
-				</div>
-				<div class="col-md-10">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								{{ 'Plan' | translate }}
-							</h3>
-						</div>
-						<div class="panel-body">
-							{{ singleProject[0].plan[defaultLanguage] }}
-						</div>
-					</div>
-				</div>      	
 			</div>
 		</div>	
 	</div>

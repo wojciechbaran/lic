@@ -152,6 +152,9 @@
   'Edytuj dane':'Edit data',
   'Jesteś już zapisany':'You are already sign in',
   'Przed dodaniem bloku, upewnij się, że dodałeś ostatnią pozycję na planie':'Before adding a panel , make sure that you have added the last item on the set',
+  'Plenary speakers':'Plenary speakers',
+  'Artykuły':'Articles'
+
 });
 testApp.constant('DE', {
   'Logowanie': 'Login',
