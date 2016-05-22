@@ -31,6 +31,7 @@ testApp.directive('ngTime', function(CONFIG, CUDService) {
       }else{
         scope.minutesShow=scope.minutes;
       }
+      scope.time=(60*scope.hours)+scope.minutes;
     };
     scope.changeTime = function(d,t){
       if(d=='more'){
@@ -46,8 +47,7 @@ testApp.directive('ngTime', function(CONFIG, CUDService) {
   return {
     restrict: 'A',
     scope: {
-      hours: '=',
-      minutes: '=',
+      time: '=',
     },
     templateUrl: CONFIG.route + '/views/time.html',
     link: link

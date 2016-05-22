@@ -53,7 +53,8 @@
     $scope.dataLoading = true;
     var data = {
       name: $scope.newProject.projectName,
-      projectStatus: 0
+      projectStatus: 0,
+      sessions: []
     }
     CUDService.Go('add', data, 'projects', 'name', function(response) {
       if (response.success) {
@@ -152,37 +153,6 @@
       $scope.projectAddSession.organizers[$scope.organizersId]={};
     }
   };
-  $scope.projectAddSessionS = function() {
-    //$scope.dataLoading = true;
-    var fname = {};
-    fname.sessions = {
-      number: $scope.projectAddSession.number,
-      name: $scope.projectAddSession.name,
-    };
-    fname.sessions.organizers=$scope.projectAddSession.organizers;
-    fname.sessions.organizers.forEach(function(organizer){
-      delete organizer.show;
-    });
-    if(!fname.sessions.organizers[fname.sessions.organizers.length-1].id){
-      fname.sessions.organizers.pop();
-    }
-    $scope.projectAddSessionfname=fname;
-    var data = [fname];
-    CUDService.Go('push', data, 'projects', $scope.singleProject[0].id, function(response) {
-      if (response.success) {
-        $scope.projectAddSession.success = 'Dodano sesje';
-        $scope.singleProject[0].sessions.push($scope.projectAddSessionfname.sessions);
-        $scope.organizersId=0;
-        $scope.projectAddSession.number+1;
-        $scope.projectAddSession.name='';
-        $scope.projectAddSession.organizers=[];
-        $scope.projectAddSession.organizers[$scope.organizersId]={};
-      } else {
-        $scope.projectAddSession.error = response.message;
-      }
-      $scope.dataLoading = false;
-    });
-  };
   $scope.listProjectS = function() {
     // type, condition, table, order
     SearchService.search('simple', '', 'projects', 'id:ASC', function(response) {
@@ -217,13 +187,9 @@
     $scope.setTab('editProject');
     $scope.projectTab = 'start';
     SearchService.search('simple', 'id:' + id, 'projects', '', function(response) {
-      $scope.singleProject = response;
+      $scope.singleProject = response;      
         //some sessions and blocks elements
-      if($scope.singleProject[0].sessions){
-        $scope.projectAddSession.number=$scope.singleProject[0].sessions.length+1;
-      }else{
-        $scope.projectAddSession.number=1;
-      }
+      $scope.initAddNewSession();
       //set users singIn
       if($scope.singleProject[0].users){
         $scope.projectUsersList=[]
@@ -235,50 +201,116 @@
       }
     });
   };
-  $scope.editSessionDescription={};
-  $scope.editSessionDescription.error='';
-  $scope.addSessionsOrganizerInEdition = function(){
-    if($scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers[$scope.organizerEditId] && $scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers[$scope.organizerEditId].id!=''){
-      $scope.organizerEditId++;
-      $scope.initNewOrganizer();
-      $scope.editSessionDescription.error='';
+  $scope.initAddNewSession = function() {
+    $scope.addNewSession = {};
+    if($scope.singleProject[0].sessions){
+      $scope.addNewSession.number=$scope.singleProject[0].sessions.length+1;
     }else{
-      $scope.editSessionDescription.error='Wybierz osobę!'
+      $scope.addNewSession.number=1;
     }
-
-  }
-  $scope.editSessionUpdateS = function(taskMessage,index) {
-    $scope[taskMessage]={};
+    $scope.addNewSession.name={};
+    $scope.addNewSession.cancel=false;
+    $scope.addNewSession.aims={};
+    $scope.addNewSession.blocks=[];
+    $scope.addNewSession.organizers=[];
+  };
+  $scope.initAddNewBlock = function() {
+    $scope.addNewBlock = {};
+    if($scope.projectEditSessionId && $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks){
+      $scope.addNewBlock.id=$scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks.length+1;
+    }else{
+      $scope.addNewBlock.id=0;
+    }
+    if($scope.singleProject[0].startDate){
+      $scope.addNewBlock.day=$scope.singleProject[0].startDate;
+    }else{
+      $scope.addNewBlock.day='';
+    }
+    $scope.addNewBlock.chair='';
+    $scope.addNewBlock.room='';
+    $scope.addNewBlock.begin=0;
+    $scope.addNewBlock.lectures=[];
+    $scope.initAddNewLecture($scope.addNewBlock.id);
+  };
+  $scope.initAddNewLecture = function(blockId) {
+    $scope.addNewLecture = {};
+    if($scope.addNewBlock.lectures){
+      $scope.addNewLecture.id=$scope.addNewBlock.lectures.length;
+    }else{
+      $scope.addNewLecture.id=0;
+    }
+    $scope.addNewLecture.lecturelink='';
+    $scope.addNewLecture.lectureType='';
+    $scope.addNewLecture.duration=0;
+  };
+  $scope.addNewSessionS = function(){
     $scope.dataLoading = true;
-    var where = [{
-      id: $scope.singleProject[0].id,
-      'sessions.number': $scope.singleProject[0].sessions[index].number      
-    }];
-    var data = ['sessions.$.name',$scope.singleProject[0].sessions[index].name];
-    var where=[{'id':$scope.singleProject[0].id},{'sessions.number':$scope.singleProject[0].sessions[index].number}];
-    CUDService.Go('deepUpdate', data, 'projects', where, function(response) {
+    $scope.addNewSessionf={};
+    $scope.addNewSessionf.success='';
+    $scope.addNewSessionf.error='';
+    CUDService.Go('push', [{sessions:$scope.addNewSession}], 'projects', $scope.singleProject[0].id, function(response) {
       if (response.success) {
-        $scope[taskMessage].success = 'Zmieniono dane';
+        $scope.addNewSessionf.success='Dodano dane!';
+        $scope.singleProject[0].sessions.push($scope.addNewSession);
+        $scope.initAddNewSession();       
       } else {
-        $scope[taskMessage].error = response.message;
+        $scope.addNewSessionf.error = response.message;
       }
       $scope.dataLoading = false;
     });
-    if($scope.singleProject[0].sessions[index].organizers && $scope.singleProject[0].sessions[index].organizers.length>0){
-      if($scope.singleProject[0].sessions[index].organizers[$scope.singleProject[0].sessions[index].organizers.length-1].id=''){
-        scope.singleProject[0].sessions[index].organizers.pop();
-      }
-      data = ['sessions.$.organizers',$scope.singleProject[0].sessions[index].organizers];
-      CUDService.Go('deepUpdate', data, 'projects', where, function(response) {
-        if (response.success) {        
-          $scope[taskMessage].success = 'Zmieniono dane';
-          $scope.addSessionsOrganizerInEdition();
-        } else {
-          $scope[taskMessage].error = response.message;
-        }
-        $scope.dataLoading = false;
-      });
+  };
+  $scope.projectEditSession = function(id) {
+    $scope.setTab('editSession');
+    $scope.sessionTab='start';
+    $scope.projectEditSessionId=id;
+    $scope.initAddNewBlock();
+  };
+  $scope.addNewLectureS = function() {
+    $scope.addNewLecturef={};
+    if($scope.addNewLecture.duration=='' || $scope.addNewLecture.lectureType==''){
+      $scope.addNewLecturef.error='Podaj poprawne wartości';
+      return;
     }
+    if($scope.addNewLecture.lectureType=='Wykład' && $scope.addNewLecture.lecturelink==''){
+      $scope.addNewLecturef.error='Wybierz wykład';
+      return;
+    }
+    $scope.addNewBlock.lectures.push($scope.addNewLecture);
+    $scope.initAddNewLecture($scope.addNewBlock.id);
+  };
+  $scope.addNewBlockS = function() {
+    $scope.addNewBlockf={};
+    $scope.dataLoading = true;
+    $scope.addNewBlockf.success='';
+    $scope.addNewBlockf.error='';
+    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks.push($scope.addNewBlock);
+    var where = [{id:$scope.singleProject[0].id}, {'sessions.number':$scope.singleProject[0].sessions[$scope.projectEditSessionId].number}];
+    var data = ['sessions',$scope.singleProject[0].sessions];
+    CUDService.Go('deepUpdate', data, 'projects', where, function(response) {
+      if (response.success) {
+        $scope.addNewBlockf.success='Dodano dane!';
+        $scope.initAddNewBlock();
+      } else {
+        $scope.addNewSessionf.error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
+  };
+  $scope.updateSessionS = function() {
+    $scope.updateSessionf={};
+    $scope.updateSessionf.success='';
+    $scope.updateSessionf.error='';
+    $scope.dataLoading = true;
+    var where = [{id:$scope.singleProject[0].id}, {'sessions.number':$scope.singleProject[0].sessions[$scope.projectEditSessionId].number}];
+    var data = ['sessions',$scope.singleProject[0].sessions];
+    CUDService.Go('deepUpdate', data, 'projects', where, function(response) {
+      if (response.success) {
+        $scope.updateSessionf.success='Dane zostały zmienione!';
+      } else {
+        $scope.updateSessionf.error = response.message;
+      }
+      $scope.dataLoading = false;
+    });
   };
   $scope.editContractor = function(id) {
     if($scope.singleContractor){
@@ -288,105 +320,6 @@
     SearchService.search('simple', 'id:' + id, 'contractors', '', function(response) {
       $scope.singleContractor = response;
     });
-  };
-  $scope.projectEditSession = function(id) {
-    $scope.setTab('editSession');
-    $scope.sessionTab='start';
-    $scope.projectEditSessionId=id;
-
-    if(!$scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks){
-      $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks=[];
-      $scope.blockbegin=0;
-    }      
-    if($scope.singleProject[0].sessions[id].blocks){
-      $scope.blockId=$scope.singleProject[0].sessions[id].blocks.length;
-    }else{
-      $scope.singleProject[0].sessions[id].blocks=[];
-    }
-    if(!$scope.blockId){
-      $scope.blockId=0;
-    }
-    $scope.initNewBlock($scope.blockId);
-    $scope.initNewOrganizer();
-  };
-  $scope.initNewOrganizer = function(){
-    if($scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers){
-      $scope.organizerEditId=$scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers.length;
-    }else{
-      $scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers=[];
-      $scope.organizerEditId=0;
-    }
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers[$scope.organizerEditId]={}
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers[$scope.organizerEditId].id='';
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].organizers[$scope.organizerEditId].show='';
-  };  
-  $scope.initNewBlock = function(blockId){
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[blockId]={};
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[blockId].id=blockId;
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].begin=0;
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].startHour=12;
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].startMinute=0;
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].begin=(60*$scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].startHour)+$scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].startMinute;
- 
-    if($scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[blockId].lectures){
-      $scope.lectureId=$scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[blockId].lectures.length;
-    }else{
-      $scope.lectureId=$scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[blockId].lectures=[];
-    }
-    if($scope.lectureId){
-      $scope.lectureId=0;
-    }
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[blockId].lectures[$scope.lectureId]={};
-  };
-  $scope.addSessionsPlan={};
-  $scope.initAddSessionsPlan = function(){
-    $scope.addSessionsPlan.lectureshow='';
-    $scope.addSessionsPlan.duration='';
-    $scope.addSessionsPlan.lectureType='';
-    $scope.addSessionsPlan.lecturelink='';
-  }
-  $scope.addSessionsPlanS = function () {
-    if($scope.addSessionsPlan.duration=='' || $scope.addSessionsPlan.lectureType==''){
-      $scope.addSessionsPlan.error='Podaj poprawne wartości';
-      return;
-    }
-    if($scope.addSessionsPlan.lectureType=='Wykład' && $scope.addSessionsPlan.lectureshow==''){
-      $scope.addSessionsPlan.error='Wybierz wykład';
-      return;
-    }
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].lectures[$scope.lectureId].duration=parseInt($scope.addSessionsPlan.duration,10);
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].lectures[$scope.lectureId].lectureType=$scope.addSessionsPlan.lectureType;
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].lectures[$scope.lectureId].articleLink=$scope.addSessionsPlan.lecturelink;
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].lectures[$scope.lectureId].label=$scope.addSessionsPlan.lectureshow;
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].lectures[$scope.lectureId].id=$scope.lectureId;
-    $scope.initAddSessionsPlan();
-    $scope.lectureId++;
-    $scope.singleProject[0].sessions[$scope.projectEditSessionId].blocks[$scope.blockId].lectures[$scope.lectureId]={};
-  }
-  $scope.addSessionsBlockS = function(projectEditSessionId,blockId){
-    $scope.addSessionsBlock={};
-    $scope.addSessionsBlock.error='';
-    $scope.addSessionsBlock.success='';
-    //var tmp = jQuery.extend(true, {}, $scope.singleProject[0].sessions[projectEditSessionId].blocks[blockId]);
-    var tmp = $scope.singleProject[0].sessions[projectEditSessionId].blocks[blockId];
-    tmp.lectures.pop();
-    tmp.begin=(60*tmp.startHour)+tmp.startMinute
-    delete tmp.startHour;
-    delete tmp.startMinute;
-    delete tmp.chairShow;
-    var where=[{'id':$scope.singleProject[0].id},{'sessions.number':projectEditSessionId+1}];
-    var data = ['sessions.$.blocks',tmp];
-    CUDService.Go('deepPush', data, 'projects', where, function(response) {
-      if (response.success) {
-        $scope.addSessionsBlock.success = response.message;        
-        $scope.blockId++;
-        $scope.initNewBlock($scope.blockId);
-      } else {
-        $scope.addSessionsBlock.error = response.message;
-      }
-      $scope.dataLoading = false;
-    });
-    $scope.initAddSessionsPlan();
   };
   $scope.editUser = function(id) {
     $scope.setTab('editUser');
@@ -464,8 +397,7 @@
     $scope.listUsersS();
     $scope.listAdminsS();
     $scope.listContractorsS();
-    $scope.editProject('57410910be4f5');
-    $scope.initAddSessionsPlan();
+    $scope.editProject('5741b54616b77');
     $scope.listArticlesS();
   };
   $scope.init();
