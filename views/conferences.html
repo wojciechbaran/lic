@@ -79,29 +79,22 @@
                         <div class="panel-body">
 	                        <ul class="list-group">
 	                        	<li ng-repeat="session in singleProject[0].sessions track by $index" class="list-group-item">
-	                        		<a ng-click="showSessionInfo('sessionInfo'+session.number)">{{ 'Sesja' | translate }} {{ session.number }}: {{ session.name[defaultLanguage] }}</a>
+	                        		<a ng-click="showSessionInfo('sessionInfo'+session.number)"><h4>{{ 'Sesja' | translate }} {{ session.number }}: {{ session.name[defaultLanguage] }}</h4></a>
 	                        		<div id="sessionInfo{{ session.number }}" class="sessionInfo hidden">
 	                        			<div ng-if="session.organizers && session.organizers[0].id!=''">
 	                        				{{ 'Organizatorzy' | translate }}:
 	                        				<span ng-repeat="organizer in session.organizers track by $index"><span ng-userfullname userid="organizer"></span>, </span>	                     
 	                        			</div>
-		                                <p>{{ 'Plan' | translate }}:</p>
+		                                <div ng-if="session.aims && session.aims[defaultLanguage]!=''">
+	                        				<p>{{ 'Cele' | translate }}:</p>
+	                        				<p>{{ session.aims[defaultLanguage] }}</p>                    
+	                        			</div>
+		                                <h4>{{ 'Plan' | translate }}:</h4>
 		                                <div ng-repeat="block in session.blocks track by $index" ng-init="lecture.blockbegin=block.begin">
 		                                    <p>{{ 'Blok' | translate }} {{ $index+1 }}</p>
 		                                    <p>{{ 'Dzień' | translate }}: {{ block.day  | date:'dd/MM'}}, <span ng-fulltime time="{{ lecture.blockbegin }}"></span></p>
 		                                    <p>{{ 'Sala' | translate }}: {{ block.room }}, {{ 'Prowadzący' | translate }}: <span ng-userfullname userid="block.chair"></p>
-		                                    <table class="table">
-		                                        <tr ng-repeat="lecture in block.lectures" ng-init="duration=lecture.duration;
-		                                        lecture.timeEnd=block.begin + duration; 
-		                                        lecture.timeStart=block.begin;
-		                                        block.begin = block.begin + lecture.duration;
-		                                        ">
-		                                            <td class="col-md-3"><span ng-fulltime time="{{ lecture.timeStart }}"></span>-<span ng-fulltime time="{{ lecture.timeEnd }}"></span></td><td class="col-md-8" ng-if="lecture.lectureType!='Wykład'">{{ lecture.lectureType | translate }}</td>
-		                                            <td class="col-md-8" ng-if="lecture.lectureType=='Wykład'">
-		                                            	<span ng-articlesfull articlelist="listArticles" articlelink="lecture.lecturelink" user="true" cilckable="true"></span>
-		                                            </td>
-		                                        </tr>
-		                                    </table>
+		                                    <span ng-plan blockstr="{{block}}"></span>
 		                                    <hr />
 		                                </div>
 		                                <div class="row">

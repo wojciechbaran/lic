@@ -14,7 +14,6 @@ testApp.directive('ngArticlesfull', function(CONFIG,SearchService) {
           scope.title=scope.articles[i].title;
         }
       }
-      console.log(scope.title); 
     });    
   }
   return {

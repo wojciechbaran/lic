@@ -272,29 +272,16 @@
                                 </p>
                                 <div class="row"></div>
                                 <h3>{{ 'Plan' | translate }}:</h3>
-                                <div ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks track by $index" ng-init="lecture.blockbegin=block.begin ">
+                                <div ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks track by $index">
                                     <h4>{{ 'Blok' | translate }} {{ $index+1 }}</h4>
-                                    <p>{{ 'Dzień' | translate }}: {{ block.day  | date:'dd/MM'}}, <span ng-fulltime time="{{ lecture.blockbegin }}"></span></p>
+                                    <p>{{ 'Dzień' | translate }}: {{ block.day  | date:'dd/MM'}}, <span ng-fulltime time="{{ block.blockbegin}}"></span></p>
                                     <p>{{ 'Sala' | translate }}: {{ block.room }}, {{ 'Prowadzący' | translate }}: <span ng-userfullname userid="block.chair"></p>
-                                    <table class="table">
-                                        <tr ng-repeat="lecture in block.lectures" ng-init="duration=lecture.duration;
-                                        lecture.timeEnd=block.begin + duration; 
-                                        lecture.timeStart=block.begin;
-                                        block.begin = block.begin + lecture.duration;
-                                        ">
-                                            <td class="col-md-3"><span ng-fulltime time="{{ lecture.timeStart }}"></span>-<span ng-fulltime time="{{ lecture.timeEnd }}"></span></td>
-                                            <td class="col-md-8" ng-if="lecture.lectureType!='Wykład'">{{ lecture.lectureType | translate }}</td>
-                                            <td class="col-md-8" ng-if="lecture.lectureType=='Wykład'"><span ng-articlesfull articlelist="listArticles" articlelink="lecture.lecturelink" user="true" cilcable="false"></span></td>
-                                        </tr>
-                                    </table>
-                                    <hr />
-                                </div>
-
-                                <div>
+                                     <span ng-plan blockstr="{{block}}"></span>                                   
+                                    <hr />                                    
                                 </div>
                             </div>
                         </div>
-                        <div ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks track by $index" class="panel panel-default" ng-show="sessionTab=='block'+$index" ng-init="lecture.blockbegin=block.begin ">
+                        <div ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks track by $index" class="panel panel-default" ng-if="sessionTab=='block'+$index">
                             <div class="panel-body">
                                 <h3>{{ 'Podstawowe informacje' | translate }}</h3>
                                 <table class="table">
@@ -312,35 +299,15 @@
                                     </tr>
                                     <tr>
                                         <td>{{ 'Godzina rozpoczęcia' | translate }}</td>
-                                        <td><span ng-fulltime time="{{ lecture.blockbegin }}"></span></td>
+                                        <td><span ng-fulltime time="{{ block.begin }}"></span></td>
                                     </tr>
                                 </table>
                                 <div class="row"></div>
                                 <h3>{{ 'Plan' | translate }}:</h3>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-2">{{ 'Godziny' | translate }}</th>
-                                            <th class="col-md-4">{{ 'Typ' | translate }}</th>
-                                            <th class="col-md-7">{{ 'Wykład' | translate }}</th>
-                                            <th class="col-md-1"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="lecture in block.lectures" ng-init="duration=lecture.duration;
-                                        lecture.timeEnd=block.begin + duration; 
-                                        lecture.timeStart=block.begin;
-                                        block.begin = block.begin + lecture.duration;
-                                        ">
-                                            <td><span ng-fulltime time="{{ lecture.timeStart }}"></span>-<span ng-fulltime time="{{ lecture.timeEnd }}"></span></td>
-                                            <td>{{ lecture.lectureType | translate }}</td>
-                                            <td><span ng-articlesfull articlelist="listArticles" articlelink="lecture.lecturelink" user="true" cilcable="false"></span></td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>    
+                                <span ng-plan blockstr="{{block}}"></span>                                
                             </div>
                         </div>
-                        <div class="panel panel-default"  ng-show="sessionTab=='description'">
+                        <div class="panel panel-default"  ng-if="sessionTab=='description'">
                             <div class="panel-body">
                                 <div ng-show="updateSessionf.error" class="alert alert-danger">{{updateSessionf.error | translate}}</div>
                                 <div ng-show="updateSessionf.success" class="alert alert-success">{{updateSessionf.success | translate}}</div>
@@ -415,7 +382,7 @@
                                             <tr ng-repeat="lecture in addNewBlock.lectures">
                                                 <td>{{ lecture.duration }}</td>
                                                 <td>{{ lecture.lectureType | translate }}</td>
-                                                <td><span ng-articlesfull articlelist="listArticles" articlelink="lecture.lecturelink" user="true" cilcable="false"></span></td>
+                                                <td  ng-if="lecture.lectureType=='Wykład'"><span ng-articlesfull articlelist="listArticles" articlelink="lecture.lecturelink" user="true" cilcable="false"></span></td>
                                                 <td></td>
                                             </tr>
                                             <tr class="info">

@@ -1,0 +1,22 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-md-2">{{ 'Godziny' | translate }}</th>
+            <th class="col-md-4">{{ 'Typ' | translate }}</th>
+            <th class="col-md-8">{{ 'Wykład' | translate }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="lecture in block.lectures" ng-init="
+        timeEnd=block.begin + lecture.duration; 
+        timeStart=block.begin;
+        block.begin = timeEnd;
+        ">
+            <td><span ng-fulltime time="{{ timeStart }}"></span>-<span ng-fulltime time="{{ timeEnd }}"></span></td>
+            <td>{{ lecture.lectureType | translate }}</td>
+            <td ng-if="lecture.lectureType=='Wykład'">
+                <span ng-articlesfull articlelist="listArticles" articlelink="lecture.lecturelink" user="true" cilcable="false"></span>                                                
+            </td>
+        </tr>
+    </tbody>
+</table>

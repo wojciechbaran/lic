@@ -397,7 +397,7 @@
     $scope.listUsersS();
     $scope.listAdminsS();
     $scope.listContractorsS();
-    //$scope.editProject('5741b54616b77');
+    $scope.editProject('5741b54616b77');
     $scope.listArticlesS();
   };
   $scope.init();
