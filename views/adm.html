@@ -242,7 +242,7 @@
         <div class="col-md-12" ng-if="tab=='editSession'">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                   <h3 class="panel-title">{{ 'Konferencja' | translate }}: {{ singleProject[0].name }} -> {{ 'Sesja' | translate }} {{ singleProject[0].sessions[projectEditSessionId].number }}: {{ singleProject[0].sessions[projectEditSessionId].name }}<a ng-click="setTab('editProject')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
+                   <h3 class="panel-title">{{ 'Konferencja' | translate }}: {{ singleProject[0].name }} -> {{ 'Sesja' | translate }} {{ singleProject[0].sessions[projectEditSessionId].number }}: {{ singleProject[0].sessions[projectEditSessionId].name[defaultLanguage] }}<a ng-click="setTab('editProject')"><span class="pull-right glyphicon glyphicon-remove"></span></a></h3>
                 </div>
                 <div class="panel-body">
                     <div class="col-md-2">
@@ -256,8 +256,8 @@
                             <li role="presentation" ng-class="sessionTab=='blocks' ? 'active' : ''">
                                 <a ng-click="setTabEdit('blocks','sessionTab')">{{ 'Dodaj Blok' | translate }}</a>
                             </li>
-                            <li ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks track by $index" role="presentation" ng-class="sessionTab=='block'+block.id ? 'active' : ''" ng-if="!$last">
-                                <a ng-click="setTabEdit('block'+block.id,'sessionTab')">{{ 'Blok' | translate }} {{ block.id+1}}</a>
+                            <li ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks track by $index" role="presentation" ng-class="sessionTab=='block'+$index ? 'active' : ''">
+                                <a ng-click="setTabEdit('block'+$index,'sessionTab')">{{ 'Blok' | translate }} {{ $index+1}}</a>
                             </li>
                         </ul>
                     </div>
@@ -265,14 +265,14 @@
                         <div class="panel panel-default"  ng-if="sessionTab=='start' || !sessionTab">
                             <div class="panel-body">
                                 <h3>{{ 'Konferencja' | translate }}: {{ singleProject[0].title[defaultLanguage] }}</h3>
-                                <h4>{{ 'Sesja' | translate }}: {{ singleProject[0].sessions[projectEditSessionId].number }} : {{ singleProject[0].sessions[projectEditSessionId].name }}</h4>
+                                <h4>{{ 'Sesja' | translate }}: {{ singleProject[0].sessions[projectEditSessionId].number }} : {{ singleProject[0].sessions[projectEditSessionId].name[defaultLanguage] }}</h4>
                                 <p ng-if="singleProject[0].sessions[projectEditSessionId].organizers && singleProject[0].sessions[projectEditSessionId].organizers.length>1">
                                     <span>{{ 'Organizatorzy' | translate }}: </span>
                                     <span ng-repeat="organizer in singleProject[0].sessions[projectEditSessionId].organizers track by $index" ng-if="!$last"><span ng-userfullname userid="organizer.id"></span>, </span>
                                 </p>
                                 <div class="row"></div>
                                 <h3>{{ 'Plan' | translate }}:</h3>
-                                <div ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks track by $index" ng-init="lecture.blockbegin=block.begin " ng-if="!$last">
+                                <div ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks track by $index" ng-init="lecture.blockbegin=block.begin ">
                                     <h4>{{ 'Blok' | translate }} {{ block.id+1 }}</h4>
                                     <p>{{ 'Dzień' | translate }}: {{ block.day  | date:'dd/MM'}}, <span ng-fulltime time="{{ lecture.blockbegin }}"></span></p>
                                     <p>{{ 'Sala' | translate }}: {{ block.room }}, {{ 'Prowadzący' | translate }}: <span ng-userfullname userid="block.chair"></p>
@@ -284,7 +284,7 @@
                                         ">
                                             <td class="col-md-3"><span ng-fulltime time="{{ lecture.timeStart }}"></span>-<span ng-fulltime time="{{ lecture.timeEnd }}"></span></td>
                                             <td class="col-md-8" ng-if="lecture.lectureType!='Wykład'">{{ lecture.lectureType | translate }}</td>
-                                            <td class="col-md-8" ng-if="lecture.lectureType=='Wykład'">{{ lecture.label }}</td>
+                                            <td class="col-md-8" ng-if="lecture.lectureType=='Wykład'"><span ng-articlesfull articlelist="listArticles" articlelink="lecture.lecturelink" user="true" cilcable="false"></span></td>
                                         </tr>
                                     </table>
                                     <hr />
@@ -294,7 +294,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks" class="panel panel-default" ng-show="sessionTab=='block'+block.id" ng-init="lecture.blockbegin=block.begin ">
+                        <div ng-repeat="block in singleProject[0].sessions[projectEditSessionId].blocks track by $index" class="panel panel-default" ng-show="sessionTab=='block'+$index" ng-init="lecture.blockbegin=block.begin ">
                             <div class="panel-body">
                                 <h3>{{ 'Podstawowe informacje' | translate }}</h3>
                                 <table class="table">
@@ -334,7 +334,7 @@
                                         ">
                                             <td><span ng-fulltime time="{{ lecture.timeStart }}"></span>-<span ng-fulltime time="{{ lecture.timeEnd }}"></span></td>
                                             <td>{{ lecture.lectureType | translate }}</td>
-                                            <td>{{ lecture.label }}</td>
+                                            <td><span ng-articlesfull articlelist="listArticles" articlelink="lecture.lecturelink" user="true" cilcable="false"></span></td></td>
                                         </tr>
                                     </tbody>
                                 </table>    
@@ -371,35 +371,35 @@
                         </div>
                         <div class="panel panel-default"  ng-show="sessionTab=='blocks'">
                             <div class="panel-body">
-                                <div ng-show="addSessionsBlock.error" class="alert alert-danger">{{addSessionsBlock.error | translate}}</div>
-                                <div ng-show="addSessionsBlock.success" class="alert alert-success">{{addSessionsBlock.success | translate}}</div>
-                                <form name="addSessionsBlockform" ng-submit="addSessionsBlockS(projectEditSessionId,blockId)" role="form">
+                                <div ng-show="addNewBlockf.error" class="alert alert-danger">{{addNewBlockf.error | translate}}</div>
+                                <div ng-show="addNewBlockf.success" class="alert alert-success">{{addNewBlockf.success | translate}}</div>
+                                <form name="addSessionsBlockform" ng-submit="addNewBlockS()" role="form">
                                     <h3>{{ 'Podstawowe informacje' | translate }}</h3>
                                     <div class="col-md-6" >
                                         <div class="col-md-4">
-                                            {{ 'Dzień' | translate }}: <span ng-calendar inp="singleProject[0].sessions[projectEditSessionId].blocks[blockId].day"></span>
+                                            {{ 'Dzień' | translate }}: <span ng-calendar inp="addNewBlock.day"></span>
                                         </div>
                                         <div class="col-md-8" >
-                                            <input type="text" name="day" id="day" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].day" disabled="true"/>
+                                            <input type="text" name="day" id="day" class="form-control" ng-model="addNewBlock.day" disabled="true"/>
                                         </div>
                                         <div class="col-md-4">
                                             {{ 'Sala' | translate }}: 
                                         </div>
                                         <div class="col-md-8" >
-                                            <input type="text" name="room" id="room" class="form-control" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].room" />
+                                            <input type="text" name="room" id="room" class="form-control" ng-model="addNewBlock.room" />
                                         </div>
                                         <div class="col-md-4">
                                             {{ 'Prowadzący' | translate }}:
                                         </div>
                                         <div class="col-md-8" >
-                                            <input type="text" name="chair" id="chair" class="form-control col-md-12" ng-model="singleProject[0].sessions[projectEditSessionId].blocks[blockId].chairShow" disabled="true" style="width: 90%;"/>
-                                            <span ng-autocomplite from="projectUsersList" to="singleProject[0].sessions[projectEditSessionId].blocks[blockId].chair" show="singleProject[0].sessions[projectEditSessionId].blocks[blockId].chairShow"></span>
+                                            <input type="text" name="chair" id="chair" class="form-control col-md-12" ng-model="addNewBlock.chair" disabled="true" style="width: 90%;"/>
+                                            <span ng-autocomplite from="projectUsersList" to="addNewBlock.chair"></span>
                                         </div>
                                         <div class="col-md-4">
                                             {{ 'Godzina rozpoczęcia' | translate }}
                                         </div>
                                         <div class="col-md-8" >
-                                            <span ng-time hours="singleProject[0].sessions[projectEditSessionId].blocks[blockId].startHour" minutes="singleProject[0].sessions[projectEditSessionId].blocks[blockId].startMinute"></span>
+                                            <span ng-time time="addNewBlock.begin"></span>
                                         </div>
                                     </div>
                                     <div class="row"></div>
@@ -414,37 +414,37 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="lecture in singleProject[0].sessions[projectEditSessionId].blocks[blockId].lectures">
+                                            <tr ng-repeat="lecture in addNewBlock.lectures">
                                                 <td>{{ lecture.duration }}</td>
                                                 <td>{{ lecture.lectureType | translate }}</td>
-                                                <td>{{ lecture.label }}</td>
+                                                <td><span ng-articlesfull articlelist="listArticles" articlelink="lecture.lecturelink" user="true" cilcable="false"></span></td>
                                                 <td></td>
                                             </tr>
                                             <tr class="info">
                                                 <td>
-                                                    <input type="number" min="1" step="1" name="duration" id="duration" class="form-control" ng-model="addSessionsPlan.duration" />
+                                                    <input type="number" min="0" step="1" name="duration" id="duration" class="form-control" ng-model="addNewLecture.duration" />
                                                 </td>
                                                 <td>
-                                                    <select name="lectureType" id="lectureType" class="form-control" ng-model="addSessionsPlan.lectureType">
+                                                    <select name="lectureType" id="lectureType" class="form-control" ng-model="addNewLecture.lectureType">
                                                         <option value="Wykład">{{ 'Wykład' | translate }}</option>
                                                         <option value="Dyskusja">{{ 'Dyskusja' | translate }}</option>
                                                         <option value="Przerwa">{{ 'Przerwa' | translate }}</option>
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <div ng-if="addSessionsPlan.lectureType=='Wykład'">
-                                                        <input type="text" name="lecture" id="lecture" class="form-control col-md-12" ng-model="addSessionsPlan.lectureshow" disabled="true" style="width: 90%;"/>
-                                                        <span ng-autocomplite-articles from="projectUsersList" to="addSessionsPlan.lecturelink" show="addSessionsPlan.lectureshow"></span>
+                                                    <div ng-if="addNewLecture.lectureType=='Wykład'">
+                                                        <input type="text" name="lecture" id="lecture" class="form-control col-md-12" ng-model="addNewLecture.lecturelink" disabled="true" style="width: 90%;"/>
+                                                        <span ng-autocomplite-articles from="projectUsersList" to="addNewLecture.lecturelink"></span>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <span ng-click="addSessionsPlanS()" class="glyphicon glyphicon-plus"></span>
+                                                    <span ng-click="addNewLectureS()" class="glyphicon glyphicon-plus"></span>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div ng-if="addSessionsPlan.error" class="alert alert-danger">{{addSessionsPlan.error | translate}}</div>
-                                    <p class="alert-warning">{{ 'Przed dodaniem bloku, upewnij się, że dodałeś ostatnią pozycję na planie' | translate }} (<span ng-click="addSessionsPlanS()" class="glyphicon glyphicon-plus"></span>)</p>
+                                    <div ng-if="addNewLecturef.error" class="alert alert-danger">{{addNewLecturef.error | translate}}</div>
+                                    <p class="alert-warning">{{ 'Przed dodaniem bloku, upewnij się, że dodałeś ostatnią pozycję na planie' | translate }} (<span class="glyphicon glyphicon-plus"></span>)</p>
 
                                     <div class="form-actions">
                                         <button type="submit" ng-disabled="dataLoading" class="btn btn-primary">{{ 'Dodaj blok' | translate }}{{ blockId }}</button>
