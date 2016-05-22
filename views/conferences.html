@@ -85,7 +85,7 @@
                         <div class="panel-body">
 	                        <ul class="list-group">
 	                        	<li ng-repeat="session in singleProject[0].sessions track by $index" class="list-group-item">
-	                        		<a ng-click="showSessionInfo('sessionInfo'+session.number)">{{ 'Sesja' | translate }} {{ session.number }}: {{ session.name }}</a>
+	                        		<a ng-click="showSessionInfo('sessionInfo'+session.number)">{{ 'Sesja' | translate }} {{ session.number }}: {{ session.name[defaultLanguage] }}</a>
 	                        		<div id="sessionInfo{{ session.number }}" class="sessionInfo hidden">
 	                        			<div ng-if="session.organizers && session.organizers[0].id!=''">
 	                        				{{ 'Organizatorzy' | translate }}:
@@ -93,7 +93,7 @@
 	                        			</div>
 		                                <p>{{ 'Plan' | translate }}:</p>
 		                                <div ng-repeat="block in session.blocks track by $index" ng-init="lecture.blockbegin=block.begin">
-		                                    <h4>{{ 'Blok' | translate }} {{ $index+1 }}</h4>
+		                                    <p>{{ 'Blok' | translate }} {{ $index+1 }}</p>
 		                                    <p>{{ 'Dzień' | translate }}: {{ block.day  | date:'dd/MM'}}, <span ng-fulltime time="{{ lecture.blockbegin }}"></span></p>
 		                                    <p>{{ 'Sala' | translate }}: {{ block.room }}, {{ 'Prowadzący' | translate }}: <span ng-userfullname userid="block.chair"></p>
 		                                    <table class="table">
@@ -104,7 +104,7 @@
 		                                        ">
 		                                            <td class="col-md-3"><span ng-fulltime time="{{ lecture.timeStart }}"></span>-<span ng-fulltime time="{{ lecture.timeEnd }}"></span></td><td class="col-md-8" ng-if="lecture.lectureType!='Wykład'">{{ lecture.lectureType | translate }}</td>
 		                                            <td class="col-md-8" ng-if="lecture.lectureType=='Wykład'">
-		                                            	<span ng-articlesfull articlelist="listArticles" articlelink="lecture.lecturelink" user="true" cilcable="false"></span>
+		                                            	<span ng-articlesfull articlelist="listArticles" articlelink="lecture.lecturelink" user="true" cilckable="true"></span>
 		                                            </td>
 		                                        </tr>
 		                                    </table>

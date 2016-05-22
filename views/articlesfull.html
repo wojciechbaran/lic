@@ -1,1 +1,5 @@
-<span ng-if="userId" ng-userfullname userid="userId"></span>{{ articlelink }}
+<span ng-if="user">
+	<span ng-userfullname userid="userId"></span> 
+</span>  
+<span ng-if="!cilckable">"<i>{{ title[config.defaultLanguage] }}"</i></span>
+<span ng-if="cilckable"><a href="{{ cilckablelink }}"><i>"{{ title[config.defaultLanguage] }}"</i></a></span>
