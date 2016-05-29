@@ -6,7 +6,7 @@
         <h1>{{ 'Panel Administracyjny' | translate }}</h1>
     </div>
     <div class="admMainMenu row" ng-show="tab=='start'">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{ 'Konferencje' | translate }}</h3>
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{ 'Użytkownicy' | translate }}</h3>
@@ -32,28 +32,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Dodatki</h3>
-                </div>
-                <div class="panel-body">
-                    <ul>
-                        <li><a ng-click="setTab('contractors')">Lista podwykonawców</a></li>
-                        <li><a ng-click="setTab('newContractor')">Dodaj podwykonawę</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{ 'Ustawienia' | translate }}</h3>
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li><a ng-click="setTab('listAdmin')">{{ 'Lista Administratorów' | translate }}</a></li>
-                        <li><a ng-click="setTab('basicData')">{{ 'Podstawowe dane' | translate }}</a></li>
+                        <li><a ng-click="setTab('listAdmin')">{{ 'Lista Administratorów' | translate }}</a></li>                        
                     </ul>
                 </div>
             </div>
@@ -345,19 +331,19 @@
                                             {{ 'Dzień' | translate }}: <span ng-calendar inp="addNewBlock.day"></span>
                                         </div>
                                         <div class="col-md-8" >
-                                            <input type="text" name="day" id="day" class="form-control" ng-model="addNewBlock.day" disabled="true"/>
+                                            <input type="text" name="day" id="day" class="form-control" ng-model="addNewBlock.day" disabled="true" required="true" />
                                         </div>
                                         <div class="col-md-4">
                                             {{ 'Sala' | translate }}: 
                                         </div>
                                         <div class="col-md-8" >
-                                            <input type="text" name="room" id="room" class="form-control" ng-model="addNewBlock.room" />
+                                            <input type="text" name="room" id="room" class="form-control" ng-model="addNewBlock.room" required="true" />
                                         </div>
                                         <div class="col-md-4">
                                             {{ 'Prowadzący' | translate }}:
                                         </div>
                                         <div class="col-md-8" >
-                                            <input type="text" name="chair" id="chair" class="form-control col-md-12" ng-model="addNewBlock.chair" disabled="true" style="width: 90%;"/>
+                                            <input type="text" name="chair" id="chair" class="form-control col-md-12" ng-model="addNewBlock.chair" disabled="true" required="true" style="width: 90%;"/>
                                             <span ng-autocomplite from="projectUsersList" to="addNewBlock.chair"></span>
                                         </div>
                                         <div class="col-md-4">
