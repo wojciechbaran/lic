@@ -82,7 +82,7 @@
   'Dodaj nową sesję':'Add new session',
   'Numer sesji':'Session number',
   'Nazwa sesji':'Session name',
-  'Organizatorzy ':'The organizers',
+  'Organizatorzy':'The organizers',
   'Obecny status':'Current status',
   'Zmień status na':'Change status to',
   'Nieopublikowany':'Unpublished',
@@ -155,7 +155,27 @@
   'Plenary speakers':'Plenary speakers',
   'Artykuły':'Articles',
   'Dodano dane!':'Added data!',
-  'Cele':'Aims'
+  'Cele':'Aims',
+  'Pon':'Mon',
+  'Wt':'Tue',
+  'Śr':'Wen',
+  'Czw':'Thu',
+  'Pt':'Fri',
+  'Sb':'Sat',
+  'Nd':'Sun',
+  'Styczeń':'January',
+  'Luty':'February',
+  'Marzec':'March',
+  'Kwiecień':'April',
+  'Maj':'May',
+  'Czerwiec':'June',
+  'Lipiec':'July',
+  'Sierpień':'August',
+  'Wrzesień':'September',
+  'Październik':'October',
+  'Listopad':'November',
+  'Grudzień':'December',
+  'Dodaj blok':'Add panel'
 
 });
 testApp.constant('DE', {
